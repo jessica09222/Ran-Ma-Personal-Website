@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Ran Ma — Spatial Data Analyst and AI Builder in Los Angeles. USC M.S. in Spatial Economics & Data Analysis, with a career across global supply chain, futures markets, media, and AI software.">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta name="author" content="Ran Ma">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ran Ma — Spatial Data & AI Builder">
+  <meta property="og:description" content="I turn scattered numbers and moving parts into something you can actually read.">
+  <meta property="og:image" content="assets/portrait.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Ran Ma — Spatial Data & AI Builder</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%231a1830'/%3E%3Ctext x='50' y='66' font-family='Arial' font-size='48' font-weight='700' fill='%23d9ff78' text-anchor='middle'%3ERM%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1a1830; --muted:#6e6a80; --paper:#fbfaf7; --white:#fff;
+      --lilac:#d8c9ff; --pink:#ffd2e1; --mint:#c9f5e8; --lime:#d9ff78;
+      --purple:#7257d5; --line:rgba(26,24,48,.13);
+      --shadow:0 24px 70px rgba(45,35,92,.12);
+      --radius:28px; --wrap:min(1180px,calc(100vw - 48px));
+      --card-bg:#fff; --panel-ink:#1a1830;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:96px}
+    html:not(.js) .reveal{opacity:1!important;transform:none!important}
+    html:not(.js) #preloader{display:none}
+    body{margin:0;background-color:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;transition:background-color .4s ease,color .4s ease}
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit}
+    img{max-width:100%;display:block}
+    :focus-visible{outline:3px solid var(--purple);outline-offset:4px;border-radius:4px}
+    ::selection{background:var(--purple);color:#fff}
+    .mono{font-family:"Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
+    .container{width:var(--wrap);margin-inline:auto}
+    .skip-link{position:fixed;left:18px;top:-60px;z-index:600;background:var(--ink);color:var(--paper);padding:12px 18px;border-radius:99px}
+    .skip-link:focus{top:18px}
+
+    /* preloader */
+    #preloader{position:fixed;inset:0;z-index:900;background:var(--paper);display:grid;place-items:center;transition:opacity .6s ease,visibility .6s}
+    #preloader.done{opacity:0;visibility:hidden}
+    .pre-mark{display:grid;place-items:center;width:70px;height:70px;border-radius:50%;background:var(--ink);color:var(--lime);font:800 1.2rem "Manrope",sans-serif;animation:pre-pulse 1.1s ease-in-out infinite}
+    .pre-bar{position:absolute;bottom:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--purple),#e46b98,var(--lime));animation:pre-load 1s ease forwards}
+    @keyframes pre-pulse{50%{transform:scale(1.12)}}
+    @keyframes pre-load{to{width:100%}}
+
+    .progress{position:fixed;z-index:300;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--purple),#e46b98,var(--lime))}
+    .ambient{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+    .ambient::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:calc(var(--mouse-x,70vw) - 280px);top:calc(var(--mouse-y,20vh) - 280px);background:radial-gradient(circle,var(--lilac),transparent 68%);opacity:.26;transition:left .5s ease,top .5s ease}
+
+    /* trailing cursor ring (fine pointers only, added by JS) */
+    .cursor-ring{position:fixed;top:0;left:0;width:30px;height:30px;border:1.5px solid var(--purple);border-radius:50%;pointer-events:none;z-index:400;transform:translate(-100px,-100px);transition:width .2s,height .2s,background .2s,border-color .2s;mix-blend-mode:normal}
+    .cursor-ring.hot{width:52px;height:52px;background:rgba(114,87,213,.12)}
+
+    nav{position:fixed;z-index:250;top:16px;left:0;right:0}
+    .nav-shell{width:min(1180px,calc(100vw - 32px));margin:auto;padding:10px 12px 10px 18px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(16px);box-shadow:0 10px 32px rgba(34,27,62,.08);display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font:800 .9rem "Manrope",sans-serif}
+    .brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:.72rem}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{position:relative;padding:10px 12px;border-radius:99px;color:var(--muted);font-size:.78rem;font-weight:600;transition:color .2s,background .2s}
+    .nav-links a:hover,.nav-links a.active{background:var(--ink);color:var(--paper)}
+    .nav-links a.active::after{content:"";position:absolute;left:50%;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--lime);transform:translateX(-50%)}
+    .nav-contact{padding:10px 18px!important;background:var(--lime)!important;color:#1a1830!important}
+    .nav-contact::after{display:none}
+    .menu-btn{display:none;border:0;background:var(--ink);color:var(--paper);border-radius:50%;width:42px;height:42px;cursor:pointer}
+    .nav-right{display:flex;align-items:center;gap:8px}
+    .lang-btn{border:1px solid var(--line);background:transparent;min-width:40px;height:38px;padding:0 12px;border-radius:99px;cursor:pointer;font:700 .74rem "Manrope",sans-serif;display:grid;place-items:center;transition:background .2s,color .2s,transform .2s}
+    .lang-btn:hover{background:var(--ink);color:var(--paper);transform:translateY(-1px)}
+
+    /* CJK-safe font fallbacks (kept late so they win over inline font shorthands) */
+    body,button,input,select,textarea{font-family:"DM Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif}
+    h1,h2,h3,.brand,.hero-role,.marquee-track span,.stat b,.skill-display .count,.journey-tab b,.float-card b,.pre-mark{font-family:"Manrope","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif}
+    .mono,.viz-cap,.mini-map figcaption,.skill-meter .lbl,.side-dots a::after,.mini-map text,.edu-photo .cap{font-family:"Roboto Mono","PingFang SC","Microsoft YaHei","Noto Sans SC",monospace}
+    .map-country{font-family:"Manrope","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif}
+
+    /* side progress dots (desktop) */
+    .side-dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:14px}
+    .side-dots a{width:9px;height:9px;border-radius:50%;background:var(--line);transition:transform .25s,background .25s;position:relative}
+    .side-dots a.active{background:var(--purple);transform:scale(1.5)}
+    .side-dots a::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%) translateX(6px);opacity:0;pointer-events:none;font:600 .62rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;background:var(--ink);color:var(--paper);padding:5px 9px;border-radius:99px;transition:opacity .2s,transform .2s}
+    .side-dots a:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+    @media(max-width:1180px){.side-dots{display:none}}
+
+    section{padding:112px 0;position:relative}
+    .eyebrow{font-size:.72rem;color:var(--purple);margin-bottom:16px}
+    .section-head{display:grid;grid-template-columns:1fr minmax(260px,.55fr);gap:36px;align-items:end;margin-bottom:48px}
+    h1,h2,h3{font-family:"Manrope",sans-serif;margin:0;letter-spacing:-.045em}
+    h2{font-size:clamp(2.35rem,5vw,4.8rem);line-height:1.03;max-width:850px}
+    .section-intro{margin:0;color:var(--muted);line-height:1.7}
+    .soft{color:var(--purple)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--line);font-weight:600;transition:transform .2s,box-shadow .2s,background .2s;will-change:transform}
+    .pill:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(26,24,48,.1)}
+    .pill.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .pill.primary .dot{background:var(--lime)}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--purple)}
+
+    .hero{min-height:100svh;padding:150px 0 70px;display:flex;align-items:center;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.7fr);gap:7vw;align-items:center}
+    .availability{display:inline-flex;align-items:center;gap:10px;background:var(--card-bg);border:1px solid var(--line);border-radius:999px;padding:10px 15px;font-size:.7rem}
+    .availability i{display:block;width:9px;height:9px;background:#71bf66;border-radius:50%;box-shadow:0 0 0 5px rgba(113,191,102,.12);animation:live 2s ease-in-out infinite}
+    @keyframes live{50%{box-shadow:0 0 0 10px rgba(113,191,102,0)}}
+    h1{font-size:clamp(4rem,10.6vw,9.5rem);line-height:.81;margin:30px 0 24px}
+    h1 .line{display:block}
+    .ltr{display:inline-block;transition:transform .35s cubic-bezier(.22,1,.36,1),color .3s;cursor:default}
+    .ltr:hover{transform:translateY(-.1em) rotate(-5deg);color:var(--purple)}
+    h1 .outline .ltr{-webkit-text-stroke:2px var(--ink);color:transparent}
+    h1 .outline .ltr:hover{-webkit-text-stroke:2px var(--purple);color:var(--lime)}
+    .hero-role{font:700 clamp(1.2rem,2.3vw,2rem) "Manrope",sans-serif;margin:0 0 18px;min-height:1.2em}
+    .hero-role .cursor{color:var(--purple);animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .hero-copy{max-width:680px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.7}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+    .portrait-wrap{position:relative;justify-self:end;width:min(100%,410px)}
+    .portrait-card{position:relative;border-radius:46% 46% 28px 28px;overflow:hidden;background:linear-gradient(145deg,var(--lilac),var(--pink));box-shadow:var(--shadow);aspect-ratio:4/5}
+    .portrait-card img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+    .orbit{position:absolute;inset:-25px;border:1px solid rgba(114,87,213,.25);border-radius:48%;animation:orbit 18s linear infinite}
+    .orbit::before,.orbit::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%}
+    .orbit::before{left:16%;top:0;background:var(--lime)}
+    .orbit::after{right:5%;bottom:18%;background:var(--pink);border:1px solid var(--ink)}
+    .float-card{position:absolute;left:-72px;bottom:38px;width:190px;padding:18px;background:color-mix(in srgb,var(--card-bg) 90%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+    .float-card b{font:700 1rem "Manrope";display:block;margin-bottom:5px}
+    .float-card span{font-size:.78rem;color:var(--muted)}
+    .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--muted);display:flex;gap:10px;align-items:center}
+    .scroll-cue::after{content:"";width:45px;height:1px;background:var(--line)}
+    @keyframes orbit{to{transform:rotate(360deg)}}
+
+    /* impact marquee */
+    .marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+    .marquee-track{display:flex;gap:44px;width:max-content;animation:scroll-x 34s linear infinite}
+    .marquee:hover .marquee-track{animation-play-state:paused}
+    .marquee-track span{font:800 clamp(1.1rem,2.4vw,1.7rem) "Manrope",sans-serif;display:inline-flex;align-items:center;gap:44px;color:var(--muted)}
+    .marquee-track span b{color:var(--ink)}
+    .marquee-track span::after{content:"✦";color:var(--purple);font-size:.8em}
+    @keyframes scroll-x{to{transform:translateX(-50%)}}
+
+    #about{padding-top:70px}
+    .about-panel{background:linear-gradient(145deg,#efe9ff,#fff0f5 55%,#e9fff7);color:var(--ink);border:1px solid var(--line);border-radius:44px;padding:clamp(34px,6vw,76px);overflow:hidden;position:relative;box-shadow:var(--shadow)}
+    .about-panel::after{content:"";position:absolute;right:-10%;bottom:-45%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--lilac),transparent 67%);opacity:.5}
+    .about-panel>*{position:relative;z-index:1}
+    .about-panel h2{max-width:16ch;margin-bottom:34px}
+    .about-copy{columns:2;column-gap:54px}
+    .about-copy p{font-size:clamp(1rem,1.35vw,1.14rem);line-height:1.75;color:var(--muted);margin:0 0 16px;break-inside:avoid}
+    .about-copy p:first-child{font-size:clamp(1.1rem,1.65vw,1.3rem);color:var(--ink);column-span:all;max-width:46ch;margin-bottom:22px}
+    .about-copy strong{color:var(--purple)}
+    .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:46px}
+    .bento .tile{grid-column:span 2;border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:22px 20px;background:rgba(255,255,255,.5);opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1),box-shadow .28s}
+    .bento .tile.in{opacity:1;transform:none}
+    .bento .tile:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(45,35,92,.12)}
+    .bento .tile:nth-child(1){background:rgba(216,201,255,.4)}
+    .bento .tile:nth-child(2){background:rgba(201,245,232,.45)}
+    .bento .tile:nth-child(3){background:rgba(255,210,225,.4)}
+    .bento .tile:nth-child(4){background:rgba(217,255,120,.22)}
+    .bento .tile:nth-child(5){background:rgba(216,201,255,.3)}
+    .bento .tile:nth-child(6){background:rgba(201,245,232,.35)}
+    .tile b{font:800 clamp(1.9rem,3.1vw,2.6rem) "Manrope",sans-serif;line-height:1;display:block;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+    .tile>span{display:block;margin-top:9px;font-size:.82rem;color:rgba(26,24,48,.62);line-height:1.45}
+    .tile .mv{margin-top:14px;height:28px;display:block}
+    .tile .mv svg{width:100%;height:100%;overflow:visible;display:block}
+    .mv .b,.mv .d{fill:var(--purple)}
+    .mv .ln{stroke:var(--purple)}
+    .mv .fillbar{fill:var(--purple)}
+    .mv .d.last{fill:var(--lime);stroke:var(--ink);stroke-width:1}
+    .mv .b{transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+    .mv .b:nth-child(2){transition-delay:.06s}.mv .b:nth-child(3){transition-delay:.12s}.mv .b:nth-child(4){transition-delay:.18s}.mv .b:nth-child(5){transition-delay:.24s}
+    .mv .ln{stroke-dasharray:240;stroke-dashoffset:240;transition:stroke-dashoffset 1.1s ease .15s}
+    .mv .fillbar{transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.22,1,.36,1) .1s}
+    .mv .d{opacity:.22;transition:opacity .45s}
+    .mv .d:nth-child(2){transition-delay:.1s}.mv .d:nth-child(3){transition-delay:.2s}.mv .d:nth-child(4){transition-delay:.3s}.mv .d:nth-child(5){transition-delay:.4s}
+    .tile.in .mv .b{transform:scaleY(1)}
+    .tile.in .mv .ln{stroke-dashoffset:0}
+    .tile.in .mv .fillbar{transform:scaleX(1)}
+    .tile.in .mv .d{opacity:1}
+    .bento .tile.now{grid-column:span 6;display:flex;align-items:center;flex-wrap:wrap;gap:8px 15px;background:var(--ink);color:#fff}
+    .tile.now i{width:9px;height:9px;border-radius:50%;background:#71bf66;box-shadow:0 0 0 5px rgba(113,191,102,.2);flex:none;animation:live 2s ease-in-out infinite}
+    .tile.now b{font:700 .68rem "Roboto Mono",monospace;letter-spacing:.16em;color:var(--lime);flex:none}
+    .tile.now>span{margin-top:0;color:rgba(255,255,255,.82);font-size:.92rem}
+    @media(max-width:900px){
+      .about-copy{columns:1}.about-copy p:first-child{max-width:none}
+      .bento{grid-template-columns:repeat(4,1fr)}
+      .bento .tile,.bento .tile.now{grid-column:span 2}
+      .bento .tile.now{grid-column:span 4}
+    }
+    @media(max-width:560px){.bento{grid-template-columns:1fr 1fr}.bento .tile,.bento .tile.now{grid-column:span 2}}
+
+    #work{background:linear-gradient(180deg,transparent,rgba(216,201,255,.18),transparent)}
+    .work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .work-card{grid-column:span 6;min-height:340px;border:1px solid var(--line);border-radius:var(--radius);padding:30px;background:var(--card-bg);display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .work-card:nth-child(3){grid-column:span 12;min-height:300px}
+    .work-card:hover,.work-card[aria-expanded="true"]{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(114,87,213,.35)}
+    .work-card::before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-65px;top:-80px;background:var(--card-accent,var(--lilac));opacity:.72}
+    .work-top,.work-bottom{position:relative;z-index:1}
+    .work-top{display:flex;justify-content:space-between;gap:20px}
+    .work-no{font-size:.68rem;color:var(--muted)}
+    .expand-icon{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:1.3rem;transition:transform .25s,background .25s}
+    .work-card[aria-expanded="true"] .expand-icon{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
+    .work-card h3{font-size:clamp(1.55rem,2.8vw,2.5rem);max-width:460px;margin:40px 0 12px}
+    .work-card .meta{color:var(--purple);font-weight:600}
+    .work-bottom{margin-top:auto}
+    .work-summary{color:var(--muted);line-height:1.6;margin:20px 0 0;max-width:760px}
+    .work-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+    .work-detail>div{overflow:hidden}
+    .work-card[aria-expanded="true"] .work-detail{grid-template-rows:1fr}
+    .work-detail p{padding-top:18px;margin:18px 0 0;border-top:1px solid var(--line);line-height:1.65}
+    .metrics{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .metrics span{padding:7px 10px;border:1px solid var(--line);border-radius:99px;font-size:.72rem;background:var(--paper)}
+    /* placeholder data-viz chip inside work card */
+    .viz{margin-top:20px;border:1px dashed var(--line);border-radius:16px;padding:14px;background:color-mix(in srgb,var(--paper) 60%,transparent);position:relative;z-index:1}
+    .viz-cap{font:500 .6rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:10px}
+    .viz svg{width:100%;height:70px;display:block;overflow:visible}
+    .viz .bar{transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+    .work-card.in .viz .bar{transform:scaleY(1)}
+    .viz .bar:nth-child(2){transition-delay:.06s}.viz .bar:nth-child(3){transition-delay:.12s}
+    .viz .bar:nth-child(4){transition-delay:.18s}.viz .bar:nth-child(5){transition-delay:.24s}
+    .viz .bar:nth-child(6){transition-delay:.3s}.viz .bar:nth-child(7){transition-delay:.36s}
+    .viz .spark{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.2s ease .2s}
+    .work-card.in .viz .spark{stroke-dashoffset:0}
+
+    #journey{overflow:hidden}
+    .journey-layout{display:grid;grid-template-columns:300px 1fr;gap:50px}
+    .journey-side{position:sticky;top:110px;height:max-content;display:flex;flex-direction:column;gap:18px}
+    .journey-tabs{display:flex;flex-direction:column;gap:8px}
+    .journey-tab{text-align:left;border:1px solid transparent;background:transparent;padding:16px;border-radius:18px;cursor:pointer;color:var(--muted);transition:.2s}
+    .journey-tab:hover{background:var(--card-bg);border-color:var(--line);color:var(--ink);box-shadow:0 10px 24px rgba(26,24,48,.06)}
+    .journey-tab.active{background:var(--card-bg);border-color:rgba(114,87,213,.45);color:var(--ink);box-shadow:0 12px 26px rgba(114,87,213,.16)}
+    .journey-tab.active b{color:var(--purple)}
+    .journey-tab.dim{opacity:.32}
+    .journey-tab .date{font-size:.65rem;display:block;margin-bottom:5px}
+    .journey-tab b{font-family:"Manrope";font-size:.95rem}
+    /* illustrated career map with clickable hotspots */
+    .mini-map{border:1px solid var(--line);border-radius:24px;padding:14px;background:var(--card-bg);position:relative;overflow:visible;max-width:780px;margin:0 auto 46px;box-shadow:0 14px 44px rgba(45,35,92,.07)}
+    .map-hint{font-size:.66rem;color:var(--muted);margin:9px 0 2px;line-height:1.4;text-align:center}
+    .jmap-wrap{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#efe9ff,#e9fff7)}
+    .jmap-wrap img{width:100%;display:block}
+    .jmap-fallback{display:none;padding:34px 18px;text-align:center;font:500 .68rem "Roboto Mono",monospace;color:var(--muted);line-height:1.6;letter-spacing:.02em}
+    .jmap-wrap.noimg .jmap-fallback{display:block}
+    .jmap-wrap.noimg .jmap-pin{display:none}
+    .jmap-pin{position:absolute;width:8%;min-width:34px;max-width:52px;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;cursor:pointer;border-radius:50%}
+    .jmap-pin::after{content:"";position:absolute;inset:8%;border-radius:50%;border:2.5px solid var(--purple);opacity:0;transform:scale(.4);transition:opacity .2s,transform .2s}
+    .jmap-pin::before{content:"";position:absolute;inset:-3px;border-radius:50%;background:var(--purple);opacity:0}
+    .jmap-pin:hover::after,.jmap-pin:focus-visible::after,.jmap-pin.active::after{opacity:1;transform:scale(1)}
+    .jmap-pin:hover::before,.jmap-pin:focus-visible::before{opacity:.16;animation:ping 1.8s ease-out infinite}
+    .jmap-pin.active::after{border-color:#e0662f;box-shadow:0 0 0 4px rgba(224,102,47,.22)}
+    @keyframes ping{0%{transform:scale(.7);opacity:.3}70%{opacity:0}100%{transform:scale(2.6);opacity:0}}
+    .map-tip{position:absolute;z-index:6;max-width:200px;padding:8px 11px;border-radius:12px;background:var(--ink);color:#fff;font-size:.7rem;line-height:1.45;pointer-events:none;box-shadow:var(--shadow);transform:translate(-50%,-100%) translateY(-9px);opacity:0;transition:opacity .16s}
+    .map-tip.show{opacity:1}
+    .map-tip::after{content:"";position:absolute;left:50%;bottom:-4px;width:9px;height:9px;background:var(--ink);transform:translateX(-50%) rotate(45deg)}
+    .edu-card.spotlight{border-color:var(--purple)!important;box-shadow:0 0 0 3px rgba(114,87,213,.3)!important;transition:box-shadow .3s,border-color .3s}
+    .journey-stage{min-height:520px;border-radius:34px;background:linear-gradient(135deg,#efe9ff,#fff0f5 55%,#e9fff7);padding:clamp(28px,5vw,62px);position:relative}
+    .journey-stage::before{content:"";position:absolute;left:25px;top:25px;width:10px;height:10px;border-radius:50%;background:var(--purple);box-shadow:20px 0 var(--pink),40px 0 var(--lime)}
+    .journey-panel{animation:panel-in .35s ease}
+    .journey-panel[hidden]{display:none}
+    .journey-kicker{font-size:.7rem;color:var(--purple);margin-top:20px}
+    .journey-panel h3{font-size:clamp(2rem,4vw,3.6rem);margin:14px 0 4px}
+    .journey-org{font-size:1.08rem;color:var(--purple);font-weight:600}
+    .journey-panel ul{margin:32px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+    .journey-panel li{padding:16px 18px 16px 46px;border:1px solid var(--line);background:color-mix(in srgb,var(--card-bg) 68%,transparent);border-radius:16px;line-height:1.55;position:relative}
+    .journey-panel li::before{content:"↳";position:absolute;left:18px;color:var(--purple);font-weight:700}
+    @keyframes panel-in{from{opacity:0;transform:translateY(10px)}}
+
+    #education{background:linear-gradient(180deg,rgba(201,245,232,.4),transparent)}
+    #education .eyebrow{color:var(--purple)}
+    #education h2{color:var(--ink)}
+    #education .section-intro{color:var(--muted)}
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .edu-card{border:1px solid var(--line);border-radius:28px;background:#fff;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(45,35,92,.06);transition:transform .3s,box-shadow .3s}
+    .edu-card:hover{transform:translateY(-5px);box-shadow:0 22px 54px rgba(45,35,92,.12)}
+    .edu-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;background:var(--lilac);right:-80px;bottom:-90px;opacity:.3}
+    .edu-photo{position:relative;border-bottom:1px solid var(--line);background:#eef1ff;line-height:0;overflow:hidden;aspect-ratio:15/7}
+    .edu-photo svg{width:100%;height:100%;display:block}
+    .edu-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+    .edu-photo .cap{position:absolute;left:10px;bottom:8px;z-index:2;line-height:1.2;font:600 .56rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:#fff;background:rgba(26,24,48,.55);padding:4px 8px;border-radius:99px;backdrop-filter:blur(3px)}
+    .edu-card:hover .edu-photo svg,.edu-card:hover .edu-photo img{transform:scale(1.03);transition:transform .5s ease}
+    .edu-body{padding:24px 28px 28px;position:relative;z-index:1}
+    .edu-card h3{font-size:1.45rem;margin-bottom:8px;color:var(--ink)}
+    .degree{color:var(--purple);font-weight:600;line-height:1.5}
+    .edu-date{color:var(--muted);font-size:.72rem;margin:12px 0 22px}
+    .tag-row{display:flex;flex-wrap:wrap;gap:8px}
+    .tag-row span{border:1px solid var(--line);border-radius:99px;padding:7px 11px;font-size:.72rem;color:var(--muted)}
+    .honors{font-size:.85rem;color:var(--muted);margin-top:20px;line-height:1.5}
+
+    .skill-layout{display:grid;grid-template-columns:minmax(270px,.7fr) 1.3fr;gap:50px;align-items:start}
+    .skill-display{position:sticky;top:115px;min-height:300px;border-radius:32px;padding:34px;background:linear-gradient(145deg,var(--lilac),var(--pink));display:flex;flex-direction:column;color:#1a1830}
+    .skill-display .count{font:800 4.5rem "Manrope";line-height:1}
+    .skill-display h3{font-size:1.7rem;margin-top:auto;color:#1a1830}
+    .skill-display p{color:rgba(26,24,48,.72);line-height:1.6;margin:8px 0 0}
+    .skill-meter{margin-top:18px}
+    .skill-meter .track{height:8px;border-radius:99px;background:rgba(26,24,48,.14);overflow:hidden}
+    .skill-meter .fill{height:100%;border-radius:99px;background:var(--ink);width:0;transition:width .7s cubic-bezier(.22,1,.36,1)}
+    .skill-meter .lbl{display:flex;justify-content:space-between;font:500 .62rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;color:rgba(26,24,48,.7)}
+    .skill-groups{display:grid;gap:22px}
+    .skill-group{border-top:1px solid var(--line);padding-top:20px}
+    .skill-group h3{font-size:1.05rem;margin-bottom:14px}
+    .skill-chips{display:flex;flex-wrap:wrap;gap:9px}
+    .skill-chip{border:1px solid var(--line);background:var(--card-bg);border-radius:999px;padding:10px 15px;cursor:pointer;color:var(--muted);transition:.2s}
+    .skill-chip:hover,.skill-chip.active{background:var(--ink);border-color:var(--ink);color:var(--paper);transform:translateY(-2px)}
+
+    #beyond{background:linear-gradient(135deg,rgba(201,245,232,.35),rgba(255,210,225,.28))}
+    .beyond-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .interest{background:color-mix(in srgb,var(--card-bg) 78%,transparent);border:1px solid var(--line);border-radius:22px;padding:24px;min-height:190px;transition:transform .2s,background .2s}
+    .interest:hover{transform:rotate(-1deg) translateY(-5px);background:var(--card-bg)}
+    .interest:nth-child(2n):hover{transform:rotate(1deg) translateY(-5px)}
+    .interest .icon{font-size:1.7rem}
+    .interest h3{font-size:1.08rem;margin:30px 0 8px}
+    .interest p{font-size:.86rem;line-height:1.55;color:var(--muted);margin:0}
+    .group-label{grid-column:1/-1;font-size:.68rem;color:var(--purple);margin-top:18px}
+
+    #contact{padding-bottom:40px}
+    .contact-card{border-radius:40px;padding:clamp(36px,7vw,84px);text-align:center;background:linear-gradient(135deg,var(--lilac),var(--pink) 52%,var(--mint));position:relative;overflow:hidden;color:#1a1830}
+    .contact-card h2{margin:auto;font-size:clamp(3rem,7vw,7rem);color:#1a1830}
+    .contact-card .eyebrow{color:#5a3fc0}
+    .contact-card p{max-width:650px;margin:24px auto;color:rgba(26,24,48,.7);font-size:1.08rem;line-height:1.6}
+    .contact-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+    .contact-actions .pill{background:rgba(255,255,255,.5);border-color:transparent;color:#1a1830}
+    .contact-actions .pill.primary{background:#1a1830;color:#fff}
+    footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:28px 0 0;font-size:.74rem;color:var(--muted)}
+
+    /* toast */
+    .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,120%);background:var(--ink);color:var(--paper);padding:13px 22px;border-radius:99px;font-size:.82rem;font-weight:600;z-index:500;box-shadow:var(--shadow);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+    .toast.show{transform:translate(-50%,0)}
+
+    /* back to top */
+    .to-top{position:fixed;right:22px;bottom:22px;z-index:200;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card-bg);cursor:pointer;display:grid;place-items:center;font-size:1.1rem;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s,background .2s;box-shadow:var(--shadow)}
+    .to-top.show{opacity:1;transform:none}
+    .to-top:hover{background:var(--ink);color:var(--paper)}
+    @media(max-width:1180px){.to-top{right:16px;bottom:16px}}
+
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+    .reveal.in{opacity:1;transform:none}
+    .stagger>*{transition-delay:calc(var(--i,0) * 70ms)}
+
+    @media(max-width:900px){
+      .nav-links{display:none}.menu-btn{display:grid;place-items:center}
+      .nav-links.open{display:flex;position:fixed;top:76px;left:16px;right:16px;padding:14px;flex-direction:column;align-items:stretch;background:color-mix(in srgb,var(--paper) 97%,transparent);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+      .nav-links a{padding:14px 16px}.nav-links a.active::after{display:none}
+      .hero-grid{grid-template-columns:1fr;gap:70px}.portrait-wrap{justify-self:center;width:min(78vw,410px)}.float-card{left:-30px}
+      .about-grid,.section-head,.skill-layout{grid-template-columns:1fr}
+      .section-head{align-items:start}.section-intro{max-width:650px}
+      .work-card,.work-card:nth-child(3){grid-column:span 12}
+      .journey-layout{grid-template-columns:1fr}.journey-side,.journey-stage{min-width:0}.journey-side{position:static}.journey-tabs{flex-direction:row;overflow-x:auto;min-width:0;padding-bottom:10px;scrollbar-width:none}.journey-tab{flex:0 0 220px}.mini-map{max-width:100%}
+      .skill-display{position:static;min-height:240px}
+    }
+    @media(max-width:640px){
+      :root{--wrap:calc(100vw - 32px)}
+      section{padding:82px 0}
+      .hero{padding-top:126px}
+      h1{font-size:clamp(3.7rem,21vw,6.5rem)}
+      .hero-actions .pill{justify-content:center;flex:1 1 145px}
+      .portrait-wrap{width:76vw}.float-card{left:-18px;bottom:18px;width:175px}
+      .about-panel{border-radius:30px;padding:30px 22px}.about-grid{gap:38px}
+      .work-card{min-height:330px;padding:24px}
+      .journey-stage{min-height:570px;border-radius:26px;padding:28px 20px}.journey-panel li{padding-left:40px}
+      .edu-grid,.beyond-grid{grid-template-columns:1fr}.edu-body{padding:22px}
+      .group-label{grid-column:1}.interest{min-height:160px}.interest h3{margin-top:22px}
+      .contact-card{border-radius:30px}.contact-actions .pill{width:100%;justify-content:center}
+      footer{flex-direction:column;align-items:center;text-align:center}
+    }
+    @media(max-width:390px){
+      .nav-shell{width:calc(100vw - 20px)}.brand-text{display:none}
+      h1{font-size:19vw}.hero-copy{font-size:.96rem}.portrait-wrap{width:79vw}
+      .float-card{left:-8px;bottom:12px;padding:14px;width:160px}
+      .section-head{gap:20px;margin-bottom:34px}h2{font-size:2.25rem}
+      .work-card{min-height:350px}.journey-tab{flex-basis:195px}
+      .journey-panel h3{font-size:2rem}.journey-stage{min-height:630px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}.ambient::before{display:none}.cursor-ring{display:none}
+      .viz .bar{transform:scaleY(1)}.viz .spark{stroke-dashoffset:0}
+      .bento .tile{opacity:1;transform:none}
+      .mv .b{transform:scaleY(1)}.mv .ln{stroke-dashoffset:0}.mv .fillbar{transform:scaleX(1)}.mv .d{opacity:1}
+    }
+    @media print{
+      nav,.side-dots,.to-top,.ambient,.cursor-ring,.marquee,.scroll-cue,#preloader,.progress{display:none!important}
+      *{box-shadow:none!important;color:#000!important;background:#fff!important}
+      section{padding:24px 0;page-break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div id="preloader" aria-hidden="true"><div class="pre-mark">RM</div><div class="pre-bar"></div></div>
+  <div class="progress" id="progress"></div>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-shell">
+      <a class="brand" href="#home" aria-label="Ran Ma, back to top"><span class="brand-mark">RM</span><span class="brand-text">Ran Ma</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-i="nav.about">About</a><a href="#work" data-i="nav.work">Selected work</a><a href="#journey" data-i="nav.journey">Journey</a><a href="#education" data-i="nav.education">Education</a><a href="#skills" data-i="nav.skills">Skills</a><a href="#beyond" data-i="nav.beyond">Beyond</a><a class="nav-contact" href="#contact" data-i="nav.contact">Let's talk</a>
+      </div>
+      <div class="nav-right">
+        <button class="lang-btn" id="langBtn" type="button" aria-label="切换到中文">中</button>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="side-dots" id="sideDots" aria-hidden="true">
+    <a href="#home" data-label="Home"></a><a href="#about" data-label="About"></a><a href="#work" data-label="Work"></a><a href="#journey" data-label="Journey"></a><a href="#education" data-label="Education"></a><a href="#skills" data-label="Skills"></a><a href="#beyond" data-label="Beyond"></a><a href="#contact" data-label="Contact"></a>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="home" data-section="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="availability mono"><i></i> <span data-i="hero.availability">Los Angeles · Open to opportunities</span></div>
+          <h1 aria-label="Ran Ma">
+            <span class="line" data-word="RAN"></span>
+            <span class="line outline" data-word="MA."></span>
+          </h1>
+          <p class="hero-role" id="heroRole">Spatial Data Analyst <span class="soft">×</span> AI Builder</p>
+          <p class="hero-copy" data-i="hero.copy">Spatial Economics and Data Analysis grad student at USC with a career built across global supply chain work at Dell, trade documentation, futures markets, film festival operations, and AI software development. I turn scattered numbers and moving parts into something you can actually read.</p>
+          <div class="hero-actions">
+            <a class="pill primary" href="#work"><span class="dot"></span><span data-i="hero.cta1">Explore my work</span></a>
+            <a class="pill" href="mailto:Jessica20020922@gmail.com"><span data-i="hero.cta2">Email me ↗</span></a>
+          </div>
+        </div>
+        <div class="portrait-wrap reveal">
+          <div class="orbit" aria-hidden="true"></div>
+          <div class="portrait-card" id="portraitCard"><img src="assets/portrait.jpg" alt="Portrait of Ran Ma" width="900" height="1125"></div>
+          <div class="float-card"><b data-i="hero.float.t">Maps · Models · Markets</b><span data-i="hero.float.s">Finding structure in fast-moving information.</span></div>
+        </div>
+      </div>
+      <div class="scroll-cue mono" aria-hidden="true" data-i="hero.scrollcue">Scroll to connect the dots</div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <section id="about" data-section="about">
+      <div class="container">
+        <div class="about-panel reveal">
+          <div class="eyebrow mono" data-i="about.eyebrow">01 · About</div>
+          <h2 data-i="about.h2">Not a straight line. <span class="soft">A connected one.</span></h2>
+          <div class="about-copy">
+            <p data-i="about.p1">I'm a <strong>Master's student in Spatial Economics and Data Analysis at USC</strong>, but the path here wasn't a straight line — and that's the point. I've reviewed hundreds of export documents in Xiamen, supported global supply chain operations at Dell, tracked futures prices across four commodity classes, produced 300+ short videos that pulled in 30,000+ views, and helped prepare and run a film festival in LA.</p>
+            <p data-i="about.p2">What connects all of it: I notice the structure hiding in messy, fast-moving information, and I make it usable — whether that's a Power BI dashboard, a spatial model, or AI-powered internal software.</p>
+            <p data-i="about.p3">Right now I'm building <strong>internal tools and AI workflows at Cayi Drink Tech</strong>, applying that same instinct to a completely new medium.</p>
+          </div>
+          <div class="bento">
+            <div class="tile"><b class="count-up" data-count="300" data-suffix="+">300+</b><span data-i="about.t1">short videos, cross-platform</span>
+              <span class="mv"><svg viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"><rect class="b" x="4" y="14" width="16" height="16" rx="2"/><rect class="b" x="28" y="8" width="16" height="22" rx="2"/><rect class="b" x="52" y="18" width="16" height="12" rx="2"/><rect class="b" x="76" y="4" width="16" height="26" rx="2"/><rect class="b" x="100" y="12" width="16" height="18" rx="2"/></svg></span>
+            </div>
+            <div class="tile"><b data-i="about.t2n">30,000+</b><span data-i="about.t2">total views</span>
+              <span class="mv"><svg viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M2 27 C24 24 34 15 52 12 C74 8 86 4 118 2" fill="none" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+            </div>
+            <div class="tile"><b class="count-up" data-count="100" data-suffix="%">100%</b><span data-i="about.t3">trade compliance</span>
+              <span class="mv"><svg viewBox="0 0 120 10" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="3" width="120" height="4" rx="2" fill="rgba(26,24,48,.14)"/><rect class="fillbar" x="0" y="3" width="120" height="4" rx="2"/></svg></span>
+            </div>
+            <div class="tile"><b class="count-up" data-count="20" data-suffix="+">20+</b><span data-i="about.t4">futures commodities</span>
+              <span class="mv"><svg viewBox="0 0 120 30" aria-hidden="true"><circle class="d" cx="14" cy="15" r="7"/><circle class="d" cx="44" cy="15" r="7"/><circle class="d" cx="74" cy="15" r="7"/><circle class="d" cx="104" cy="15" r="7"/></svg></span>
+            </div>
+            <div class="tile"><b class="count-up" data-count="5">5</b><span data-i="about.t5">industries</span>
+              <span class="mv"><svg viewBox="0 0 120 30" aria-hidden="true"><circle class="d" cx="12" cy="15" r="6"/><circle class="d" cx="36" cy="15" r="6"/><circle class="d" cx="60" cy="15" r="6"/><circle class="d" cx="84" cy="15" r="6"/><circle class="d last" cx="108" cy="15" r="6"/></svg></span>
+            </div>
+            <div class="tile"><b data-i="about.t6n">3.76</b><span data-i="about.t6">GPA at USC</span>
+              <span class="mv"><svg viewBox="0 0 120 10" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="3" width="120" height="4" rx="2" fill="rgba(26,24,48,.14)"/><rect class="fillbar" x="0" y="3" width="112.8" height="4" rx="2"/></svg></span>
+            </div>
+            <div class="tile now"><i></i><b data-i="about.now.k">NOW</b><span data-i="about.now.v">Building internal tools and AI workflows at Cayi Drink Tech</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" data-section="work">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="eyebrow mono" data-i="work.eyebrow">02 · Selected work</div><h2 data-i="work.h2">Work that makes <span class="soft">complexity useful.</span></h2></div>
+          <p class="section-intro" data-i="work.intro">Three snapshots drawn directly from my experience. Hover to explore; click a card to open the full story. Charts are illustrative placeholders.</p>
+        </div>
+        <div class="work-grid">
+          <article class="work-card reveal" style="--card-accent:var(--mint)" tabindex="0" role="button" aria-expanded="false">
+            <div class="work-top"><span class="work-no mono" data-i="work.c1.no">01 · Data operations</span><span class="expand-icon" aria-hidden="true">+</span></div>
+            <h3 data-i="work.c1.h3">Turning daily logistics data into decisions.</h3><div class="meta" data-i="work.c1.meta">Dell Technologies · Power BI + Excel</div>
+            <div class="work-bottom">
+              <p class="work-summary" data-i="work.c1.sum">Built an Excel database and Power BI visualization panels to surface operational insight from daily logistics data.</p>
+              <figure class="viz" aria-hidden="true">
+                <figcaption class="viz-cap"><span data-i="work.c1.vc1">Weekly reports delivered</span><span data-i="work.c1.vc2">50+ total</span></figcaption>
+                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
+                  <rect class="bar" x="8"   y="34" width="26" height="36" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="48"  y="22" width="26" height="48" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="88"  y="40" width="26" height="30" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="128" y="14" width="26" height="56" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="168" y="26" width="26" height="44" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="208" y="10" width="26" height="60" rx="3" fill="var(--lime)"/>
+                  <rect class="bar" x="248" y="30" width="26" height="40" rx="3" fill="var(--purple)"/>
+                </svg>
+              </figure>
+              <div class="work-detail"><div><p data-i="work.c1.det">Tracked daily logistics data, compiled it in an Excel database, published timely updates to the internal site, summarized daily backlogs, and reported weekly IT issues — more than 50 reports delivered.</p><div class="metrics"><span data-i="work.c1.m1">50+ reports</span><span data-i="work.c1.m2">Power BI panels</span><span data-i="work.c1.m3">Operational insight</span></div></div></div>
+            </div>
+          </article>
+          <article class="work-card reveal" style="--card-accent:var(--pink)" tabindex="0" role="button" aria-expanded="false">
+            <div class="work-top"><span class="work-no mono" data-i="work.c2.no">02 · Media intelligence</span><span class="expand-icon" aria-hidden="true">+</span></div>
+            <h3 data-i="work.c2.h3">Making market movement easier to follow.</h3><div class="meta" data-i="work.c2.meta">Pioneer Futures · Analysis + Content</div>
+            <div class="work-bottom">
+              <p class="work-summary" data-i="work.c2.sum">Tracked prices across four commodity classes, then translated daily market and media signals into clear platform content.</p>
+              <figure class="viz" aria-hidden="true">
+                <figcaption class="viz-cap"><span data-i="work.c2.vc1">Cumulative video reach</span><span data-i="work.c2.vc2">30,000+ clicks</span></figcaption>
+                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
+                  <path class="spark" d="M4 62 C50 58 70 40 110 36 C150 32 170 20 210 15 C240 11 270 7 296 5" fill="none" stroke="var(--purple)" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="296" cy="5" r="4" fill="var(--lime)"/>
+                </svg>
+              </figure>
+              <div class="work-detail"><div><p data-i="work.c2.det">Analyzed daily price trends across 20+ futures commodities in agriculture, metals, energy, and chemicals, curated daily media coverage across WeChat, TikTok, and Toutiao, and produced 300+ videos that reached 30,000+ total clicks.</p><div class="metrics"><span data-i="work.c2.m1">20+ commodities</span><span data-i="work.c2.m2">300+ videos</span><span data-i="work.c2.m3">30,000+ clicks</span></div></div></div>
+            </div>
+          </article>
+          <article class="work-card reveal" style="--card-accent:var(--lilac)" tabindex="0" role="button" aria-expanded="false">
+            <div class="work-top"><span class="work-no mono" data-i="work.c3.no">03 · AI-enabled workflows</span><span class="expand-icon" aria-hidden="true">+</span></div>
+            <h3 data-i="work.c3.h3">Building internal tools that remove friction from real work.</h3><div class="meta" data-i="work.c3.meta">Cayi Drink Tech · Internal systems + SEO/GEO</div>
+            <div class="work-bottom">
+              <p class="work-summary" data-i="work.c3.sum">Designed and built two internal company systems, set up AI-assisted automation, and trained a U.S. business development team to use AI tools.</p>
+              <figure class="viz" aria-hidden="true">
+                <figcaption class="viz-cap"><span data-i="work.c3.vc1">Hydration brands tracked</span><span data-i="work.c3.vc2">10+ brands</span></figcaption>
+                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
+                  <rect class="bar" x="10"  y="18" width="22" height="52" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="42"  y="30" width="22" height="40" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="74"  y="12" width="22" height="58" rx="3" fill="var(--lime)"/>
+                  <rect class="bar" x="106" y="36" width="22" height="34" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="138" y="24" width="22" height="46" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="170" y="42" width="22" height="28" rx="3" fill="var(--purple)"/>
+                  <rect class="bar" x="202" y="20" width="22" height="50" rx="3" fill="var(--purple)"/>
+                </svg>
+              </figure>
+              <div class="work-detail"><div><p data-i="work.c3.det">Audited colleagues' processes to design two internal systems, built automation workflows (including AppSheet), led SEO/GEO strategy, and used Claude to automate Amazon and TikTok data pulls for sales analysis across more than 10 hydration brands.</p><div class="metrics"><span data-i="work.c3.m1">2 internal systems</span><span data-i="work.c3.m2">10+ brands</span><span data-i="work.c3.m3">AI team training</span></div></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" data-section="journey">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="eyebrow mono" data-i="journey.eyebrow">03 · Journey</div><h2 data-i="journey.h2">One route, <span class="soft">five perspectives.</span></h2></div>
+          <p class="section-intro" data-i="journey.intro">Choose a stop to see how each role added a new way of looking at information, operations, and people. Tap a map pin to filter by region.</p>
+        </div>
+        <figure class="mini-map reveal">
+          <div class="jmap-wrap" id="jmapWrap">
+            <img src="assets/journey-map.jpg" alt="Illustrated map of my journey from Fujian, China to California, USA" onerror="this.closest('.jmap-wrap').classList.add('noimg')">
+            <div class="jmap-fallback" data-i="map.fallback">Add assets/journey-map.jpg to show the illustrated map here.</div>
+            <button class="jmap-pin" style="left:14%;top:62%" data-act="edu" data-edu="jgu" data-tip="map.tip.jgu" aria-label="Zhangzhou — Tan Kah Kee College"></button>
+            <button class="jmap-pin" style="left:34.5%;top:57%" data-act="city" data-city="xiamen" data-tip="map.tip.xiamen" aria-label="Xiamen — filter roles"></button>
+            <button class="jmap-pin" style="left:65.5%;top:52%" data-act="city" data-city="oxnard" data-tip="map.tip.oxnard" aria-label="Oxnard — Cayi Drink Tech"></button>
+            <button class="jmap-pin" style="left:78.5%;top:76%" data-act="city" data-city="la" data-tip="map.tip.la" aria-label="Los Angeles — filter roles"></button>
+          </div>
+          <div class="map-tip" id="mapTip"></div>
+          <p class="map-hint" data-i="map.hint">Tap a pin to filter roles by place; the school pin jumps to Education.</p>
+        </figure>
+        <div class="journey-layout">
+          <div class="journey-side">
+            <div class="journey-tabs" role="tablist" aria-label="Career timeline">
+              <button class="journey-tab active" role="tab" aria-selected="true" aria-controls="journey-0" id="tab-0" data-region="us" data-city="oxnard"><span class="date mono" data-i="j.t0.d">Jun 2026 — Present</span><b data-i="j.t0.n">Cayi Drink Tech</b></button>
+              <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-1" id="tab-1" data-region="us" data-city="la"><span class="date mono" data-i="j.t1.d">Oct — Nov 2025</span><b data-i="j.t1.n">CAFF / CATF</b></button>
+              <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-2" id="tab-2" data-region="cn" data-city="xiamen"><span class="date mono" data-i="j.t2.d">Jul — Sep 2023</span><b data-i="j.t2.n">Dell Technologies</b></button>
+              <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-3" id="tab-3" data-region="cn" data-city="xiamen"><span class="date mono" data-i="j.t3.d">Feb 2021 — Jun 2022</span><b data-i="j.t3.n">Pioneer Futures</b></button>
+              <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-4" id="tab-4" data-region="cn" data-city="xiamen"><span class="date mono" data-i="j.t4.d">Jul 2020 — Feb 2022</span><b data-i="j.t4.n">Xiamen Mingcheng</b></button>
+            </div>
+          </div>
+          <div class="journey-stage reveal">
+            <article class="journey-panel" role="tabpanel" id="journey-0" aria-labelledby="tab-0"><div class="journey-kicker mono" data-i="j.p0.k">Los Angeles · Current</div><h3 data-i="j.p0.r">AI Tool Creator Intern</h3><div class="journey-org" data-i="j.p0.o">Cayi Drink Tech</div><ul><li data-i="j.p0.b0">Designed and built two internal company systems by auditing colleagues' workflows for efficiency gains.</li><li data-i="j.p0.b1">Set up AI-assisted automation (including AppSheet) to cut repetitive manual work.</li><li data-i="j.p0.b2">Trained the U.S. business development team on AI tools for pipeline building and lead generation.</li><li data-i="j.p0.b3">Led SEO/GEO strategy and used Claude to automate Amazon/TikTok data pulls for sales analysis across 10+ hydration brands.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-1" aria-labelledby="tab-1" hidden><div class="journey-kicker mono" data-i="j.p1.k">Los Angeles</div><h3 data-i="j.p1.r">Assistant</h3><div class="journey-org" data-i="j.p1.o">Chinese American Film Festival & TV Festival (CAFF / CATF)</div><ul><li data-i="j.p1.b0">Supported large-scale event operations — pre-event prep, on-site coordination, and live execution alongside production teams.</li><li data-i="j.p1.b1">Coordinated talent and guests across red carpet, seating, and award segments.</li><li data-i="j.p1.b2">Assisted the Industry Forum and Film Promotion Conference with content sessions and project showcases.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-2" aria-labelledby="tab-2" hidden><div class="journey-kicker mono" data-i="j.p2.k">Xiamen, China</div><h3 data-i="j.p2.r">Global Supply Chain Assistant</h3><div class="journey-org" data-i="j.p2.o">Dell Technologies</div><ul><li data-i="j.p2.b0">Tracked daily logistics data, built an Excel database, and visualized it in Power BI — 50+ reports delivered.</li><li data-i="j.p2.b1">Built data visualization panels to surface operational insights from Excel.</li><li data-i="j.p2.b2">Summarized daily backlogs and reported weekly IT issues.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-3" aria-labelledby="tab-3" hidden><div class="journey-kicker mono" data-i="j.p3.k">Xiamen, China</div><h3 data-i="j.p3.r">Media Promotion Staff</h3><div class="journey-org" data-i="j.p3.o">Pioneer Futures Co., Ltd</div><ul><li data-i="j.p3.b0">Tracked and analyzed daily price trends across 20+ futures commodities — agriculture, metals, energy, chemicals.</li><li data-i="j.p3.b1">Curated and summarized daily media coverage across WeChat, TikTok, and Toutiao.</li><li data-i="j.p3.b2">Produced 300+ videos across platforms, reaching 30,000+ total clicks.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-4" aria-labelledby="tab-4" hidden><div class="journey-kicker mono" data-i="j.p4.k">Xiamen, China</div><h3 data-i="j.p4.r">Documentation & Logistics Assistant</h3><div class="journey-org" data-i="j.p4.o">Xiamen Mingcheng Environmental Technology Co., Ltd</div><ul><li data-i="j.p4.b0">Produced and reviewed 100+ import/export documents monthly with 100% regulatory compliance.</li><li data-i="j.p4.b1">Negotiated shipment terms with carriers for 20+ orders monthly, ensuring 100% on-time delivery.</li><li data-i="j.p4.b2">Verified tax refund details and completed documentation for 20+ export orders.</li></ul></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" data-section="education">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow mono" data-i="edu.eyebrow">04 · Education</div><h2 data-i="edu.h2">Trained to think in maps, models, and markets.</h2></div><p class="section-intro" data-i="edu.intro">A foundation that connects spatial analysis with economics, trade, and practical development.</p></div>
+        <div class="edu-grid">
+          <article class="edu-card reveal">
+            <div class="edu-photo">
+              <img src="assets/edu-usc.jpg" alt="University of Southern California campus" onerror="this.remove()">
+              <svg viewBox="0 0 300 112" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a USC-style campus building">
+                <defs><linearGradient id="skyU" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef1ff"/><stop offset="1" stop-color="#f6eef7"/></linearGradient></defs>
+                <rect width="300" height="112" fill="url(#skyU)"/>
+                <circle cx="254" cy="22" r="10" fill="#ffd98a"/>
+                <ellipse cx="64" cy="20" rx="15" ry="6.5" fill="#fff" opacity=".85"/><ellipse cx="76" cy="20" rx="10" ry="5.5" fill="#fff" opacity=".85"/>
+                <rect x="44" y="52" width="212" height="56" fill="#f0e0d5"/>
+                <rect x="139" y="30" width="42" height="78" fill="#f5e8de"/>
+                <path d="M131 30 L160 15 L189 30 Z" fill="#9c2c2c"/>
+                <rect x="155" y="21" width="10" height="6" fill="#ffcf40"/>
+                <g fill="#7257d5" opacity=".36">
+                  <rect x="58" y="64" width="14" height="44" rx="7"/><rect x="86" y="64" width="14" height="44" rx="7"/>
+                  <rect x="200" y="64" width="14" height="44" rx="7"/><rect x="228" y="64" width="14" height="44" rx="7"/>
+                  <rect x="151" y="48" width="18" height="60" rx="9"/>
+                </g>
+                <path d="M24 108 q3 -22 1 -38" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <path d="M280 108 q-3 -26 -1 -44" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <g fill="#84bd84"><ellipse cx="25" cy="68" rx="16" ry="6" transform="rotate(-20 25 68)"/><ellipse cx="25" cy="70" rx="16" ry="6" transform="rotate(20 25 70)"/><ellipse cx="279" cy="62" rx="17" ry="6" transform="rotate(-18 279 62)"/><ellipse cx="279" cy="64" rx="17" ry="6" transform="rotate(18 279 64)"/></g>
+                <rect x="0" y="106" width="300" height="6" fill="#dcebdc"/>
+              </svg>
+              <span class="cap" data-i="edu.c1.cap">USC · Los Angeles</span>
+            </div>
+            <div class="edu-body">
+              <h3 data-i="edu.c1.s">University of Southern California</h3><div class="degree" data-i="edu.c1.d">M.S., Spatial Economics and Data Analysis</div><div class="edu-date mono" data-i="edu.c1.dt">Sep 2024 — Present · Los Angeles, CA · GPA 3.76</div><div class="tag-row"><span data-i="edu.c1.g0">Spatial Analysis &amp; Modeling</span><span data-i="edu.c1.g1">Econometrics</span><span data-i="edu.c1.g2">Microeconomic Policy</span><span data-i="edu.c1.g3">Spatial Thinking</span><span data-i="edu.c1.g4">Spatial Econometrics</span></div>
+            </div>
+          </article>
+          <article class="edu-card reveal">
+            <div class="edu-photo">
+              <img src="assets/edu-jgu.jpg" alt="Xiamen University Tan Kah Kee College campus" onerror="this.remove()">
+              <svg viewBox="0 0 300 112" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a Tan Kah Kee style campus building by the sea">
+                <defs><linearGradient id="skyJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4ea"/><stop offset="1" stop-color="#fdeef0"/></linearGradient></defs>
+                <rect width="300" height="112" fill="url(#skyJ)"/>
+                <circle cx="254" cy="20" r="9" fill="#ffd98a"/>
+                <ellipse cx="62" cy="18" rx="14" ry="6" fill="#fff" opacity=".85"/><ellipse cx="73" cy="18" rx="9" ry="5" fill="#fff" opacity=".85"/>
+                <rect x="42" y="58" width="216" height="42" fill="#efe6d5"/>
+                <g fill="#b07a4b" opacity=".42"><rect x="56" y="72" width="12" height="28" rx="6"/><rect x="84" y="72" width="12" height="28" rx="6"/><rect x="112" y="72" width="12" height="28" rx="6"/><rect x="176" y="72" width="12" height="28" rx="6"/><rect x="204" y="72" width="12" height="28" rx="6"/><rect x="232" y="72" width="12" height="28" rx="6"/></g>
+                <path d="M20 60 C20 40 70 32 150 32 C230 32 280 40 280 60 C258 46 220 40 150 40 C80 40 42 46 20 60 Z" fill="#e0662f"/>
+                <rect x="132" y="26" width="36" height="16" fill="#f3ead7"/>
+                <path d="M118 30 C118 18 136 13 150 13 C164 13 182 18 182 30 C168 21 158 19 150 19 C142 19 132 21 118 30 Z" fill="#e0662f"/>
+                <rect x="146" y="6" width="8" height="9" fill="#e0662f"/>
+                <path d="M24 104 q3 -20 1 -34" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <path d="M280 104 q-3 -22 -1 -38" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <g fill="#84bd84"><ellipse cx="25" cy="64" rx="14" ry="5.5" transform="rotate(-20 25 64)"/><ellipse cx="25" cy="66" rx="14" ry="5.5" transform="rotate(20 25 66)"/><ellipse cx="279" cy="60" rx="14" ry="5.5" transform="rotate(-18 279 60)"/><ellipse cx="279" cy="62" rx="14" ry="5.5" transform="rotate(18 279 62)"/></g>
+                <rect x="0" y="100" width="300" height="12" fill="#c3e7de"/>
+                <path d="M0 103 q12 -4 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0" fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"/>
+              </svg>
+              <span class="cap" data-i="edu.c2.cap">Tan Kah Kee College · Fujian</span>
+            </div>
+            <div class="edu-body">
+              <h3 data-i="edu.c2.s">Xiamen University Tan Kah Kee College</h3><div class="degree" data-i="edu.c2.d">B.Econ., International Business and Trade</div><div class="edu-date mono" data-i="edu.c2.dt">Sep 2020 — Jun 2024 · Zhangzhou, China</div><div class="tag-row"><span data-i="edu.c2.g0">Brand Marketing</span><span data-i="edu.c2.g1">Investment Economics</span><span data-i="edu.c2.g2">Statistics</span><span data-i="edu.c2.g3">International Trade Practice</span><span data-i="edu.c2.g4">International Logistics</span><span data-i="edu.c2.g5">Python</span><span data-i="edu.c2.g6">WeChat Mini Program Dev</span></div><p class="honors" data-i="edu.c2.h">Second-Class Scholarship, 2022–2023 · National Computer Rank Examination, Level 2</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" data-section="skills">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow mono" data-i="skills.eyebrow">05 · Skills</div><h2 data-i="skills.h2">A toolkit organized by <span class="soft">what it unlocks.</span></h2></div><p class="section-intro" data-i="skills.intro">Select a skill to see where it fits in the way I analyze, build, create, and operate. Bars are a rough self-assessment.</p></div>
+        <div class="skill-layout">
+          <aside class="skill-display reveal" aria-live="polite">
+            <span class="count" id="skillCount">01</span>
+            <h3 id="skillName">Spatial analysis & modeling</h3>
+            <p id="skillText">Connecting location, economics, and patterns through USC coursework and spatial thinking.</p>
+            <div class="skill-meter"><div class="lbl"><span id="skillTool">ArcGIS</span><span id="skillLevelText">Working proficiency</span></div><div class="track"><div class="fill" id="skillFill"></div></div></div>
+          </aside>
+          <div class="skill-groups">
+            <div class="skill-group"><h3 data-i="skills.g0">Analyze &amp; model</h3><div class="skill-chips">
+              <button class="skill-chip active" data-title="Spatial analysis &amp; modeling" data-level="72" data-copy="Connecting location, economics, and patterns through USC coursework and spatial thinking.">ArcGIS</button>
+              <button class="skill-chip" data-title="Statistical analysis" data-level="60" data-copy="Working with economic and operational data using statistical tooling.">Stata</button>
+              <button class="skill-chip" data-title="Data analysis" data-level="58" data-copy="Using code to explore, structure, and communicate data.">R</button>
+              <button class="skill-chip" data-title="Data visualization" data-level="80" data-copy="Turning logistics and operational data into panels and reports people can use.">Power BI</button>
+              <button class="skill-chip" data-title="Programming for analysis" data-level="60" data-copy="Applying programming to data, coursework, and practical development.">Python</button>
+            </div></div>
+            <div class="skill-group"><h3 data-i="skills.g1">Build &amp; develop</h3><div class="skill-chips">
+              <button class="skill-chip" data-title="Interactive development" data-level="45" data-copy="Building web interactions and lightweight digital experiences.">JavaScript</button>
+              <button class="skill-chip" data-title="Database workflows" data-level="55" data-copy="Working with structured data and database management tools.">Navicat Premium</button>
+              <button class="skill-chip" data-title="Low-code app building" data-level="60" data-copy="Building internal apps and automations without a full engineering stack.">AppSheet</button>
+              <button class="skill-chip" data-title="AI-assisted building" data-level="90" data-copy="Using AI tools to automate data pulls, build workflows, and improve team efficiency.">Claude</button>
+              <button class="skill-chip" data-title="AI-assisted development" data-level="72" data-copy="Using an AI coding workflow to move from idea to working software.">Codex</button>
+            </div></div>
+            <div class="skill-group"><h3 data-i="skills.g2">Create &amp; produce</h3><div class="skill-chips">
+              <button class="skill-chip" data-title="Video production" data-level="88" data-copy="Produced 300+ platform videos and edited footage for 10+ Chinese TV drama productions.">CapCut (剪映)</button>
+              <button class="skill-chip" data-title="Video editing" data-level="82" data-copy="Shaping raw footage into clear, audience-ready stories across platforms.">Video Editing</button>
+              <button class="skill-chip" data-title="Content strategy" data-level="78" data-copy="Connecting market signals, media coverage, and platform needs into daily content.">Content Strategy</button>
+            </div></div>
+            <div class="skill-group"><h3 data-i="skills.g3">Operate</h3><div class="skill-chips">
+              <button class="skill-chip" data-title="Structured operations" data-level="90" data-copy="Building databases, tracking logistics, and supporting repeatable reporting workflows.">Excel</button>
+              <button class="skill-chip" data-title="Business communication" data-level="80" data-copy="Preparing polished documents for operational and professional contexts.">Word</button>
+              <button class="skill-chip" data-title="Clear presentations" data-level="80" data-copy="Organizing information so a team or audience can act on it.">PowerPoint</button>
+              <button class="skill-chip" data-title="Trade documentation" data-level="92" data-copy="Processed 100+ import/export documents monthly with 100% regulatory compliance.">Trade Documentation</button>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beyond" data-section="beyond">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow mono" data-i="beyond.eyebrow">06 · Beyond work</div><h2 data-i="beyond.h2">Courts, clubs, <span class="soft">cameras.</span></h2></div><p class="section-intro" data-i="beyond.intro">The rest of the picture: teamwork, consistency, community, and a long-running instinct to make things.</p></div>
+        <div class="beyond-grid">
+          <div class="group-label mono" data-i="beyond.l0">Sports</div>
+          <article class="interest reveal"><span class="icon">🏸</span><h3 data-i="beyond.c0.t">Badminton</h3><p data-i="beyond.c0.d">Varsity player, 2017–2020 (6th place in high school competition); now playing with the USC Badminton Club.</p></article>
+          <article class="interest reveal"><span class="icon">🏊</span><h3 data-i="beyond.c1.t">Swimming</h3><p data-i="beyond.c1.d">Placed 7th in a school swim team competition.</p></article>
+          <article class="interest reveal"><span class="icon">🎾</span><h3 data-i="beyond.c2.t">USC Tennis Club</h3><p data-i="beyond.c2.d">Member of the USC Tennis Club for 1.5 years.</p></article>
+          <article class="interest reveal"><span class="icon">🏹</span><h3 data-i="beyond.c3.t">USC Archery Club</h3><p data-i="beyond.c3.d">Member of the USC Archery Club.</p></article>
+          <div class="group-label mono" data-i="beyond.l1">Clubs &amp; volunteering</div>
+          <article class="interest reveal"><span class="icon">🙋</span><h3 data-i="beyond.c4.t">Youth Volunteer Association</h3><p data-i="beyond.c4.d">Media &amp; Publicity Dept., Sep 2022–Jun 2023. Wrote WeChat posts averaging 1,000+ views; awarded “Outstanding Volunteer.”</p></article>
+          <article class="interest reveal"><span class="icon">🏃</span><h3 data-i="beyond.c5.t">Xiamen Marathon</h3><p data-i="beyond.c5.d">Supported race-day operations as a volunteer.</p></article>
+          <article class="interest reveal"><span class="icon">🐾</span><h3 data-i="beyond.c6.t">Animal Protection Society</h3><p data-i="beyond.c6.d">Active member at Xiamen University Tan Kah Kee College.</p></article>
+          <div class="group-label mono" data-i="beyond.l2">Creative</div>
+          <article class="interest reveal"><span class="icon">🎬</span><h3 data-i="beyond.c7.t">On-set &amp; editing</h3><p data-i="beyond.c7.d">Independently shot and edited footage for 10+ Chinese TV drama productions, outside of coursework.</p></article>
+          <article class="interest reveal"><span class="icon">🎥</span><h3 data-i="beyond.c8.t">Media Center</h3><p data-i="beyond.c8.d">Production Dept., Sep 2020–Jun 2021. Filmed and edited promotional videos for college-wide events, distributed via official channels.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" data-section="contact">
+      <div class="container">
+        <div class="contact-card reveal"><div class="eyebrow mono" data-i="contact.eyebrow">07 · Contact</div><h2 data-i="contact.h2">Let's connect the next dot.</h2><p data-i="contact.p">Open to roles in data analysis, spatial economics, or supply chain — wherever trade, tech, and storytelling meet.</p><div class="contact-actions"><button class="pill primary" id="copyEmail" type="button"><span class="dot"></span>Jessica20020922@gmail.com</button><a class="pill" href="assets/Ran-Ma-Resume.pdf" download data-i="contact.dl">Download resume ↓</a><a class="pill" href="https://www.linkedin.com/in/ran-ma-6b51b6384" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="pill" href="tel:2136629220">213-662-9220</a></div></div>
+        <footer><span>© 2026 Ran Ma</span><span data-i="footer.loc">Los Angeles, CA</span><span data-i="footer.lang">Native Mandarin speaker</span></footer>
+      </div>
+    </section>
+  </main>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  /* ===== Bilingual content. Edit strings here; keys match data-i attributes above. ===== */
+  window.I18N = {
+    en: {
+      title: "Ran Ma — Spatial Data & AI Builder",
+      "nav.about": "About", "nav.work": "Selected work", "nav.journey": "Journey",
+      "nav.education": "Education", "nav.skills": "Skills", "nav.beyond": "Beyond", "nav.contact": "Let's talk",
+      "hero.availability": "Los Angeles · Open to opportunities",
+      "hero.copy": "Spatial Economics and Data Analysis grad student at USC with a career built across global supply chain work at Dell, trade documentation, futures markets, film festival operations, and AI software development. I turn scattered numbers and moving parts into something you can actually read.",
+      "hero.cta1": "Explore my work", "hero.cta2": "Email me ↗",
+      "hero.float.t": "Maps · Models · Markets",
+      "hero.float.s": "Finding structure in fast-moving information.",
+      "hero.scrollcue": "Scroll to connect the dots",
+      "about.eyebrow": "01 · About",
+      "about.h2": 'Not a straight line. <span class="soft">A connected one.</span>',
+      "about.p1": "I'm a <strong>Master's student in Spatial Economics and Data Analysis at USC</strong>, but the path here wasn't a straight line — and that's the point. I've reviewed hundreds of export documents in Xiamen, supported global supply chain operations at Dell, tracked futures prices across four commodity classes, produced 300+ short videos that pulled in 30,000+ views, and helped prepare and run a film festival in LA.",
+      "about.p2": "What connects all of it: I notice the structure hiding in messy, fast-moving information, and I make it usable — whether that's a Power BI dashboard, a spatial model, or AI-powered internal software.",
+      "about.p3": "Right now I'm building <strong>internal tools and AI workflows at Cayi Drink Tech</strong>, applying that same instinct to a completely new medium.",
+      "about.s1": "videos produced and edited across platforms",
+      "about.s2": "trade documents processed monthly, 100% compliant",
+      "about.s3": "industries touched: trade, futures, media, film, AI",
+      "about.t1": "short videos, cross-platform",
+      "about.t2": "total views", "about.t2n": "30,000+",
+      "about.t3": "trade-compliance rate",
+      "about.t4": "futures commodities tracked",
+      "about.t5": "industries worked in",
+      "about.t6": "cumulative GPA at USC", "about.t6n": "3.76",
+      "about.now.k": "NOW",
+      "about.now.v": "Building internal tools and AI workflows at Cayi Drink Tech",
+      "work.eyebrow": "02 · Selected work",
+      "work.h2": 'Work that makes <span class="soft">complexity useful.</span>',
+      "work.intro": "Three snapshots drawn directly from my experience. Hover to explore; click a card to open the full story. Charts are illustrative placeholders.",
+      "work.c1.no": "01 · Data operations",
+      "work.c1.h3": "Turning daily logistics data into decisions.",
+      "work.c1.meta": "Dell Technologies · Power BI + Excel",
+      "work.c1.sum": "Built an Excel database and Power BI visualization panels to surface operational insight from daily logistics data.",
+      "work.c1.vc1": "Weekly reports delivered", "work.c1.vc2": "50+ total",
+      "work.c1.det": "Tracked daily logistics data, compiled it in an Excel database, published timely updates to the internal site, summarized daily backlogs, and reported weekly IT issues — more than 50 reports delivered.",
+      "work.c1.m1": "50+ reports", "work.c1.m2": "Power BI panels", "work.c1.m3": "Operational insight",
+      "work.c2.no": "02 · Media intelligence",
+      "work.c2.h3": "Making market movement easier to follow.",
+      "work.c2.meta": "Pioneer Futures · Analysis + Content",
+      "work.c2.sum": "Tracked prices across four commodity classes, then translated daily market and media signals into clear platform content.",
+      "work.c2.vc1": "Cumulative video reach", "work.c2.vc2": "30,000+ clicks",
+      "work.c2.det": "Analyzed daily price trends across 20+ futures commodities in agriculture, metals, energy, and chemicals, curated daily media coverage across WeChat, TikTok, and Toutiao, and produced 300+ videos that reached 30,000+ total clicks.",
+      "work.c2.m1": "20+ commodities", "work.c2.m2": "300+ videos", "work.c2.m3": "30,000+ clicks",
+      "work.c3.no": "03 · AI-enabled workflows",
+      "work.c3.h3": "Building internal tools that remove friction from real work.",
+      "work.c3.meta": "Cayi Drink Tech · Internal systems + SEO/GEO",
+      "work.c3.sum": "Designed and built two internal company systems, set up AI-assisted automation, and trained a U.S. business development team to use AI tools.",
+      "work.c3.vc1": "Hydration brands tracked", "work.c3.vc2": "10+ brands",
+      "work.c3.det": "Audited colleagues' processes to design two internal systems, built automation workflows (including AppSheet), led SEO/GEO strategy, and used Claude to automate Amazon and TikTok data pulls for sales analysis across more than 10 hydration brands.",
+      "work.c3.m1": "2 internal systems", "work.c3.m2": "10+ brands", "work.c3.m3": "AI team training",
+      "journey.eyebrow": "03 · Journey",
+      "journey.h2": 'One route, <span class="soft">five perspectives.</span>',
+      "journey.intro": "Choose a stop to see how each role added a new way of looking at information, operations, and people. On the map, a flag filters roles by city, a badge jumps to that school.",
+      "journey.mapcap": "Career geography",
+      "journey.pin.cn": "Fujian", "journey.pin.us": "Los Angeles",
+      "map.hint": "Tap a pin to filter roles by place; the school pin jumps to Education.",
+      "map.fallback": "Add assets/journey-map.jpg to show the illustrated map.",
+      "map.cn": "CHINA", "map.us": "USA",
+      "map.lbl.xiamen": "Xiamen", "map.lbl.zhangzhou": "Zhangzhou", "map.lbl.la": "Los Angeles", "map.lbl.usc": "USC",
+      "map.tip.xiamen": "Xiamen — Mingcheng, Dell, Pioneer Futures",
+      "map.tip.oxnard": "Oxnard — Cayi Drink Tech (internal tools & AI workflows)",
+      "map.tip.la": "Los Angeles — CAFF / CATF (film & TV festival)",
+      "map.tip.jgu": "XMU Tan Kah Kee College — B.Econ, International Business & Trade",
+      "map.tip.usc": "University of Southern California — M.S., Spatial Economics & Data Analysis",
+      "j.t0.d": "Jun 2026 — Present", "j.t0.n": "Cayi Drink Tech",
+      "j.t1.d": "Oct — Nov 2025", "j.t1.n": "CAFF / CATF",
+      "j.t2.d": "Jul — Sep 2023", "j.t2.n": "Dell Technologies",
+      "j.t3.d": "Feb 2021 — Jun 2022", "j.t3.n": "Pioneer Futures",
+      "j.t4.d": "Jul 2020 — Feb 2022", "j.t4.n": "Xiamen Mingcheng",
+      "j.p0.k": "Los Angeles · Current", "j.p0.r": "AI Tool Creator Intern", "j.p0.o": "Cayi Drink Tech",
+      "j.p0.b0": "Designed and built two internal company systems by auditing colleagues' workflows for efficiency gains.",
+      "j.p0.b1": "Set up AI-assisted automation (including AppSheet) to cut repetitive manual work.",
+      "j.p0.b2": "Trained the U.S. business development team on AI tools for pipeline building and lead generation.",
+      "j.p0.b3": "Led SEO/GEO strategy and used Claude to automate Amazon/TikTok data pulls for sales analysis across 10+ hydration brands.",
+      "j.p1.k": "Los Angeles", "j.p1.r": "Assistant", "j.p1.o": "Chinese American Film Festival & TV Festival (CAFF / CATF)",
+      "j.p1.b0": "Supported large-scale event operations — pre-event prep, on-site coordination, and live execution alongside production teams.",
+      "j.p1.b1": "Coordinated talent and guests across red carpet, seating, and award segments.",
+      "j.p1.b2": "Assisted the Industry Forum and Film Promotion Conference with content sessions and project showcases.",
+      "j.p2.k": "Xiamen, China", "j.p2.r": "Global Supply Chain Assistant", "j.p2.o": "Dell Technologies",
+      "j.p2.b0": "Tracked daily logistics data, built an Excel database, and visualized it in Power BI — 50+ reports delivered.",
+      "j.p2.b1": "Built data visualization panels to surface operational insights from Excel.",
+      "j.p2.b2": "Summarized daily backlogs and reported weekly IT issues.",
+      "j.p3.k": "Xiamen, China", "j.p3.r": "Media Promotion Staff", "j.p3.o": "Pioneer Futures Co., Ltd",
+      "j.p3.b0": "Tracked and analyzed daily price trends across 20+ futures commodities — agriculture, metals, energy, chemicals.",
+      "j.p3.b1": "Curated and summarized daily media coverage across WeChat, TikTok, and Toutiao.",
+      "j.p3.b2": "Produced 300+ videos across platforms, reaching 30,000+ total clicks.",
+      "j.p4.k": "Xiamen, China", "j.p4.r": "Documentation & Logistics Assistant", "j.p4.o": "Xiamen Mingcheng Environmental Technology Co., Ltd",
+      "j.p4.b0": "Produced and reviewed 100+ import/export documents monthly with 100% regulatory compliance.",
+      "j.p4.b1": "Negotiated shipment terms with carriers for 20+ orders monthly, ensuring 100% on-time delivery.",
+      "j.p4.b2": "Verified tax refund details and completed documentation for 20+ export orders.",
+      "edu.eyebrow": "04 · Education",
+      "edu.h2": "Trained to think in maps, models, and markets.",
+      "edu.intro": "A foundation that connects spatial analysis with economics, trade, and practical development.",
+      "edu.c1.s": "University of Southern California",
+      "edu.c1.d": "M.S., Spatial Economics and Data Analysis",
+      "edu.c1.dt": "Sep 2024 — Present · Los Angeles, CA · GPA 3.76",
+      "edu.c1.cap": "USC · Los Angeles", "edu.c2.cap": "Tan Kah Kee College · Fujian",
+      "edu.c1.g0": "Spatial Analysis & Modeling", "edu.c1.g1": "Econometrics", "edu.c1.g2": "Microeconomic Policy",
+      "edu.c1.g3": "Spatial Thinking", "edu.c1.g4": "Spatial Econometrics",
+      "edu.c2.s": "Xiamen University Tan Kah Kee College",
+      "edu.c2.d": "B.Econ., International Business and Trade",
+      "edu.c2.dt": "Sep 2020 — Jun 2024 · Zhangzhou, China",
+      "edu.c2.g0": "Brand Marketing", "edu.c2.g1": "Investment Economics", "edu.c2.g2": "Statistics",
+      "edu.c2.g3": "International Trade Practice", "edu.c2.g4": "International Logistics", "edu.c2.g5": "Python",
+      "edu.c2.g6": "WeChat Mini Program Dev",
+      "edu.c2.h": "Second-Class Scholarship, 2022–2023 · National Computer Rank Examination, Level 2",
+      "skills.eyebrow": "05 · Skills",
+      "skills.h2": 'A toolkit organized by <span class="soft">what it unlocks.</span>',
+      "skills.intro": "Select a skill to see where it fits in the way I analyze, build, create, and operate. Bars are a rough self-assessment.",
+      "skills.g0": "Analyze & model", "skills.g1": "Build & develop", "skills.g2": "Create & produce", "skills.g3": "Operate",
+      "beyond.eyebrow": "06 · Beyond work",
+      "beyond.h2": 'Courts, clubs, <span class="soft">cameras.</span>',
+      "beyond.intro": "The rest of the picture: teamwork, consistency, community, and a long-running instinct to make things.",
+      "beyond.l0": "Sports", "beyond.l1": "Clubs & volunteering", "beyond.l2": "Creative",
+      "beyond.c0.t": "Badminton", "beyond.c0.d": "Varsity player, 2017–2020 (6th place in high school competition); now playing with the USC Badminton Club.",
+      "beyond.c1.t": "Swimming", "beyond.c1.d": "Placed 7th in a school swim team competition.",
+      "beyond.c2.t": "USC Tennis Club", "beyond.c2.d": "Member of the USC Tennis Club for 1.5 years.",
+      "beyond.c3.t": "USC Archery Club", "beyond.c3.d": "Member of the USC Archery Club.",
+      "beyond.c4.t": "Youth Volunteer Association", "beyond.c4.d": "Media & Publicity Dept., Sep 2022–Jun 2023. Wrote WeChat posts averaging 1,000+ views; awarded “Outstanding Volunteer.”",
+      "beyond.c5.t": "Xiamen Marathon", "beyond.c5.d": "Supported race-day operations as a volunteer.",
+      "beyond.c6.t": "Animal Protection Society", "beyond.c6.d": "Active member at Xiamen University Tan Kah Kee College.",
+      "beyond.c7.t": "On-set & editing", "beyond.c7.d": "Independently shot and edited footage for 10+ Chinese TV drama productions, outside of coursework.",
+      "beyond.c8.t": "Media Center", "beyond.c8.d": "Production Dept., Sep 2020–Jun 2021. Filmed and edited promotional videos for college-wide events, distributed via official channels.",
+      "contact.eyebrow": "07 · Contact",
+      "contact.h2": "Let's connect the next dot.",
+      "contact.p": "Open to roles in data analysis, spatial economics, or supply chain — wherever trade, tech, and storytelling meet.",
+      "contact.dl": "Download resume ↓",
+      "footer.loc": "Los Angeles, CA", "footer.lang": "Native Mandarin speaker",
+      copied: "Email copied to clipboard ✓",
+      roles: ["Spatial Data Analyst", "AI Builder", "Supply Chain Analyst", "Data Storyteller"],
+      levels: ["Daily driver", "Strong working proficiency", "Working proficiency", "Familiar"],
+      marquee: ["<b>300+</b> videos", "<b>30,000+</b> views", "<b>100+</b> docs / month", "<b>100%</b> trade compliance", "<b>20+</b> commodities", "<b>50+</b> Power BI reports", "<b>10+</b> hydration brands", "<b>2</b> internal systems", "<b>GPA 3.76</b> at USC"],
+      skills: [
+        ["ArcGIS", "Spatial analysis & modeling", "Connecting location, economics, and patterns through USC coursework and spatial thinking."],
+        ["Stata", "Statistical analysis", "Working with economic and operational data using statistical tooling."],
+        ["R", "Data analysis", "Using code to explore, structure, and communicate data."],
+        ["Power BI", "Data visualization", "Turning logistics and operational data into panels and reports people can use."],
+        ["Python", "Programming for analysis", "Applying programming to data, coursework, and practical development."],
+        ["JavaScript", "Interactive development", "Building web interactions and lightweight digital experiences."],
+        ["Navicat Premium", "Database workflows", "Working with structured data and database management tools."],
+        ["AppSheet", "Low-code app building", "Building internal apps and automations without a full engineering stack."],
+        ["Claude", "AI-assisted building", "Using AI tools to automate data pulls, build workflows, and improve team efficiency."],
+        ["Codex", "AI-assisted development", "Using an AI coding workflow to move from idea to working software."],
+        ["CapCut (剪映)", "Video production", "Produced 300+ platform videos and edited footage for 10+ Chinese TV drama productions."],
+        ["Video Editing", "Video editing", "Shaping raw footage into clear, audience-ready stories across platforms."],
+        ["Content Strategy", "Content strategy", "Connecting market signals, media coverage, and platform needs into daily content."],
+        ["Excel", "Structured operations", "Building databases, tracking logistics, and supporting repeatable reporting workflows."],
+        ["Word", "Business communication", "Preparing polished documents for operational and professional contexts."],
+        ["PowerPoint", "Clear presentations", "Organizing information so a team or audience can act on it."],
+        ["Trade Documentation", "Trade documentation", "Processed 100+ import/export documents monthly with 100% regulatory compliance."]
+      ]
+    },
+    zh: {
+      title: "马然 — 空间数据 × AI",
+      "nav.about": "关于", "nav.work": "项目", "nav.journey": "经历",
+      "nav.education": "教育", "nav.skills": "技能", "nav.beyond": "工作之外", "nav.contact": "联系我",
+      "hero.availability": "洛杉矶 · 看新机会中",
+      "hero.copy": "我在南加大读空间经济学与数据分析。这些年做过戴尔的全球供应链、外贸单据、期货行情、电影节，也自己写 AI 软件。我最擅长的事：把一堆看着乱、又一直在动的信息，理成你一眼能看明白的东西。",
+      "hero.cta1": "看看我做过什么", "hero.cta2": "给我写封邮件 ↗",
+      "hero.float.t": "地图 · 模型 · 市场",
+      "hero.float.s": "在又乱又快的信息里，找出门道。",
+      "hero.scrollcue": "往下滑，看这些点怎么连起来",
+      "about.eyebrow": "01 · 关于我",
+      "about.h2": '看似绕路，<span class="soft">其实步步相连。</span>',
+      "about.p1": "我在<strong>南加大读空间经济学与数据分析</strong>硕士。这一路不是直线，但每段经历都接上了下一段——在厦门审过上百份出口单据，在戴尔管过全球供应链的数据，盯过四大类商品的期货行情，做过 300 多条短视频、加起来 3 万多次播放，还跟着团队筹办、跑完了洛杉矶的一届电影节。",
+      "about.p2": "这些经历其实指向同一件事：面对又乱又快的信息，我能看出里面的结构，再把它做成能用的东西——一张 Power BI 看板、一个空间模型，或者一整套 AI 驱动的内部系统。",
+      "about.p3": "现在我在 <strong>Cayi Drink Tech 做内部工具和 AI 工作流</strong>，把这套本事用到一个全新的场景里。",
+      "about.s1": "跨平台做过、剪过的视频",
+      "about.s2": "每月经手的外贸单据，全部合规",
+      "about.s3": "待过的行业：外贸、期货、媒体、影视、AI",
+      "about.t1": "条短视频 · 跨平台",
+      "about.t2": "总播放量", "about.t2n": "3万+",
+      "about.t3": "外贸单据合规率",
+      "about.t4": "跟踪过的期货品种",
+      "about.t5": "待过的行业",
+      "about.t6": "USC 在读 GPA", "about.t6n": "3.76",
+      "about.now.k": "现在",
+      "about.now.v": "在 Cayi Drink Tech 做内部工具和 AI 工作流",
+      "work.eyebrow": "02 · 精选项目",
+      "work.h2": '把复杂的东西，<span class="soft">做得好用。</span>',
+      "work.intro": "三个片段，都来自我真实做过的事。悬停看一眼，点开看完整过程。图表是示意占位。",
+      "work.c1.no": "01 · 数据运营",
+      "work.c1.h3": "让每天的物流数据，能拿来做决定。",
+      "work.c1.meta": "戴尔科技 · Power BI + Excel",
+      "work.c1.sum": "搭了 Excel 数据库和 Power BI 看板，从每天的物流数据里看出运营上的问题。",
+      "work.c1.vc1": "每周产出的报告", "work.c1.vc2": "累计 50 多份",
+      "work.c1.det": "每天跟踪物流数据，整进 Excel 数据库，及时更新到内网，汇总当天的积压，每周上报 IT 问题——前后交付了 50 多份报告。",
+      "work.c1.m1": "50+ 份报告", "work.c1.m2": "Power BI 看板", "work.c1.m3": "看出运营问题",
+      "work.c2.no": "02 · 媒体情报",
+      "work.c2.h3": "让市场的涨跌，看起来没那么绕。",
+      "work.c2.meta": "先锋期货 · 分析 + 内容",
+      "work.c2.sum": "盯着四大类商品的价格，把每天的行情和媒体动态，做成大家看得懂的平台内容。",
+      "work.c2.vc1": "视频累计播放", "work.c2.vc2": "3 万+ 次",
+      "work.c2.det": "跟踪农产品、金属、能源、化工共 20 多个期货品种的每日走势，梳理微信、抖音、今日头条的当天报道，做了 300 多条视频，加起来 3 万多次播放。",
+      "work.c2.m1": "20+ 个品种", "work.c2.m2": "300+ 条视频", "work.c2.m3": "3 万+ 次播放",
+      "work.c3.no": "03 · AI 驱动的工作流",
+      "work.c3.h3": "找出 AI 能真正帮上忙的地方。",
+      "work.c3.meta": "Cayi Drink Tech · 内部系统 + SEO/GEO",
+      "work.c3.sum": "设计并落地了两套公司内部系统，接上了 AI 自动化，还带着美国的 BD 团队上手 AI 工具。",
+      "work.c3.vc1": "跟踪的水饮品牌", "work.c3.vc2": "10 多个",
+      "work.c3.det": "把同事的流程一条条捋清楚，据此设计了两套内部系统，搭了自动化工作流（用到 AppSheet），主导 SEO/GEO，还用 Claude 自动抓 Amazon、TikTok 的数据，给 10 多个水饮品牌做销售分析。",
+      "work.c3.m1": "2 套内部系统", "work.c3.m2": "10+ 个品牌", "work.c3.m3": "带团队用 AI",
+      "journey.eyebrow": "03 · 一路走来",
+      "journey.h2": '一条路，<span class="soft">五个看世界的角度。</span>',
+      "journey.intro": "点开每一站，看它给了我看待信息、运营和人的哪个新角度。地图上：点小旗子按城市筛经历，点学校徽章跳到那所学校。",
+      "journey.mapcap": "走过的地方",
+      "journey.pin.cn": "福建", "journey.pin.us": "洛杉矶",
+      "map.hint": "点地图上的标记按地点筛选经历；学校标记会跳到教育背景。",
+      "map.fallback": "把 assets/journey-map.jpg 放进去，这里就会显示手绘地图。",
+      "map.cn": "中国", "map.us": "美国",
+      "map.lbl.xiamen": "厦门", "map.lbl.zhangzhou": "漳州", "map.lbl.la": "洛杉矶", "map.lbl.usc": "USC",
+      "map.tip.xiamen": "厦门 — 明承环保、戴尔、先锋期货",
+      "map.tip.oxnard": "奥克斯纳德 — Cayi Drink Tech（内部工具 & AI 工作流）",
+      "map.tip.la": "洛杉矶 — 中美电影节 / 电视节（CAFF / CATF）",
+      "map.tip.jgu": "厦门大学嘉庚学院 — 经济学学士（国际经济与贸易）",
+      "map.tip.usc": "南加州大学 — 理学硕士（空间经济学与数据分析）",
+      "j.t0.d": "2026年6月 — 至今", "j.t0.n": "Cayi Drink Tech",
+      "j.t1.d": "2025年10 — 11月", "j.t1.n": "CAFF / CATF",
+      "j.t2.d": "2023年7 — 9月", "j.t2.n": "Dell Technologies",
+      "j.t3.d": "2021年2月 — 2022年6月", "j.t3.n": "Pioneer Futures",
+      "j.t4.d": "2020年7月 — 2022年2月", "j.t4.n": "厦门明承环保",
+      "j.p0.k": "洛杉矶 · 现在", "j.p0.r": "AI 工具开发实习生", "j.p0.o": "Cayi Drink Tech",
+      "j.p0.b0": "把同事的工作流程一条条捋清楚，据此设计并搭好了两套公司内部系统，把效率提上去。",
+      "j.p0.b1": "接上 AI 自动化（含 AppSheet），把重复的手工活省掉。",
+      "j.p0.b2": "带美国 BD 团队上手 AI 工具，用来找客户线索、理销售流程。",
+      "j.p0.b3": "主导 SEO/GEO，用 Claude 自动抓 Amazon/TikTok 数据，给 10 多个水饮品牌做销售分析。",
+      "j.p1.k": "洛杉矶", "j.p1.r": "现场助理", "j.p1.o": "中美电影节 & 中美电视节（CAFF / CATF）",
+      "j.p1.b0": "跟着团队做大型影视活动的运营——会前筹备、现场调度，到实时执行。",
+      "j.p1.b1": "在红毯、席位和颁奖环节，对接嘉宾和艺人。",
+      "j.p1.b2": "协助产业论坛和电影推介会的内容环节、项目展示。",
+      "j.p2.k": "中国厦门", "j.p2.r": "全球供应链助理", "j.p2.o": "Dell Technologies",
+      "j.p2.b0": "每天跟踪物流数据，搭 Excel 数据库，用 Power BI 做可视化——交付了 50 多份报告。",
+      "j.p2.b1": "做数据看板，从 Excel 里挖出运营层面的问题。",
+      "j.p2.b2": "汇总当天积压，每周上报 IT 问题。",
+      "j.p3.k": "中国厦门", "j.p3.r": "媒体推广", "j.p3.o": "Pioneer Futures Co., Ltd",
+      "j.p3.b0": "跟踪并分析 20 多个期货品种的每日走势——农产品、金属、能源、化工。",
+      "j.p3.b1": "梳理并汇总微信、抖音、今日头条的当天报道。",
+      "j.p3.b2": "跨平台做了 300 多条视频，加起来 3 万多次播放。",
+      "j.p4.k": "中国厦门", "j.p4.r": "单证与物流助理", "j.p4.o": "厦门明承环保科技有限公司",
+      "j.p4.b0": "每月做并审 100 多份进出口单据，100% 合规。",
+      "j.p4.b1": "每月替 20 多笔订单跟承运商谈运输条款，保证 100% 准时到货。",
+      "j.p4.b2": "核对退税明细，把 20 多笔出口订单的单据做完整。",
+      "edu.eyebrow": "04 · 教育背景",
+      "edu.h2": "被训练成用地图、模型和市场来想问题。",
+      "edu.intro": "一套把空间分析、经济学、贸易和动手能力接在一起的底子。",
+      "edu.c1.s": "南加州大学（USC）",
+      "edu.c1.d": "理学硕士 · 空间经济学与数据分析",
+      "edu.c1.dt": "2024年9月 — 至今 · 美国加州洛杉矶 · GPA 3.76",
+      "edu.c1.cap": "USC · 洛杉矶", "edu.c2.cap": "嘉庚学院 · 福建",
+      "edu.c1.g0": "空间分析与建模", "edu.c1.g1": "计量经济学", "edu.c1.g2": "微观经济政策",
+      "edu.c1.g3": "空间思维", "edu.c1.g4": "空间计量经济学",
+      "edu.c2.s": "厦门大学嘉庚学院",
+      "edu.c2.d": "经济学学士 · 国际经济与贸易",
+      "edu.c2.dt": "2020年9月 — 2024年6月 · 中国福建漳州",
+      "edu.c2.g0": "品牌营销", "edu.c2.g1": "投资经济学", "edu.c2.g2": "统计学",
+      "edu.c2.g3": "国际贸易实务", "edu.c2.g4": "国际物流", "edu.c2.g5": "Python",
+      "edu.c2.g6": "微信小程序开发",
+      "edu.c2.h": "二等奖学金（2022–2023） · 全国计算机等级考试二级",
+      "skills.eyebrow": "05 · 技能",
+      "skills.h2": '按<span class="soft">能用来做什么</span>，把工具分了组。',
+      "skills.intro": "点一项，看它在我分析、构建、创作和运营的时候，落在哪一环。进度条是我自己的大致估计。",
+      "skills.g0": "分析与建模", "skills.g1": "构建与开发", "skills.g2": "创作与产出", "skills.g3": "运营",
+      "beyond.eyebrow": "06 · 工作之外",
+      "beyond.h2": '球场、社团、<span class="soft">镜头。</span>',
+      "beyond.intro": "画像的另一半：团队、坚持、社群，还有一直想做点东西出来的那股劲。",
+      "beyond.l0": "运动", "beyond.l1": "社团与志愿", "beyond.l2": "创作",
+      "beyond.c0.t": "羽毛球", "beyond.c0.d": "校队队员，2017–2020（高中比赛拿过第 6）；现在在 USC 羽毛球社继续打。",
+      "beyond.c1.t": "游泳", "beyond.c1.d": "校队比赛拿过第 7。",
+      "beyond.c2.t": "USC 网球社", "beyond.c2.d": "在 USC 网球社打了一年半。",
+      "beyond.c3.t": "USC 射箭社", "beyond.c3.d": "USC 射箭社成员。",
+      "beyond.c4.t": "青年志愿者协会", "beyond.c4.d": "媒体与宣传部，2022年9月–2023年6月。写的微信推文平均阅读 1000+，拿了“优秀志愿者”。",
+      "beyond.c5.t": "厦门马拉松", "beyond.c5.d": "赛事当天做志愿者，帮着跑运营。",
+      "beyond.c6.t": "动物保护协会", "beyond.c6.d": "在厦门大学嘉庚学院算比较活跃的成员。",
+      "beyond.c7.t": "拍摄与剪辑", "beyond.c7.d": "课余自己拍、自己剪，参与过 10 多部国产剧的素材。",
+      "beyond.c8.t": "传媒中心", "beyond.c8.d": "制作部，2020年9月–2021年6月。给全院的活动拍宣传片、做剪辑，走学校官方渠道发。",
+      "contact.eyebrow": "07 · 联系我",
+      "contact.h2": "把下一个点，一起连上。",
+      "contact.p": "数据分析、空间经济、供应链方向的机会我都想聊——只要是贸易、技术和表达碰在一起的地方。",
+      "contact.dl": "下载简历 ↓",
+      "footer.loc": "美国加州洛杉矶", "footer.lang": "母语中文",
+      copied: "邮箱已复制 ✓",
+      roles: ["空间数据分析师", "AI 工具开发者", "供应链分析师", "用数据讲故事的人"],
+      levels: ["天天在用", "很熟", "能独立上手", "了解一点"],
+      marquee: ["<b>300+</b> 条短视频", "<b>3 万+</b> 次播放", "<b>100+</b> 份单据 / 月", "<b>100%</b> 外贸合规", "<b>20+</b> 个期货品种", "<b>50+</b> 份 Power BI 报告", "<b>10+</b> 个水饮品牌", "<b>2</b> 套内部系统", "<b>USC GPA 3.76</b>"],
+      skills: [
+        ["ArcGIS", "空间分析与建模", "把位置、经济和规律接起来——靠 USC 的课，加一套空间思维。"],
+        ["Stata", "统计分析", "用统计的方法处理经济和运营数据。"],
+        ["R", "数据分析", "用代码把数据挖出来、理清楚、讲明白。"],
+        ["Power BI", "数据可视化", "把物流和运营数据，做成同事能直接拿去用的看板。"],
+        ["Python", "用编程做分析", "用编程做数据分析，也用在课程和实际开发里。"],
+        ["JavaScript", "网页交互", "做网页上的交互和轻量的小工具。"],
+        ["Navicat Premium", "数据库", "用它管数据库、处理结构化数据。"],
+        ["AppSheet", "低代码搭建", "不写完整后端，也能把内部应用和自动化搭起来。"],
+        ["Claude", "AI 辅助构建", "让 AI 帮我抓数据、搭流程，把团队效率抬上去。"],
+        ["Codex", "AI 辅助开发", "用 AI 写代码，从一个想法做到能跑起来的东西。"],
+        ["剪映 (CapCut)", "视频制作", "做过 300 多条平台视频，也给 10 多部国产剧剪过素材。"],
+        ["视频剪辑", "视频剪辑", "把一堆原始素材，剪成观众愿意看完的清晰故事。"],
+        ["内容策略", "内容策略", "把行情、媒体动态和平台需求，拧成每天要发的内容。"],
+        ["Excel", "结构化运营", "搭数据库、跟物流、撑起能复用的报表流程。"],
+        ["Word", "商务文档", "把运营和正式场合要用的文档，做得规规矩矩。"],
+        ["PowerPoint", "把话讲清楚", "把信息讲清楚，让团队或听众能照着做。"],
+        ["外贸单证", "外贸单证", "每月经手 100 多份进出口单据，全部合规。"]
+      ]
+    }
+  };
+  </script>
+  <script>
+    document.documentElement.classList.add('js');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = matchMedia('(pointer:fine)').matches;
+
+    /* ---------- language ---------- */
+    const I18N = window.I18N;
+    const langBtn = document.getElementById('langBtn');
+    let lang;
+    try { lang = localStorage.getItem('rm-lang'); } catch (e) {}
+    if (lang !== 'en' && lang !== 'zh') lang = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+    let t = I18N[lang];
+
+    /* ---------- preloader ---------- */
+    addEventListener('load', () => setTimeout(() => document.getElementById('preloader').classList.add('done'), 350));
+    setTimeout(() => document.getElementById('preloader').classList.add('done'), 2500); // safety
+
+    /* ---------- hero: split letters + typing role ---------- */
+    document.querySelectorAll('h1 .line').forEach(line => {
+      line.innerHTML = [...line.dataset.word].map(c => `<span class="ltr">${c}</span>`).join('');
+    });
+    const roleEl = document.getElementById('heroRole');
+    let roles = t.roles;
+    let ri = 0, ci = 0, deleting = false;
+    const tick = () => {
+      const word = roles[ri] || '';
+      ci += deleting ? -1 : 1;
+      ci = Math.max(0, Math.min(ci, word.length));
+      roleEl.innerHTML = word.slice(0, ci) + '<span class="cursor">▍</span>';
+      let delay = deleting ? 45 : 90;
+      if (!deleting && ci === word.length) { delay = 1900; deleting = true; }
+      else if (deleting && ci === 0) { deleting = false; ri = (ri + 1) % roles.length; delay = 350; }
+      setTimeout(tick, delay);
+    };
+
+    /* ---------- marquee ---------- */
+    const renderMarquee = () => {
+      const row = t.marquee.map(b => `<span>${b}</span>`).join('');
+      document.getElementById('marquee').innerHTML = row + row;
+    };
+
+    /* ---------- reveal on scroll ---------- */
+    const revealItems = document.querySelectorAll('.reveal, .work-card, .bento .tile');
+    if ('IntersectionObserver' in window && !reduced) {
+      const ro = new IntersectionObserver(entries => entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add('in'); ro.unobserve(en.target); }
+      }), { threshold: .12, rootMargin: '0px 0px -40px' });
+      revealItems.forEach(el => ro.observe(el));
+    } else revealItems.forEach(el => el.classList.add('in'));
+
+    /* ---------- count up ---------- */
+    const countEls = document.querySelectorAll('.count-up');
+    const runCount = el => {
+      const target = +el.dataset.count, suffix = el.dataset.suffix || '', dur = 1400, t0 = performance.now();
+      const step = now => {
+        const p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e).toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    if ('IntersectionObserver' in window && !reduced) {
+      const co = new IntersectionObserver(entries => entries.forEach(en => {
+        if (en.isIntersecting) { runCount(en.target); co.unobserve(en.target); }
+      }), { threshold: .6 });
+      countEls.forEach(el => co.observe(el));
+    }
+
+    /* ---------- scroll progress + back to top ---------- */
+    const progress = document.getElementById('progress');
+    const toTop = document.getElementById('toTop');
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
+      toTop.classList.toggle('show', scrollY > 600);
+    };
+    addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }));
+
+    /* ---------- active section (nav + side dots) ---------- */
+    const navA = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const dotA = [...document.querySelectorAll('.side-dots a')];
+    const secs = [...document.querySelectorAll('[data-section]')];
+    const so = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) {
+        const id = '#' + en.target.id;
+        navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        dotA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    }), { rootMargin: '-30% 0px -60%', threshold: 0 });
+    secs.forEach(s => so.observe(s));
+
+    /* ---------- mobile menu ---------- */
+    const menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
+    const closeMenu = () => { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = '☰'; document.body.classList.remove('menu-open'); };
+    menuBtn.addEventListener('click', () => {
+      const open = !navLinks.classList.contains('open');
+      navLinks.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.textContent = open ? '×' : '☰';
+      document.body.classList.toggle('menu-open', open);
+    });
+    navA.forEach(a => a.addEventListener('click', closeMenu));
+
+    /* ---------- work cards expand ---------- */
+    document.querySelectorAll('.work-card').forEach(card => {
+      const toggle = () => card.setAttribute('aria-expanded', card.getAttribute('aria-expanded') !== 'true');
+      card.addEventListener('click', e => { if (!e.target.closest('a')) toggle(); });
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    });
+
+    /* ---------- journey tabs + hash + map filter ---------- */
+    const tabs = [...document.querySelectorAll('.journey-tab')];
+    const panels = [...document.querySelectorAll('.journey-panel')];
+    const journeyStage = document.querySelector('.journey-stage');
+    const selectJourney = (i, scroll) => {
+      tabs.forEach((t, k) => { const a = k === i; t.classList.toggle('active', a); t.setAttribute('aria-selected', String(a)); t.tabIndex = a ? 0 : -1; });
+      panels.forEach((p, k) => p.hidden = k !== i);
+      if (scroll) {
+        // stacked layout: the story panel sits below — bring it into view; wide layout: keep the tab visible
+        const target = innerWidth <= 900 ? journeyStage : tabs[i];
+        target.scrollIntoView({ block: innerWidth <= 900 ? 'start' : 'nearest', inline: 'center', behavior: reduced ? 'auto' : 'smooth' });
+      }
+      history.replaceState(null, '', '#journey');
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectJourney(i, true));
+      tab.addEventListener('keydown', e => {
+        if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(e.key)) return;
+        e.preventDefault();
+        const n = (i + (e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        selectJourney(n); tabs[n].focus();
+      });
+    });
+    /* ---------- interactive map (illustrated image + hotspots) ---------- */
+    const jmapPins = [...document.querySelectorAll('.jmap-pin')];
+    const mapTip = document.getElementById('mapTip');
+    const miniMap = document.querySelector('.mini-map');
+    const eduCards = [...document.querySelectorAll('.edu-card')];
+
+    let activeCity = null;
+    const filterCity = city => {
+      activeCity = activeCity === city ? null : city;
+      jmapPins.forEach(p => p.classList.toggle('active', p.dataset.city && p.dataset.city === activeCity));
+      tabs.forEach(tab => tab.classList.toggle('dim', activeCity && tab.dataset.city !== activeCity));
+      if (activeCity) {
+        const first = tabs.findIndex(tab => tab.dataset.city === activeCity);
+        if (first > -1) selectJourney(first, true);
+      }
+    };
+    const showTip = el => {
+      const v = t[el.dataset.tip];
+      if (!v) return;
+      mapTip.textContent = v;
+      const r = el.getBoundingClientRect(), m = miniMap.getBoundingClientRect();
+      mapTip.style.left = (r.left + r.width / 2 - m.left) + 'px';
+      mapTip.style.top = (r.top - m.top) + 'px';
+      mapTip.classList.add('show');
+    };
+    const hideTip = () => mapTip.classList.remove('show');
+    jmapPins.forEach(pin => {
+      pin.addEventListener('pointerenter', () => showTip(pin));
+      pin.addEventListener('pointerleave', hideTip);
+      pin.addEventListener('focus', () => showTip(pin));
+      pin.addEventListener('blur', hideTip);
+      const act = () => {
+        if (pin.dataset.act === 'edu') {
+          document.getElementById('education').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+          const card = eduCards[pin.dataset.edu === 'jgu' ? 1 : 0];
+          if (card) { card.classList.add('spotlight'); setTimeout(() => card.classList.remove('spotlight'), 2600); }
+        } else {
+          filterCity(pin.dataset.city);
+        }
+      };
+      pin.addEventListener('click', act);
+      pin.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+    });
+
+    /* ---------- skills ---------- */
+    const chips = [...document.querySelectorAll('.skill-chip')];
+    const fill = document.getElementById('skillFill');
+    const levelLabel = n => n >= 85 ? t.levels[0] : n >= 70 ? t.levels[1] : n >= 55 ? t.levels[2] : t.levels[3];
+    const applyChip = (chip, i) => {
+      chips.forEach(c => c.classList.remove('active')); chip.classList.add('active');
+      document.getElementById('skillCount').textContent = String(i + 1).padStart(2, '0');
+      document.getElementById('skillName').textContent = chip.dataset.title;
+      document.getElementById('skillText').textContent = chip.dataset.copy;
+      document.getElementById('skillTool').textContent = chip.textContent;
+      document.getElementById('skillLevelText').textContent = levelLabel(+chip.dataset.level);
+      fill.style.width = chip.dataset.level + '%';
+    };
+    const renderSkills = () => {
+      chips.forEach((chip, i) => {
+        const s = t.skills[i];
+        if (!s) return;
+        chip.textContent = s[0]; chip.dataset.title = s[1]; chip.dataset.copy = s[2];
+      });
+      const active = document.querySelector('.skill-chip.active') || chips[0];
+      applyChip(active, chips.indexOf(active));
+    };
+    chips.forEach((chip, i) => chip.addEventListener('click', () => applyChip(chip, i)));
+    if ('IntersectionObserver' in window && !reduced) {
+      // replay the fill animation when the panel scrolls into view
+      const sko = new IntersectionObserver(entries => entries.forEach(en => {
+        if (en.isIntersecting) {
+          const active = document.querySelector('.skill-chip.active') || chips[0];
+          fill.style.width = '0%';
+          requestAnimationFrame(() => { fill.style.width = active.dataset.level + '%'; });
+          sko.disconnect();
+        }
+      }), { threshold: .2 });
+      sko.observe(document.querySelector('.skill-display'));
+    }
+
+    /* ---------- copy email ---------- */
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const showToast = msg => {
+      toast.textContent = msg; toast.classList.add('show');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    };
+    document.getElementById('copyEmail').addEventListener('click', async () => {
+      const email = 'Jessica20020922@gmail.com';
+      try { await navigator.clipboard.writeText(email); showToast(t.copied); }
+      catch (e) { location.href = 'mailto:' + email; }
+    });
+
+    /* ---------- apply language ---------- */
+    const applyLang = next => {
+      lang = next; t = I18N[lang];
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.title = t.title;
+      document.querySelectorAll('[data-i]').forEach(el => {
+        const v = t[el.dataset.i];
+        if (v == null) return;
+        if (String(v).indexOf('<') > -1) el.innerHTML = v; else el.textContent = v;
+      });
+      langBtn.textContent = lang === 'en' ? '中' : 'EN';
+      langBtn.setAttribute('aria-label', lang === 'en' ? '切换到中文' : 'Switch to English');
+      roles = t.roles; ri = 0; ci = 0; deleting = false;
+      if (reduced) roleEl.textContent = roles[0];
+      renderMarquee();
+      renderSkills();
+      try { localStorage.setItem('rm-lang', lang); } catch (e) {}
+    };
+    langBtn.addEventListener('click', () => applyLang(lang === 'en' ? 'zh' : 'en'));
+    applyLang(lang);
+    if (!reduced) tick();
+
+    /* ---------- pointer-driven flourishes ---------- */
+    if (!reduced && fine) {
+      // ambient glow
+      addEventListener('pointermove', e => {
+        document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+        document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+      }, { passive: true });
+
+      // trailing cursor ring
+      const ring = document.createElement('div');
+      ring.className = 'cursor-ring';
+      document.body.appendChild(ring);
+      let rx = innerWidth / 2, ry = innerHeight / 2, tx = rx, ty = ry;
+      addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+      const loop = () => {
+        rx += (tx - rx) * .18; ry += (ty - ry) * .18;
+        ring.style.transform = `translate(${rx - 15}px,${ry - 15}px)`;
+        requestAnimationFrame(loop);
+      };
+      loop();
+      document.addEventListener('pointerover', e => {
+        ring.classList.toggle('hot', !!e.target.closest('a,button,.work-card,[role="button"]'));
+      });
+
+      // magnetic pills
+      document.querySelectorAll('.pill, .nav-contact').forEach(el => {
+        el.addEventListener('pointermove', e => {
+          const r = el.getBoundingClientRect();
+          el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px,${(e.clientY - r.top - r.height / 2) * .35}px)`;
+        });
+        el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+      });
+
+      // hero parallax
+      const pc = document.getElementById('portraitCard');
+      addEventListener('scroll', () => {
+        if (scrollY < innerHeight) pc.style.transform = `translateY(${scrollY * .06}px)`;
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
