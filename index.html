@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ran Ma — Spatial Data & AI Builder">
   <meta property="og:description" content="I turn scattered numbers and moving parts into something you can actually read.">
-  <meta property="og:image" content="portrait.jpg">
+  <meta property="og:image" content="assets/portrait.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <title>Ran Ma — Spatial Data & AI Builder</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%231a1830'/%3E%3Ctext x='50' y='66' font-family='Arial' font-size='48' font-weight='700' fill='%23d9ff78' text-anchor='middle'%3ERM%3C/text%3E%3C/svg%3E">
@@ -208,17 +208,23 @@
     .work-detail p{padding-top:18px;margin:18px 0 0;border-top:1px solid var(--line);line-height:1.65}
     .metrics{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
     .metrics span{padding:7px 10px;border:1px solid var(--line);border-radius:99px;font-size:.72rem;background:var(--paper)}
-    /* placeholder data-viz chip inside work card */
-    .viz{margin-top:20px;border:1px dashed var(--line);border-radius:16px;padding:14px;background:color-mix(in srgb,var(--paper) 60%,transparent);position:relative;z-index:1}
-    .viz-cap{font:500 .6rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:10px}
-    .viz svg{width:100%;height:70px;display:block;overflow:visible}
-    .viz .bar{transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.22,1,.36,1)}
-    .work-card.in .viz .bar{transform:scaleY(1)}
-    .viz .bar:nth-child(2){transition-delay:.06s}.viz .bar:nth-child(3){transition-delay:.12s}
-    .viz .bar:nth-child(4){transition-delay:.18s}.viz .bar:nth-child(5){transition-delay:.24s}
-    .viz .bar:nth-child(6){transition-delay:.3s}.viz .bar:nth-child(7){transition-delay:.36s}
-    .viz .spark{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.2s ease .2s}
-    .work-card.in .viz .spark{stroke-dashoffset:0}
+    /* interactive impact models inside work cards */
+    .impact-model{margin-top:22px;border:1px solid var(--line);border-radius:20px;padding:17px;background:color-mix(in srgb,var(--card-bg) 84%,var(--paper));position:relative;z-index:2;cursor:default}
+    .model-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:15px}
+    .model-kicker{font:500 .6rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.11em;color:var(--muted)}
+    .model-total{font:800 1.25rem "Manrope",sans-serif;color:var(--purple);white-space:nowrap}
+    .model-steps{display:grid;grid-template-columns:repeat(var(--steps,4),minmax(0,1fr));gap:7px;position:relative}
+    .model-steps::before{content:"";position:absolute;left:7%;right:7%;top:20px;height:1px;background:linear-gradient(90deg,var(--purple),var(--lilac),var(--lime));opacity:.55}
+    .model-step{position:relative;z-index:1;min-width:0;border:0;background:transparent;padding:0;cursor:pointer;text-align:center;color:var(--muted)}
+    .model-dot{width:40px;height:40px;margin:0 auto 8px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:var(--card-bg);font:700 .68rem "Roboto Mono",monospace;transition:transform .22s,background .22s,color .22s,box-shadow .22s}
+    .model-label{display:block;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere}
+    .model-step:hover .model-dot,.model-step:focus-visible .model-dot{transform:translateY(-3px);box-shadow:0 9px 18px rgba(45,35,92,.13)}
+    .model-step.active{color:var(--ink)}
+    .model-step.active .model-dot{background:var(--ink);color:var(--lime);border-color:var(--ink);transform:translateY(-3px);box-shadow:0 9px 22px rgba(45,35,92,.18)}
+    .model-detail{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:15px;padding-top:13px;border-top:1px solid var(--line)}
+    .model-stat{min-width:66px;font:800 1.08rem "Manrope",sans-serif;color:var(--purple)}
+    .model-copy{font-size:.74rem;color:var(--muted);line-height:1.45}
+    @media(max-width:560px){.model-label{font-size:.59rem}.model-dot{width:35px;height:35px}.model-detail{grid-template-columns:1fr}.model-head{margin-bottom:12px}}
 
     #journey{overflow:hidden}
     .journey-layout{display:grid;grid-template-columns:300px 1fr;gap:50px}
@@ -239,6 +245,8 @@
     .jmap-fallback{display:none;padding:34px 18px;text-align:center;font:500 .68rem "Roboto Mono",monospace;color:var(--muted);line-height:1.6;letter-spacing:.02em}
     .jmap-wrap.noimg .jmap-fallback{display:block}
     .jmap-wrap.noimg .jmap-pin{display:none}
+    .map-expand{position:absolute;right:10px;top:10px;z-index:8;border:1px solid rgba(255,255,255,.7);background:rgba(26,24,48,.72);color:#fff;border-radius:999px;padding:8px 11px;font-size:.68rem;cursor:pointer;backdrop-filter:blur(8px);transition:transform .2s,background .2s}
+    .map-expand:hover{transform:translateY(-2px);background:var(--ink)}
     .jmap-pin{position:absolute;width:8%;min-width:34px;max-width:52px;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;cursor:pointer;border-radius:50%}
     .jmap-pin::after{content:"";position:absolute;inset:8%;border-radius:50%;border:2.5px solid var(--purple);opacity:0;transform:scale(.4);transition:opacity .2s,transform .2s}
     .jmap-pin::before{content:"";position:absolute;inset:-3px;border-radius:50%;background:var(--purple);opacity:0}
@@ -271,12 +279,20 @@
     .edu-card:hover{transform:translateY(-5px);box-shadow:0 22px 54px rgba(45,35,92,.12)}
     .edu-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;background:var(--lilac);right:-80px;bottom:-90px;opacity:.3}
     .edu-photo{position:relative;border-bottom:1px solid var(--line);background:#eef1ff;line-height:0;overflow:hidden;aspect-ratio:15/7}
-    .edu-photo svg{width:100%;height:100%;display:block}
-    .edu-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+    .edu-media{position:absolute;inset:0;border:0;padding:0;background:transparent;cursor:zoom-in;width:100%;height:100%;overflow:hidden}
+    .edu-photo img{width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .65s cubic-bezier(.22,1,.36,1),filter .3s}
     .edu-photo .cap{position:absolute;left:10px;bottom:8px;z-index:2;line-height:1.2;font:600 .56rem "Roboto Mono",monospace;text-transform:uppercase;letter-spacing:.1em;color:#fff;background:rgba(26,24,48,.55);padding:4px 8px;border-radius:99px;backdrop-filter:blur(3px)}
-    .edu-card:hover .edu-photo svg,.edu-card:hover .edu-photo img{transform:scale(1.03);transition:transform .5s ease}
+    .edu-media::after{content:"↗";position:absolute;right:12px;bottom:10px;z-index:3;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(26,24,48,.68);color:#fff;font-size:.85rem;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s}
+    .edu-card:hover .edu-photo img,.edu-media:focus-visible img{transform:scale(1.055);filter:saturate(1.05)}
+    .edu-card:hover .edu-media::after,.edu-media:focus-visible::after{opacity:1;transform:none}
     .edu-body{padding:24px 28px 28px;position:relative;z-index:1}
     .edu-card h3{font-size:1.45rem;margin-bottom:8px;color:var(--ink)}
+    .media-dialog{width:min(1040px,calc(100vw - 36px));max-height:calc(100vh - 36px);border:0;border-radius:28px;padding:0;background:var(--card-bg);color:var(--ink);box-shadow:0 30px 110px rgba(26,24,48,.32);overflow:hidden}
+    .media-dialog::backdrop{background:rgba(20,17,36,.72);backdrop-filter:blur(8px)}
+    .media-dialog img{width:100%;max-height:78vh;object-fit:contain;background:#111}
+    .media-dialog-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px}
+    .media-dialog-title{font-weight:700;line-height:1.35}
+    .media-close{width:38px;height:38px;flex:none;border:1px solid var(--line);border-radius:50%;background:var(--paper);cursor:pointer;font-size:1.1rem}
     .degree{color:var(--purple);font-weight:600;line-height:1.5}
     .edu-date{color:var(--muted);font-size:.72rem;margin:12px 0 22px}
     .tag-row{display:flex;flex-wrap:wrap;gap:8px}
@@ -423,7 +439,7 @@
         </div>
         <div class="portrait-wrap reveal">
           <div class="orbit" aria-hidden="true"></div>
-          <div class="portrait-card" id="portraitCard"><img src="portrait.jpg" alt="Portrait of Ran Ma" width="900" height="1125"></div>
+          <div class="portrait-card" id="portraitCard"><img src="assets/portrait.jpg" alt="Portrait of Ran Ma" width="900" height="1125"></div>
           <div class="float-card"><b data-i="hero.float.t">Maps · Models · Markets</b><span data-i="hero.float.s">Finding structure in fast-moving information.</span></div>
         </div>
       </div>
@@ -473,7 +489,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div><div class="eyebrow mono" data-i="work.eyebrow">02 · Selected work</div><h2 data-i="work.h2">Work that makes <span class="soft">complexity useful.</span></h2></div>
-          <p class="section-intro" data-i="work.intro">Three snapshots drawn directly from my experience. Hover to explore; click a card to open the full story. Charts are illustrative placeholders.</p>
+          <p class="section-intro" data-i="work.intro">Three snapshots drawn directly from my experience. Open a card for the full story, then explore each model step to see how the work created impact.</p>
         </div>
         <div class="work-grid">
           <article class="work-card reveal" style="--card-accent:var(--mint)" tabindex="0" role="button" aria-expanded="false">
@@ -481,18 +497,7 @@
             <h3 data-i="work.c1.h3">Turning daily logistics data into decisions.</h3><div class="meta" data-i="work.c1.meta">Dell Technologies · Power BI + Excel</div>
             <div class="work-bottom">
               <p class="work-summary" data-i="work.c1.sum">Built an Excel database and Power BI visualization panels to surface operational insight from daily logistics data.</p>
-              <figure class="viz" aria-hidden="true">
-                <figcaption class="viz-cap"><span data-i="work.c1.vc1">Weekly reports delivered</span><span data-i="work.c1.vc2">50+ total</span></figcaption>
-                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
-                  <rect class="bar" x="8"   y="34" width="26" height="36" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="48"  y="22" width="26" height="48" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="88"  y="40" width="26" height="30" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="128" y="14" width="26" height="56" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="168" y="26" width="26" height="44" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="208" y="10" width="26" height="60" rx="3" fill="var(--lime)"/>
-                  <rect class="bar" x="248" y="30" width="26" height="40" rx="3" fill="var(--purple)"/>
-                </svg>
-              </figure>
+              <div class="impact-model" data-model="operations" style="--steps:4" aria-label="Interactive logistics data workflow"></div>
               <div class="work-detail"><div><p data-i="work.c1.det">Tracked daily logistics data, compiled it in an Excel database, published timely updates to the internal site, summarized daily backlogs, and reported weekly IT issues — more than 50 reports delivered.</p><div class="metrics"><span data-i="work.c1.m1">50+ reports</span><span data-i="work.c1.m2">Power BI panels</span><span data-i="work.c1.m3">Operational insight</span></div></div></div>
             </div>
           </article>
@@ -501,13 +506,7 @@
             <h3 data-i="work.c2.h3">Making market movement easier to follow.</h3><div class="meta" data-i="work.c2.meta">Pioneer Futures · Analysis + Content</div>
             <div class="work-bottom">
               <p class="work-summary" data-i="work.c2.sum">Tracked prices across four commodity classes, then translated daily market and media signals into clear platform content.</p>
-              <figure class="viz" aria-hidden="true">
-                <figcaption class="viz-cap"><span data-i="work.c2.vc1">Cumulative video reach</span><span data-i="work.c2.vc2">30,000+ clicks</span></figcaption>
-                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
-                  <path class="spark" d="M4 62 C50 58 70 40 110 36 C150 32 170 20 210 15 C240 11 270 7 296 5" fill="none" stroke="var(--purple)" stroke-width="2.5" stroke-linecap="round"/>
-                  <circle cx="296" cy="5" r="4" fill="var(--lime)"/>
-                </svg>
-              </figure>
+              <div class="impact-model" data-model="media" style="--steps:3" aria-label="Interactive media reach model"></div>
               <div class="work-detail"><div><p data-i="work.c2.det">Analyzed daily price trends across 20+ futures commodities in agriculture, metals, energy, and chemicals, curated daily media coverage across WeChat, TikTok, and Toutiao, and produced 300+ videos that reached 30,000+ total clicks.</p><div class="metrics"><span data-i="work.c2.m1">20+ commodities</span><span data-i="work.c2.m2">300+ videos</span><span data-i="work.c2.m3">30,000+ clicks</span></div></div></div>
             </div>
           </article>
@@ -516,18 +515,7 @@
             <h3 data-i="work.c3.h3">Building internal tools that remove friction from real work.</h3><div class="meta" data-i="work.c3.meta">Cayi Drink Tech · Internal systems + SEO/GEO</div>
             <div class="work-bottom">
               <p class="work-summary" data-i="work.c3.sum">Designed and built two internal company systems, set up AI-assisted automation, and trained a U.S. business development team to use AI tools.</p>
-              <figure class="viz" aria-hidden="true">
-                <figcaption class="viz-cap"><span data-i="work.c3.vc1">Hydration brands tracked</span><span data-i="work.c3.vc2">10+ brands</span></figcaption>
-                <svg viewBox="0 0 300 70" preserveAspectRatio="none">
-                  <rect class="bar" x="10"  y="18" width="22" height="52" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="42"  y="30" width="22" height="40" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="74"  y="12" width="22" height="58" rx="3" fill="var(--lime)"/>
-                  <rect class="bar" x="106" y="36" width="22" height="34" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="138" y="24" width="22" height="46" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="170" y="42" width="22" height="28" rx="3" fill="var(--purple)"/>
-                  <rect class="bar" x="202" y="20" width="22" height="50" rx="3" fill="var(--purple)"/>
-                </svg>
-              </figure>
+              <div class="impact-model" data-model="ai" style="--steps:4" aria-label="Interactive AI workflow model"></div>
               <div class="work-detail"><div><p data-i="work.c3.det">Audited colleagues' processes to design two internal systems, built automation workflows (including AppSheet), led SEO/GEO strategy, and used Claude to automate Amazon and TikTok data pulls for sales analysis across more than 10 hydration brands.</p><div class="metrics"><span data-i="work.c3.m1">2 internal systems</span><span data-i="work.c3.m2">10+ brands</span><span data-i="work.c3.m3">AI team training</span></div></div></div>
             </div>
           </article>
@@ -543,8 +531,9 @@
         </div>
         <figure class="mini-map reveal">
           <div class="jmap-wrap" id="jmapWrap">
-            <img src="journey-map.jpg" alt="Illustrated map of my journey from Fujian, China to California, USA" onerror="this.closest('.jmap-wrap').classList.add('noimg')">
-            <div class="jmap-fallback" data-i="map.fallback">Add journey-map.jpg to show the illustrated map here.</div>
+            <img src="assets/journey-map-v2.png" alt="Illustrated map of my journey from Fujian, China to California, USA" onerror="this.closest('.jmap-wrap').classList.add('noimg')">
+            <div class="jmap-fallback" data-i="map.fallback">Add assets/journey-map-v2.png to show the illustrated map here.</div>
+            <button class="map-expand" type="button" data-lightbox-src="assets/journey-map-v2.png" data-lightbox-title="Career geography · Fujian to California" aria-label="Open career map in a larger view">Expand ↗</button>
             <button class="jmap-pin" style="left:14%;top:62%" data-act="edu" data-edu="jgu" data-tip="map.tip.jgu" aria-label="Zhangzhou — Tan Kah Kee College"></button>
             <button class="jmap-pin" style="left:34.5%;top:57%" data-act="city" data-city="xiamen" data-tip="map.tip.xiamen" aria-label="Xiamen — filter roles"></button>
             <button class="jmap-pin" style="left:65.5%;top:52%" data-act="city" data-city="oxnard" data-tip="map.tip.oxnard" aria-label="Oxnard — Cayi Drink Tech"></button>
@@ -580,27 +569,10 @@
         <div class="edu-grid">
           <article class="edu-card reveal">
             <div class="edu-photo">
-              <img src="edu-usc.jpg" alt="University of Southern California campus" onerror="this.remove()">
-              <svg viewBox="0 0 300 112" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a USC-style campus building">
-                <defs><linearGradient id="skyU" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef1ff"/><stop offset="1" stop-color="#f6eef7"/></linearGradient></defs>
-                <rect width="300" height="112" fill="url(#skyU)"/>
-                <circle cx="254" cy="22" r="10" fill="#ffd98a"/>
-                <ellipse cx="64" cy="20" rx="15" ry="6.5" fill="#fff" opacity=".85"/><ellipse cx="76" cy="20" rx="10" ry="5.5" fill="#fff" opacity=".85"/>
-                <rect x="44" y="52" width="212" height="56" fill="#f0e0d5"/>
-                <rect x="139" y="30" width="42" height="78" fill="#f5e8de"/>
-                <path d="M131 30 L160 15 L189 30 Z" fill="#9c2c2c"/>
-                <rect x="155" y="21" width="10" height="6" fill="#ffcf40"/>
-                <g fill="#7257d5" opacity=".36">
-                  <rect x="58" y="64" width="14" height="44" rx="7"/><rect x="86" y="64" width="14" height="44" rx="7"/>
-                  <rect x="200" y="64" width="14" height="44" rx="7"/><rect x="228" y="64" width="14" height="44" rx="7"/>
-                  <rect x="151" y="48" width="18" height="60" rx="9"/>
-                </g>
-                <path d="M24 108 q3 -22 1 -38" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-                <path d="M280 108 q-3 -26 -1 -44" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-                <g fill="#84bd84"><ellipse cx="25" cy="68" rx="16" ry="6" transform="rotate(-20 25 68)"/><ellipse cx="25" cy="70" rx="16" ry="6" transform="rotate(20 25 70)"/><ellipse cx="279" cy="62" rx="17" ry="6" transform="rotate(-18 279 62)"/><ellipse cx="279" cy="64" rx="17" ry="6" transform="rotate(18 279 64)"/></g>
-                <rect x="0" y="106" width="300" height="6" fill="#dcebdc"/>
-              </svg>
-              <span class="cap" data-i="edu.c1.cap">USC · Los Angeles</span>
+              <button class="edu-media" type="button" data-lightbox-src="assets/usc-campus-bovard.png" data-lightbox-title="University of Southern California · Los Angeles" aria-label="Open University of Southern California campus image">
+                <img src="assets/usc-campus-bovard.png" alt="University of Southern California Bovard Administration Building" onerror="this.remove()">
+                <span class="cap" data-i="edu.c1.cap">USC · Los Angeles</span>
+              </button>
             </div>
             <div class="edu-body">
               <h3 data-i="edu.c1.s">University of Southern California</h3><div class="degree" data-i="edu.c1.d">M.S., Spatial Economics and Data Analysis</div><div class="edu-date mono" data-i="edu.c1.dt">Sep 2024 — Present · Los Angeles, CA · GPA 3.76</div><div class="tag-row"><span data-i="edu.c1.g0">Spatial Analysis &amp; Modeling</span><span data-i="edu.c1.g1">Econometrics</span><span data-i="edu.c1.g2">Microeconomic Policy</span><span data-i="edu.c1.g3">Spatial Thinking</span><span data-i="edu.c1.g4">Spatial Econometrics</span></div>
@@ -608,25 +580,10 @@
           </article>
           <article class="edu-card reveal">
             <div class="edu-photo">
-              <img src="edu-jgu.jpg" alt="Xiamen University Tan Kah Kee College campus" onerror="this.remove()">
-              <svg viewBox="0 0 300 112" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a Tan Kah Kee style campus building by the sea">
-                <defs><linearGradient id="skyJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4ea"/><stop offset="1" stop-color="#fdeef0"/></linearGradient></defs>
-                <rect width="300" height="112" fill="url(#skyJ)"/>
-                <circle cx="254" cy="20" r="9" fill="#ffd98a"/>
-                <ellipse cx="62" cy="18" rx="14" ry="6" fill="#fff" opacity=".85"/><ellipse cx="73" cy="18" rx="9" ry="5" fill="#fff" opacity=".85"/>
-                <rect x="42" y="58" width="216" height="42" fill="#efe6d5"/>
-                <g fill="#b07a4b" opacity=".42"><rect x="56" y="72" width="12" height="28" rx="6"/><rect x="84" y="72" width="12" height="28" rx="6"/><rect x="112" y="72" width="12" height="28" rx="6"/><rect x="176" y="72" width="12" height="28" rx="6"/><rect x="204" y="72" width="12" height="28" rx="6"/><rect x="232" y="72" width="12" height="28" rx="6"/></g>
-                <path d="M20 60 C20 40 70 32 150 32 C230 32 280 40 280 60 C258 46 220 40 150 40 C80 40 42 46 20 60 Z" fill="#e0662f"/>
-                <rect x="132" y="26" width="36" height="16" fill="#f3ead7"/>
-                <path d="M118 30 C118 18 136 13 150 13 C164 13 182 18 182 30 C168 21 158 19 150 19 C142 19 132 21 118 30 Z" fill="#e0662f"/>
-                <rect x="146" y="6" width="8" height="9" fill="#e0662f"/>
-                <path d="M24 104 q3 -20 1 -34" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-                <path d="M280 104 q-3 -22 -1 -38" stroke="#6f9a6f" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-                <g fill="#84bd84"><ellipse cx="25" cy="64" rx="14" ry="5.5" transform="rotate(-20 25 64)"/><ellipse cx="25" cy="66" rx="14" ry="5.5" transform="rotate(20 25 66)"/><ellipse cx="279" cy="60" rx="14" ry="5.5" transform="rotate(-18 279 60)"/><ellipse cx="279" cy="62" rx="14" ry="5.5" transform="rotate(18 279 62)"/></g>
-                <rect x="0" y="100" width="300" height="12" fill="#c3e7de"/>
-                <path d="M0 103 q12 -4 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0" fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"/>
-              </svg>
-              <span class="cap" data-i="edu.c2.cap">Tan Kah Kee College · Fujian</span>
+              <button class="edu-media" type="button" data-lightbox-src="assets/tan-kah-kee-college-campus.png" data-lightbox-title="Xiamen University Tan Kah Kee College · Fujian" aria-label="Open Tan Kah Kee College campus image">
+                <img src="assets/tan-kah-kee-college-campus.png" alt="Xiamen University Tan Kah Kee College campus main building complex" onerror="this.remove()">
+                <span class="cap" data-i="edu.c2.cap">Tan Kah Kee College · Fujian</span>
+              </button>
             </div>
             <div class="edu-body">
               <h3 data-i="edu.c2.s">Xiamen University Tan Kah Kee College</h3><div class="degree" data-i="edu.c2.d">B.Econ., International Business and Trade</div><div class="edu-date mono" data-i="edu.c2.dt">Sep 2020 — Jun 2024 · Zhangzhou, China</div><div class="tag-row"><span data-i="edu.c2.g0">Brand Marketing</span><span data-i="edu.c2.g1">Investment Economics</span><span data-i="edu.c2.g2">Statistics</span><span data-i="edu.c2.g3">International Trade Practice</span><span data-i="edu.c2.g4">International Logistics</span><span data-i="edu.c2.g5">Python</span><span data-i="edu.c2.g6">WeChat Mini Program Dev</span></div><p class="honors" data-i="edu.c2.h">Second-Class Scholarship, 2022–2023 · National Computer Rank Examination, Level 2</p>
@@ -699,11 +656,19 @@
 
     <section id="contact" data-section="contact">
       <div class="container">
-        <div class="contact-card reveal"><div class="eyebrow mono" data-i="contact.eyebrow">07 · Contact</div><h2 data-i="contact.h2">Let's connect the next dot.</h2><p data-i="contact.p">Open to roles in data analysis, spatial economics, or supply chain — wherever trade, tech, and storytelling meet.</p><div class="contact-actions"><button class="pill primary" id="copyEmail" type="button"><span class="dot"></span>Jessica20020922@gmail.com</button><a class="pill" href="Ran-Ma-Resume.pdf" download data-i="contact.dl">Download resume ↓</a><a class="pill" href="https://www.linkedin.com/in/ran-ma-6b51b6384" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="pill" href="tel:2136629220">213-662-9220</a></div></div>
+        <div class="contact-card reveal"><div class="eyebrow mono" data-i="contact.eyebrow">07 · Contact</div><h2 data-i="contact.h2">Let's connect the next dot.</h2><p data-i="contact.p">Open to roles in data analysis, spatial economics, or supply chain — wherever trade, tech, and storytelling meet.</p><div class="contact-actions"><button class="pill primary" id="copyEmail" type="button"><span class="dot"></span>Jessica20020922@gmail.com</button><a class="pill" href="assets/Ran-Ma-Resume.pdf" download data-i="contact.dl">Download resume ↓</a><a class="pill" href="https://www.linkedin.com/in/ran-ma-6b51b6384" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="pill" href="tel:2136629220">213-662-9220</a></div></div>
         <footer><span>© 2026 Ran Ma</span><span data-i="footer.loc">Los Angeles, CA</span><span data-i="footer.lang">Native Mandarin speaker</span></footer>
       </div>
     </section>
   </main>
+
+  <dialog class="media-dialog" id="mediaDialog" aria-labelledby="mediaDialogTitle">
+    <img id="mediaDialogImage" alt="">
+    <div class="media-dialog-foot">
+      <div class="media-dialog-title" id="mediaDialogTitle"></div>
+      <button class="media-close" id="mediaDialogClose" type="button" aria-label="Close image">×</button>
+    </div>
+  </dialog>
 
   <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -739,7 +704,7 @@
       "about.now.v": "Building internal tools and AI workflows at Cayi Drink Tech",
       "work.eyebrow": "02 · Selected work",
       "work.h2": 'Work that makes <span class="soft">complexity useful.</span>',
-      "work.intro": "Three snapshots drawn directly from my experience. Hover to explore; click a card to open the full story. Charts are illustrative placeholders.",
+      "work.intro": "Three snapshots drawn directly from my experience. Open a card for the full story, then explore each model step to see how the work created impact.",
       "work.c1.no": "01 · Data operations",
       "work.c1.h3": "Turning daily logistics data into decisions.",
       "work.c1.meta": "Dell Technologies · Power BI + Excel",
@@ -767,7 +732,7 @@
       "journey.mapcap": "Career geography",
       "journey.pin.cn": "Fujian", "journey.pin.us": "Los Angeles",
       "map.hint": "Tap a pin to filter roles by place; the school pin jumps to Education.",
-      "map.fallback": "Add journey-map.jpg to show the illustrated map.",
+      "map.fallback": "Add assets/journey-map-v2.png to show the illustrated map.",
       "map.cn": "CHINA", "map.us": "USA",
       "map.lbl.xiamen": "Xiamen", "map.lbl.zhangzhou": "Zhangzhou", "map.lbl.la": "Los Angeles", "map.lbl.usc": "USC",
       "map.tip.xiamen": "Xiamen — Mingcheng, Dell, Pioneer Futures",
@@ -891,7 +856,7 @@
       "about.now.v": "在 Cayi Drink Tech 做内部工具和 AI 工作流",
       "work.eyebrow": "02 · 精选项目",
       "work.h2": '把复杂的东西，<span class="soft">做得好用。</span>',
-      "work.intro": "三个片段，都来自我真实做过的事。悬停看一眼，点开看完整过程。图表是示意占位。",
+      "work.intro": "三个片段，都来自我真实做过的事。点开卡片看完整过程，再逐步探索每项工作如何产生影响。",
       "work.c1.no": "01 · 数据运营",
       "work.c1.h3": "让每天的物流数据，能拿来做决定。",
       "work.c1.meta": "戴尔科技 · Power BI + Excel",
@@ -919,7 +884,7 @@
       "journey.mapcap": "走过的地方",
       "journey.pin.cn": "福建", "journey.pin.us": "洛杉矶",
       "map.hint": "点地图上的标记按地点筛选经历；学校标记会跳到教育背景。",
-      "map.fallback": "把 journey-map.jpg 放进去，这里就会显示手绘地图。",
+      "map.fallback": "把 assets/journey-map-v2.png 放进去，这里就会显示手绘地图。",
       "map.cn": "中国", "map.us": "美国",
       "map.lbl.xiamen": "厦门", "map.lbl.zhangzhou": "漳州", "map.lbl.la": "洛杉矶", "map.lbl.usc": "USC",
       "map.tip.xiamen": "厦门 — 明承环保、戴尔、先锋期货",
@@ -1120,12 +1085,107 @@
     });
     navA.forEach(a => a.addEventListener('click', closeMenu));
 
+    /* ---------- interactive impact models ---------- */
+    const IMPACT_MODELS = {
+      operations: {
+        en: {
+          kicker: 'Data operations flow', total: '50+ reports',
+          steps: [
+            ['01', 'Daily data', 'Live inputs', 'Tracked logistics movement, backlogs, and recurring operational issues.'],
+            ['02', 'Excel base', 'Structured', 'Turned scattered updates into a reusable database with consistent fields.'],
+            ['03', 'Power BI', 'Visible', 'Built visual panels so patterns and exceptions could be seen quickly.'],
+            ['04', 'Decisions', 'Actionable', 'Published updates and delivered more than 50 reports for day-to-day decisions.']
+          ]
+        },
+        zh: {
+          kicker: '数据运营流程', total: '50+ 份报告',
+          steps: [
+            ['01', '每日数据', '实时输入', '持续跟踪物流进度、积压情况和重复出现的运营问题。'],
+            ['02', 'Excel 数据库', '结构化', '把分散更新整理成字段统一、可复用的数据库。'],
+            ['03', 'Power BI', '可视化', '搭建可视化面板，让趋势和异常更容易被发现。'],
+            ['04', '运营决策', '可行动', '发布更新并完成 50 多份报告，支持日常运营判断。']
+          ]
+        }
+      },
+      media: {
+        en: {
+          kicker: 'Signal-to-audience model', total: '30K+ clicks',
+          steps: [
+            ['01', 'Markets', '20+ tracked', 'Monitored agriculture, metals, energy, and chemical futures every day.'],
+            ['02', 'Content', '300+ videos', 'Translated market and media signals into short, platform-ready stories.'],
+            ['03', 'Reach', '30K+ clicks', 'Distributed across WeChat, TikTok, and Toutiao to build cumulative reach.']
+          ]
+        },
+        zh: {
+          kicker: '从信号到受众', total: '30,000+ 点击',
+          steps: [
+            ['01', '市场监测', '20+ 品种', '每日跟踪农业、金属、能源和化工四类期货行情。'],
+            ['02', '内容生产', '300+ 视频', '把市场与媒体信号转化成适合平台传播的短内容。'],
+            ['03', '传播触达', '30,000+ 点击', '通过微信、抖音和今日头条形成累计传播效果。']
+          ]
+        }
+      },
+      ai: {
+        en: {
+          kicker: 'AI workflow system', total: '2 systems',
+          steps: [
+            ['01', 'Audit', 'Workflows', 'Mapped colleagues’ real processes before deciding what should be automated.'],
+            ['02', 'Build', '2 systems', 'Designed internal tools around the actual handoffs and information gaps.'],
+            ['03', 'Automate', '10+ brands', 'Automated Amazon and TikTok data pulls for hydration-brand analysis.'],
+            ['04', 'Enable', 'Team training', 'Helped the business development team use AI for pipeline and lead generation.']
+          ]
+        },
+        zh: {
+          kicker: 'AI 工作流系统', total: '2 套系统',
+          steps: [
+            ['01', '流程诊断', '真实工作流', '先梳理同事的实际流程，再判断哪些环节值得自动化。'],
+            ['02', '系统搭建', '2 套系统', '围绕真实交接和信息缺口设计内部工具。'],
+            ['03', '数据自动化', '10+ 品牌', '自动抓取 Amazon 与 TikTok 数据，支持补水品牌销售分析。'],
+            ['04', '团队赋能', 'AI 培训', '帮助美国业务拓展团队用 AI 建立销售管线和寻找线索。']
+          ]
+        }
+      }
+    };
+
+    const renderImpactModel = (root, activeIndex = 0) => {
+      const model = IMPACT_MODELS[root.dataset.model]?.[lang];
+      if (!model) return;
+      const safeIndex = Math.max(0, Math.min(activeIndex, model.steps.length - 1));
+      root.innerHTML = `
+        <div class="model-head"><span class="model-kicker">${model.kicker}</span><strong class="model-total">${model.total}</strong></div>
+        <div class="model-steps">
+          ${model.steps.map((step, i) => `<button type="button" class="model-step${i === safeIndex ? ' active' : ''}" data-step="${i}" aria-pressed="${i === safeIndex}"><span class="model-dot">${step[0]}</span><span class="model-label">${step[1]}</span></button>`).join('')}
+        </div>
+        <div class="model-detail" aria-live="polite"><strong class="model-stat">${model.steps[safeIndex][2]}</strong><span class="model-copy">${model.steps[safeIndex][3]}</span></div>`;
+      root.querySelectorAll('.model-step').forEach((button, i) => button.addEventListener('click', e => {
+        e.stopPropagation();
+        root.dataset.active = String(i);
+        renderImpactModel(root, i);
+        root.querySelector(`[data-step="${i}"]`)?.focus();
+      }));
+    };
+    const renderImpactModels = () => document.querySelectorAll('.impact-model').forEach(root => renderImpactModel(root, +(root.dataset.active || 0)));
+
     /* ---------- work cards expand ---------- */
     document.querySelectorAll('.work-card').forEach(card => {
       const toggle = () => card.setAttribute('aria-expanded', card.getAttribute('aria-expanded') !== 'true');
-      card.addEventListener('click', e => { if (!e.target.closest('a')) toggle(); });
-      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+      card.addEventListener('click', e => { if (!e.target.closest('a,button')) toggle(); });
+      card.addEventListener('keydown', e => { if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(); } });
     });
+
+    /* ---------- image lightbox ---------- */
+    const mediaDialog = document.getElementById('mediaDialog');
+    const mediaDialogImage = document.getElementById('mediaDialogImage');
+    const mediaDialogTitle = document.getElementById('mediaDialogTitle');
+    document.querySelectorAll('[data-lightbox-src]').forEach(trigger => trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      mediaDialogImage.src = trigger.dataset.lightboxSrc;
+      mediaDialogImage.alt = trigger.dataset.lightboxTitle || '';
+      mediaDialogTitle.textContent = trigger.dataset.lightboxTitle || '';
+      mediaDialog.showModal();
+    }));
+    document.getElementById('mediaDialogClose').addEventListener('click', () => mediaDialog.close());
+    mediaDialog.addEventListener('click', e => { if (e.target === mediaDialog) mediaDialog.close(); });
 
     /* ---------- journey tabs + hash + map filter ---------- */
     const tabs = [...document.querySelectorAll('.journey-tab')];
@@ -1259,6 +1319,12 @@
       if (reduced) roleEl.textContent = roles[0];
       renderMarquee();
       renderSkills();
+      renderImpactModels();
+      const mapExpand = document.querySelector('.map-expand');
+      if (mapExpand) {
+        mapExpand.textContent = lang === 'zh' ? '放大 ↗' : 'Expand ↗';
+        mapExpand.setAttribute('aria-label', lang === 'zh' ? '放大查看职业地图' : 'Open career map in a larger view');
+      }
       try { localStorage.setItem('rm-lang', lang); } catch (e) {}
     };
     langBtn.addEventListener('click', () => applyLang(lang === 'en' ? 'zh' : 'en'));
