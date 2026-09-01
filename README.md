@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/31685684/README.md)[# Ran Ma — Personal Website
+# Ran Ma — Personal Website
 
 Single self-contained `index.html` (no build step, no external JS libraries).
 Just open the file, or drop the folder on any static host (GitHub Pages, Netlify, Cloudflare Pages).
@@ -45,4 +45,3 @@ Light theme only — no dark mode. Bilingual (English / 简体中文) with a tog
 - `data-level="…"` on `.skill-chip` → your real proficiency numbers (0–100)
 - `window.I18N` (bottom of file) → review the Chinese; company names like "先锋期货" are
   best-guess translations. Cayi is tagged as Oxnard, CAFF as Los Angeles — adjust if wrong.
-Uploading README.md…]()
