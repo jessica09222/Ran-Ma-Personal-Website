@@ -325,20 +325,20 @@
 
     #recognition{background:linear-gradient(180deg,rgba(239,233,255,.5),rgba(255,240,245,.35) 58%,transparent)}
     #recognition .eyebrow{color:var(--purple)}
-    .recognition-carousel{position:relative;width:min(820px,100%);margin:0 auto 28px}
+    .recognition-carousel{position:relative;width:min(440px,100%);margin:0 auto 34px}
     .recognition-viewport{overflow:hidden;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,#ece9f8,#fff4f7);box-shadow:0 18px 50px rgba(45,35,92,.1)}
     .recognition-track{display:flex;transition:transform .65s cubic-bezier(.22,1,.36,1);touch-action:pan-y}
-    .recognition-photo{position:relative;flex:0 0 100%;height:clamp(280px,28vw,340px);margin:0;overflow:hidden;background:#eceaf6;min-width:0;min-height:0}
-    .recognition-photo button{width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;display:block;overflow:hidden}
+    .recognition-photo{position:relative;flex:0 0 100%;height:auto;margin:0;overflow:hidden;background:#eceaf6;min-width:0;min-height:0;display:flex;flex-direction:column}
+    .recognition-photo button{width:100%;height:auto;aspect-ratio:3/4;padding:0;border:0;background:transparent;cursor:zoom-in;display:block;overflow:hidden;flex:0 0 auto}
     .recognition-photo img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.22,1,.36,1),filter .3s}
-    .recognition-photo.is-photo img{object-position:center 34%}
+    .recognition-photo.is-photo img{object-position:center}
     .recognition-photo.is-poster{background:linear-gradient(135deg,#e9e7fa,#fff)}
     .recognition-photo.is-poster img{object-fit:contain;padding:18px}
     .recognition-photo:hover img,.recognition-photo button:focus-visible img{transform:scale(1.035);filter:saturate(1.05)}
-    .recognition-caption{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:end;justify-content:space-between;gap:12px;padding:13px 15px;border-radius:16px;background:rgba(26,24,48,.72);color:#fff;backdrop-filter:blur(8px);pointer-events:none}
+    .recognition-caption{position:static;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:var(--ink);color:#fff;pointer-events:none}
     .recognition-caption span:first-child{font-weight:700;line-height:1.35}
     .recognition-caption .zoom{font:600 .7rem "Roboto Mono",monospace;white-space:nowrap;opacity:.8}
-    .carousel-button{position:absolute;z-index:2;top:50%;width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(26,24,48,.68);color:#fff;cursor:pointer;font-size:1.45rem;box-shadow:0 8px 24px rgba(26,24,48,.18);backdrop-filter:blur(8px);transform:translateY(-50%);transition:.2s}
+    .carousel-button{position:absolute;z-index:2;top:43%;width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(26,24,48,.68);color:#fff;cursor:pointer;font-size:1.45rem;box-shadow:0 8px 24px rgba(26,24,48,.18);backdrop-filter:blur(8px);transform:translateY(-50%);transition:.2s}
     .carousel-button:hover,.carousel-button:focus-visible{background:var(--purple);transform:translateY(-50%) scale(1.05)}
     .carousel-button.prev{left:16px}.carousel-button.next{right:16px}
     .carousel-dots{display:flex;justify-content:center;gap:9px;margin-top:14px}
@@ -449,7 +449,7 @@
       .work-grid{gap:7px}.work-card,.work-card:nth-child(3){min-height:220px;padding:48px 10px 14px;border-radius:17px}.work-card h3{font-size:.82rem;line-height:1.35;margin:26px 0 9px}.work-card .meta{font-size:.62rem;line-height:1.35}.work-summary,.work-detail,.impact-model,.expand-icon{display:none!important}.work-no{font-size:.55rem}.work-top{gap:4px}
       .journey-stage{min-height:570px;border-radius:26px;padding:28px 20px}.journey-panel li{padding-left:40px}
       .edu-grid,.beyond-grid{grid-template-columns:1fr}.edu-body{padding:22px}
-      .recognition-viewport{border-radius:24px}.recognition-photo{height:auto;aspect-ratio:4/3}.recognition-photo.is-poster img{padding:12px}.carousel-button{width:40px;height:40px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}.research-metrics{grid-template-columns:1fr}.research-story,.award-card{border-radius:24px;padding:24px}
+      .recognition-viewport{border-radius:24px}.recognition-photo{height:auto;aspect-ratio:auto}.recognition-photo.is-poster img{padding:12px}.recognition-caption{min-height:64px;padding:12px 14px}.carousel-button{width:40px;height:40px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}.research-metrics{grid-template-columns:1fr}.research-story,.award-card{border-radius:24px;padding:24px}
       .group-label{grid-column:1}.interest{min-height:160px}.interest h3{margin-top:22px}
       .contact-card{border-radius:30px}.contact-actions .pill{width:100%;justify-content:center}
       footer{flex-direction:column;align-items:center;text-align:center}
