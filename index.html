@@ -315,7 +315,7 @@
     #education h2{color:var(--ink)}
     #education .section-intro{color:var(--muted)}
     .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .edu-card{border:1px solid var(--line);border-radius:28px;background:#fff;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(45,35,92,.06);transition:transform .3s,box-shadow .3s}
+    .edu-card{border:1px solid var(--line);border-radius:28px;background:#fff;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(45,35,92,.06);transition:transform .3s,box-shadow .3s;scroll-margin-top:112px}
     .edu-card:hover{transform:translateY(-5px);box-shadow:0 22px 54px rgba(45,35,92,.12)}
     .edu-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;background:var(--lilac);right:-80px;bottom:-90px;opacity:.3}
     .edu-photo{position:relative;border-bottom:1px solid var(--line);background:#eef1ff;line-height:0;overflow:hidden;aspect-ratio:15/7}
@@ -691,7 +691,7 @@
       <div class="container">
         <div class="section-head reveal"><div><div class="eyebrow mono" data-i="edu.eyebrow">04 · Education</div><h2 data-i="edu.h2">Spatial Economics and Data Analysis &amp; International Business and Trade</h2></div><p class="section-intro" data-i="edu.intro">Graduate training at USC combines spatial analysis and econometrics, supported by an undergraduate foundation in international trade and business.</p></div>
         <div class="edu-grid">
-          <article class="edu-card reveal">
+          <article class="edu-card reveal" id="edu-usc">
             <div class="edu-photo">
               <button class="edu-media" type="button" data-lightbox-src="assets/edu-usc.jpg" data-lightbox-title="南加州大学 · 洛杉矶" aria-label="查看南加州大学校园图片">
                 <img src="assets/edu-usc.jpg" alt="南加州大学校园" onerror="this.remove()">
@@ -702,7 +702,7 @@
               <h3 data-i="edu.c1.s">University of Southern California</h3><div class="degree" data-i="edu.c1.d">M.S., Spatial Economics and Data Analysis</div><div class="edu-date mono" data-i="edu.c1.dt">Sep 2024 — Present · Los Angeles, CA · GPA 3.76</div><div class="tag-row"><span data-i="edu.c1.g0">Spatial Analysis &amp; Modeling</span><span data-i="edu.c1.g1">Econometrics</span><span data-i="edu.c1.g2">Microeconomic Policy</span><span data-i="edu.c1.g3">Spatial Thinking</span><span data-i="edu.c1.g4">Spatial Econometrics</span></div>
             </div>
           </article>
-          <article class="edu-card reveal">
+          <article class="edu-card reveal" id="edu-jgu">
             <div class="edu-photo">
               <button class="edu-media" type="button" data-lightbox-src="assets/edu-jgu.jpg" data-lightbox-title="厦门大学嘉庚学院 · 福建" aria-label="查看厦门大学嘉庚学院校园图片">
                 <img src="assets/edu-jgu.jpg" alt="厦门大学嘉庚学院校园" onerror="this.remove()">
@@ -1466,8 +1466,6 @@
     const jmapPins = [...document.querySelectorAll('.jmap-pin')];
     const mapTip = document.getElementById('mapTip');
     const miniMap = document.querySelector('.mini-map');
-    const eduCards = [...document.querySelectorAll('.edu-card')];
-
     let activeCity = null;
     const filterCity = city => {
       activeCity = activeCity === city ? null : city;
@@ -1495,9 +1493,13 @@
       pin.addEventListener('blur', hideTip);
       const act = () => {
         if (pin.dataset.act === 'edu') {
-          document.getElementById('education').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
-          const card = eduCards[pin.dataset.edu === 'jgu' ? 1 : 0];
-          if (card) { card.classList.add('spotlight'); setTimeout(() => card.classList.remove('spotlight'), 2600); }
+          const card = document.getElementById(`edu-${pin.dataset.edu}`);
+          if (card) {
+            card.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+            card.classList.add('spotlight');
+            setTimeout(() => card.classList.remove('spotlight'), 2600);
+            history.replaceState(null, '', '#education');
+          }
         } else {
           filterCity(pin.dataset.city);
         }
