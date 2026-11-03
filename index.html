@@ -799,7 +799,7 @@
 
     <section id="contact" data-section="contact">
       <div class="container">
-        <div class="contact-card reveal"><div class="eyebrow mono" data-i="contact.eyebrow">08 · Contact</div><h2 data-i="contact.h2">Let's connect the next dot.</h2><p data-i="contact.p">Open to opportunities across AI-enabled business operations, internal tools, workflow automation, and e-commerce.</p><div class="contact-actions"><button class="pill primary" id="copyEmail" type="button"><span class="dot"></span>Jessica20020922@gmail.com</button><a class="pill" href="assets/Ran-Ma-Resume.pdf" download data-i="contact.dl">Download resume ↓</a><a class="pill" href="https://www.linkedin.com/in/ran-ma-6b51b6384" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="pill" href="tel:2136629220">213-662-9220</a></div></div>
+        <div class="contact-card reveal"><div class="eyebrow mono" data-i="contact.eyebrow">08 · Contact</div><h2 data-i="contact.h2">Let's connect the next dot.</h2><p data-i="contact.p">Open to opportunities across AI-enabled business operations, internal tools, workflow automation, and e-commerce.</p><div class="contact-actions"><button class="pill primary" id="copyEmail" type="button"><span class="dot"></span>Jessica20020922@gmail.com</button><a class="pill" href="assets/Ran-Ma-Resume.pdf" download data-i="contact.dl">Download resume ↓</a><a class="pill" href="https://www.linkedin.com/in/ran-ma-6b51b6384" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="pill" id="contactPhone" href="tel:+12136629220" data-i="contact.phone">+1 213 662 9220</a></div></div>
         <footer><span>© 2026 Ran Ma</span><span data-i="footer.loc">Los Angeles, CA</span><span data-i="footer.lang">Native Mandarin speaker</span></footer>
       </div>
     </section>
@@ -957,6 +957,7 @@
       "contact.h2": "Let's connect the next dot.",
       "contact.p": "Open to opportunities across AI-enabled business operations, internal tools, workflow automation, and e-commerce.",
       "contact.dl": "Download resume ↓",
+      "contact.phone": "+1 213 662 9220",
       "footer.loc": "Los Angeles, CA", "footer.lang": "Native Mandarin speaker",
       copied: "Email copied to clipboard ✓",
       roles: ["AI-Enabled Business Operations", "Internal Tools", "Workflow Automation", "E-commerce"],
@@ -1120,6 +1121,7 @@
       "contact.h2": "期待与您建立新的联系。",
       "contact.p": "我关注 AI 赋能业务运营、内部工具开发、工作流自动化与电商相关机会。",
       "contact.dl": "下载简历 ↓",
+      "contact.phone": "+86 182 0599 1616",
       "footer.loc": "美国加州洛杉矶", "footer.lang": "母语中文",
       copied: "邮箱地址已复制 ✓",
       roles: ["AI 赋能业务运营", "内部工具", "工作流自动化", "电商"],
@@ -1540,6 +1542,8 @@
       renderMarquee();
       renderSkills();
       renderImpactModels();
+      const contactPhone = document.getElementById('contactPhone');
+      contactPhone.href = lang === 'zh' ? 'tel:+8618205991616' : 'tel:+12136629220';
       const mapExpand = document.querySelector('.map-expand');
       if (mapExpand) {
         mapExpand.textContent = lang === 'zh' ? '放大 ↗' : 'Expand ↗';
