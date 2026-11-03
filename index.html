@@ -318,17 +318,25 @@
 
     #recognition{background:linear-gradient(180deg,rgba(239,233,255,.5),rgba(255,240,245,.35) 58%,transparent)}
     #recognition .eyebrow{color:var(--purple)}
-    .recognition-visuals{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,.62fr);gap:18px;margin-bottom:18px}
-    .recognition-photo{position:relative;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:#eceaf6;box-shadow:0 18px 50px rgba(45,35,92,.1);min-height:0}
-    .recognition-photo.wide{aspect-ratio:16/10}
-    .recognition-photo.tall{aspect-ratio:4/5}
+    .recognition-carousel{position:relative;margin-bottom:18px}
+    .recognition-viewport{overflow:hidden;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,#ece9f8,#fff4f7);box-shadow:0 18px 50px rgba(45,35,92,.1)}
+    .recognition-track{display:flex;transition:transform .65s cubic-bezier(.22,1,.36,1);touch-action:pan-y}
+    .recognition-photo{position:relative;flex:0 0 100%;margin:0;aspect-ratio:16/9;overflow:hidden;background:#eceaf6;min-width:0;min-height:0}
     .recognition-photo button{width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;display:block;overflow:hidden}
     .recognition-photo img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.22,1,.36,1),filter .3s}
-    .recognition-photo.tall img{object-position:center top}
+    .recognition-photo.is-photo img{object-position:center 62%}
+    .recognition-photo.is-poster{background:linear-gradient(135deg,#e9e7fa,#fff)}
+    .recognition-photo.is-poster img{object-fit:contain;padding:18px}
     .recognition-photo:hover img,.recognition-photo button:focus-visible img{transform:scale(1.035);filter:saturate(1.05)}
     .recognition-caption{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:end;justify-content:space-between;gap:12px;padding:13px 15px;border-radius:16px;background:rgba(26,24,48,.72);color:#fff;backdrop-filter:blur(8px);pointer-events:none}
     .recognition-caption span:first-child{font-weight:700;line-height:1.35}
     .recognition-caption .zoom{font:600 .7rem "Roboto Mono",monospace;white-space:nowrap;opacity:.8}
+    .carousel-button{position:absolute;z-index:2;top:50%;width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(26,24,48,.68);color:#fff;cursor:pointer;font-size:1.45rem;box-shadow:0 8px 24px rgba(26,24,48,.18);backdrop-filter:blur(8px);transform:translateY(-50%);transition:.2s}
+    .carousel-button:hover,.carousel-button:focus-visible{background:var(--purple);transform:translateY(-50%) scale(1.05)}
+    .carousel-button.prev{left:16px}.carousel-button.next{right:16px}
+    .carousel-dots{display:flex;justify-content:center;gap:9px;margin-top:14px}
+    .carousel-dot{width:9px;height:9px;padding:0;border:0;border-radius:99px;background:rgba(114,87,213,.25);cursor:pointer;transition:.25s}
+    .carousel-dot.active{width:28px;background:var(--purple)}
     .recognition-content{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:18px;align-items:stretch}
     .research-story,.award-card{border:1px solid var(--line);border-radius:30px;padding:clamp(26px,4vw,46px);background:rgba(255,255,255,.82);box-shadow:0 16px 44px rgba(45,35,92,.07)}
     .research-kicker{color:var(--purple);font-size:.7rem;line-height:1.6;text-transform:uppercase;letter-spacing:.08em}
@@ -434,8 +442,8 @@
       .work-guide-stage{height:210px;margin-top:-4px;margin-bottom:-62px}.work-guide-pose,.work-guide-hand{height:220px;bottom:-28px}
       .work-grid{gap:7px}.work-card,.work-card:nth-child(3){min-height:220px;padding:48px 10px 14px;border-radius:17px}.work-card h3{font-size:.82rem;line-height:1.35;margin:26px 0 9px}.work-card .meta{font-size:.62rem;line-height:1.35}.work-summary,.work-detail,.impact-model,.expand-icon{display:none!important}.work-no{font-size:.55rem}.work-top{gap:4px}
       .journey-stage{min-height:570px;border-radius:26px;padding:28px 20px}.journey-panel li{padding-left:40px}
-      .edu-grid,.beyond-grid,.recognition-visuals{grid-template-columns:1fr}.edu-body{padding:22px}
-      .recognition-photo.wide{aspect-ratio:4/3}.recognition-photo.tall{aspect-ratio:4/5;max-height:620px}.research-metrics{grid-template-columns:1fr}.research-story,.award-card{border-radius:24px;padding:24px}
+      .edu-grid,.beyond-grid{grid-template-columns:1fr}.edu-body{padding:22px}
+      .recognition-viewport{border-radius:24px}.recognition-photo{aspect-ratio:4/3}.recognition-photo.is-poster img{padding:12px}.carousel-button{width:40px;height:40px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}.research-metrics{grid-template-columns:1fr}.research-story,.award-card{border-radius:24px;padding:24px}
       .group-label{grid-column:1}.interest{min-height:160px}.interest h3{margin-top:22px}
       .contact-card{border-radius:30px}.contact-actions .pill{width:100%;justify-content:center}
       footer{flex-direction:column;align-items:center;text-align:center}
@@ -582,27 +590,27 @@
             <div class="work-top"><span class="work-no mono" data-i="work.c1.no">01 · Data operations</span><span class="expand-icon" aria-hidden="true">+</span></div>
             <h3 data-i="work.c1.h3">Turning daily logistics data into decisions.</h3><div class="meta" data-i="work.c1.meta">Dell Technologies · Power BI + Excel</div>
             <div class="work-bottom">
-              <p class="work-summary" data-i="work.c1.sum">Built an Excel database and Power BI visualization panels to surface operational insight from daily logistics data.</p>
+              <p class="work-summary" data-i="work.c1.sum">Prepared clean shipment-status and exception data for an ASN monitoring dashboard, then turned daily logistics data into reliable operational reporting.</p>
               <div class="impact-model" data-model="operations" style="--steps:4" aria-label="Interactive logistics data workflow"></div>
-              <div class="work-detail"><div><p data-i="work.c1.det">Tracked daily logistics data, compiled it in an Excel database, published timely updates to the internal site, summarized daily backlogs, and reported weekly IT issues — more than 50 reports delivered.</p><div class="metrics"><span data-i="work.c1.m1">50+ reports</span><span data-i="work.c1.m2">Power BI panels</span><span data-i="work.c1.m3">Operational insight</span></div></div></div>
+              <div class="work-detail"><div><p data-i="work.c1.det">Gathered business requirements for an ASN monitoring dashboard, prepared shipment-status and exception-monitoring datasets, and cleaned logistics data in Excel using lookup formulas, record matching, delivery-status classification, and duplicate removal. Monitored daily operations and delivered 50+ Excel and Power BI reports.</p><div class="metrics"><span data-i="work.c1.m1">50+ reports</span><span data-i="work.c1.m2">ASN monitoring</span><span data-i="work.c1.m3">Clean logistics data</span></div></div></div>
             </div>
           </article>
           <article class="work-card reveal" style="--card-accent:var(--pink)" tabindex="0" role="button" aria-expanded="false">
             <div class="work-top"><span class="work-no mono" data-i="work.c2.no">02 · Media intelligence</span><span class="expand-icon" aria-hidden="true">+</span></div>
             <h3 data-i="work.c2.h3">Making market movement easier to follow.</h3><div class="meta" data-i="work.c2.meta">Pioneer Futures · Analysis + Content</div>
             <div class="work-bottom">
-              <p class="work-summary" data-i="work.c2.sum">Tracked prices across four commodity classes, then translated daily market and media signals into clear platform content.</p>
+              <p class="work-summary" data-i="work.c2.sum">Translated market trends and financial news into daily content, then used performance signals to refine topics and titles.</p>
               <div class="impact-model" data-model="media" style="--steps:3" aria-label="Interactive media reach model"></div>
-              <div class="work-detail"><div><p data-i="work.c2.det">Analyzed daily price trends across 20+ futures commodities in agriculture, metals, energy, and chemicals, curated daily media coverage across WeChat, TikTok, and Toutiao, and produced 300+ videos that reached 30,000+ total clicks.</p><div class="metrics"><span data-i="work.c2.m1">20+ commodities</span><span data-i="work.c2.m2">300+ videos</span><span data-i="work.c2.m3">30,000+ clicks</span></div></div></div>
+              <div class="work-detail"><div><p data-i="work.c2.det">Analyzed market trends across 20+ futures commodities and translated financial news into daily content topics. Independently planned, produced, and published 300+ short videos across Douyin, WeChat Channels, and Toutiao, generating 30,000+ cumulative views.</p><div class="metrics"><span data-i="work.c2.m1">20+ commodities</span><span data-i="work.c2.m2">300+ videos</span><span data-i="work.c2.m3">30,000+ views</span></div></div></div>
             </div>
           </article>
           <article class="work-card reveal" style="--card-accent:var(--lilac)" tabindex="0" role="button" aria-expanded="false">
             <div class="work-top"><span class="work-no mono" data-i="work.c3.no">03 · AI-enabled business operations</span><span class="expand-icon" aria-hidden="true">+</span></div>
             <h3 data-i="work.c3.h3">Connecting fragmented operations through internal tools and automation.</h3><div class="meta" data-i="work.c3.meta">Cayi Drink Tech · Internal platform + E-commerce automation</div>
             <div class="work-bottom">
-              <p class="work-summary" data-i="work.c3.sum">Built an Internal Operations Management Platform, digitized the end-to-end order lifecycle, and automated recurring e-commerce research with Claude and Codex.</p>
+              <p class="work-summary" data-i="work.c3.sum">Translated cross-functional SOPs into an AI-assisted operations platform and automated recurring competitive research with Claude and Codex.</p>
               <div class="impact-model" data-model="ai" style="--steps:4" aria-label="Interactive AI workflow model"></div>
-              <div class="work-detail"><div><p data-i="work.c3.det">Designed and built an Internal Operations Management Platform using AI-assisted development, centralizing fragmented business records and enabling cross-functional teams to retrieve linked operational information by order number. Digitized the end-to-end order lifecycle from sample requests and quotations through sales orders, production and procurement, inventory allocation, quality inspection, shipment, and receivables, incorporating linked records, approval workflows, status tracking, and employee task notifications. Automated Amazon and TikTok market research and data collection across 10+ brands and 300+ products using Claude and Codex, reducing recurring research time by 80%—from 20 to 4 hours.</p><div class="metrics"><span data-i="work.c3.m1">1 CAYI platform</span><span data-i="work.c3.m2">300+ products</span><span data-i="work.c3.m3">80% less research time</span></div></div></div>
+              <div class="work-detail"><div><p data-i="work.c3.det">Analyzed SOPs across sales, procurement, production, inventory, and fulfillment, then translated order processes into linked digital workflows. Designed an AI-assisted internal operations platform with order tracking, approvals, and automated task notifications; coordinated employee testing and feedback before deployment. Automated Amazon and TikTok competitive research across 10+ brands and 300+ products, reducing recurring research time by 80%, from 20 to 4 hours.</p><div class="metrics"><span data-i="work.c3.m1">1 CAYI platform</span><span data-i="work.c3.m2">300+ products</span><span data-i="work.c3.m3">80% less research time</span></div></div></div>
             </div>
           </article>
         </div>
@@ -623,7 +631,6 @@
             <button class="map-expand" type="button" data-lightbox-src="assets/journey-map.jpg" data-lightbox-title="职业地域 · 福建至加利福尼亚" aria-label="放大查看职业经历地图">放大查看 ↗</button>
             <button class="jmap-pin" style="left:14%;top:62%" data-act="edu" data-edu="jgu" data-tip="map.tip.jgu" aria-label="Zhangzhou — Tan Kah Kee College"></button>
             <button class="jmap-pin" style="left:34.5%;top:57%" data-act="city" data-city="xiamen" data-tip="map.tip.xiamen" aria-label="Xiamen — filter roles"></button>
-            <button class="jmap-pin" style="left:65.5%;top:52%" data-act="city" data-city="oxnard" data-tip="map.tip.oxnard" aria-label="Oxnard — Cayi Drink Tech"></button>
             <button class="jmap-pin" style="left:78.5%;top:76%" data-act="city" data-city="la" data-tip="map.tip.la" aria-label="Los Angeles — filter roles"></button>
           </div>
           <div class="map-tip" id="mapTip"></div>
@@ -632,7 +639,7 @@
         <div class="journey-layout">
           <div class="journey-side">
             <div class="journey-tabs" role="tablist" aria-label="Career timeline">
-              <button class="journey-tab active" role="tab" aria-selected="true" aria-controls="journey-0" id="tab-0" data-region="us" data-city="oxnard"><span class="date mono" data-i="j.t0.d">Jun 2026 — Present</span><b data-i="j.t0.n">Cayi Drink Tech</b></button>
+              <button class="journey-tab active" role="tab" aria-selected="true" aria-controls="journey-0" id="tab-0" data-region="us" data-city="la"><span class="date mono" data-i="j.t0.d">Jun 2026 — Present</span><b data-i="j.t0.n">Cayi Drink Tech</b></button>
               <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-1" id="tab-1" data-region="us" data-city="la"><span class="date mono" data-i="j.t1.d">Oct — Nov 2025</span><b data-i="j.t1.n">CAFF / CATF</b></button>
               <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-2" id="tab-2" data-region="cn" data-city="xiamen"><span class="date mono" data-i="j.t2.d">Jul — Sep 2023</span><b data-i="j.t2.n">Dell Technologies</b></button>
               <button class="journey-tab" role="tab" aria-selected="false" aria-controls="journey-3" id="tab-3" data-region="cn" data-city="xiamen"><span class="date mono" data-i="j.t3.d">Feb 2021 — Jun 2022</span><b data-i="j.t3.n">Pioneer Futures</b></button>
@@ -640,11 +647,11 @@
             </div>
           </div>
           <div class="journey-stage reveal">
-            <article class="journey-panel" role="tabpanel" id="journey-0" aria-labelledby="tab-0"><div class="journey-kicker mono" data-i="j.p0.k">Los Angeles · Current</div><h3 data-i="j.p0.r">AI Tool Creator Intern</h3><div class="journey-org" data-i="j.p0.o">Cayi Drink Tech</div><ul><li data-i="j.p0.b0">Designed and built two internal company systems after auditing colleagues’ workflows for efficiency gains.</li><li data-i="j.p0.b1">Set up AI-assisted automation, including AppSheet, to reduce repetitive manual work.</li><li data-i="j.p0.b2">Trained the U.S. business development team to use AI tools for pipeline building and lead generation.</li><li data-i="j.p0.b3">Led SEO/GEO strategy and used Claude to automate Amazon and TikTok data collection for sales analysis across 10+ hydration brands.</li></ul></article>
-            <article class="journey-panel" role="tabpanel" id="journey-1" aria-labelledby="tab-1" hidden><div class="journey-kicker mono" data-i="j.p1.k">Los Angeles</div><h3 data-i="j.p1.r">Assistant</h3><div class="journey-org" data-i="j.p1.o">Chinese American Film Festival & TV Festival (CAFF / CATF)</div><ul><li data-i="j.p1.b0">Supported large-scale event operations — pre-event prep, on-site coordination, and live execution alongside production teams.</li><li data-i="j.p1.b1">Coordinated talent and guests across red carpet, seating, and award segments.</li><li data-i="j.p1.b2">Assisted the Industry Forum and Film Promotion Conference with content sessions and project showcases.</li></ul></article>
-            <article class="journey-panel" role="tabpanel" id="journey-2" aria-labelledby="tab-2" hidden><div class="journey-kicker mono" data-i="j.p2.k">Xiamen, China</div><h3 data-i="j.p2.r">Global Supply Chain Assistant</h3><div class="journey-org" data-i="j.p2.o">Dell Technologies</div><ul><li data-i="j.p2.b0">Tracked daily logistics data, built an Excel database, and visualized it in Power BI — 50+ reports delivered.</li><li data-i="j.p2.b1">Built data visualization panels to surface operational insights from Excel.</li><li data-i="j.p2.b2">Summarized daily backlogs and reported weekly IT issues.</li></ul></article>
-            <article class="journey-panel" role="tabpanel" id="journey-3" aria-labelledby="tab-3" hidden><div class="journey-kicker mono" data-i="j.p3.k">Xiamen, China</div><h3 data-i="j.p3.r">Media Promotion Staff</h3><div class="journey-org" data-i="j.p3.o">Pioneer Futures Co., Ltd</div><ul><li data-i="j.p3.b0">Tracked and analyzed daily price trends across 20+ futures commodities — agriculture, metals, energy, chemicals.</li><li data-i="j.p3.b1">Curated and summarized daily media coverage across WeChat, TikTok, and Toutiao.</li><li data-i="j.p3.b2">Produced 300+ videos across platforms, reaching 30,000+ total clicks.</li></ul></article>
-            <article class="journey-panel" role="tabpanel" id="journey-4" aria-labelledby="tab-4" hidden><div class="journey-kicker mono" data-i="j.p4.k">Xiamen, China</div><h3 data-i="j.p4.r">Documentation & Logistics Assistant</h3><div class="journey-org" data-i="j.p4.o">Xiamen Mingcheng Environmental Technology Co., Ltd</div><ul><li data-i="j.p4.b0">Produced and reviewed 100+ import/export documents monthly with 100% regulatory compliance.</li><li data-i="j.p4.b1">Negotiated shipment terms with carriers for 20+ orders monthly, ensuring 100% on-time delivery.</li><li data-i="j.p4.b2">Verified tax refund details and completed documentation for 20+ export orders.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-0" aria-labelledby="tab-0"><div class="journey-kicker mono" data-i="j.p0.k">Los Angeles · Current</div><h3 data-i="j.p0.r">Business Operations & AI Automation Assistant</h3><div class="journey-org" data-i="j.p0.o">Cayi Drink Tech</div><ul><li data-i="j.p0.b0">Analyzed SOPs across sales, procurement, production, inventory, and fulfillment, translating order processes into linked digital workflows with status tracking.</li><li data-i="j.p0.b1">Designed an AI-assisted internal operations platform with order tracking, approvals, and automated task notifications; coordinated employee testing and feedback before deployment.</li><li data-i="j.p0.b2">Automated Amazon and TikTok competitive research across 10+ brands and 300+ products with Claude and Codex, cutting recurring research time by 80%, from 20 to 4 hours.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-1" aria-labelledby="tab-1" hidden><div class="journey-kicker mono" data-i="j.p1.k">Los Angeles</div><h3 data-i="j.p1.r">Part-time Event Operations Assistant</h3><div class="journey-org" data-i="j.p1.o">Chinese American Film Festival & TV Festival (CAFF / CATF)</div><ul><li data-i="j.p1.b0">Supported large-scale film and television event operations from pre-event preparation through on-site coordination and live execution.</li><li data-i="j.p1.b1">Coordinated talent and guests across red carpet, seating, and award segments within live production workflows.</li><li data-i="j.p1.b2">Supported the Industry Forum and Film Promotion Conference, including content sessions, project showcases, and industry talks.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-2" aria-labelledby="tab-2" hidden><div class="journey-kicker mono" data-i="j.p2.k">Xiamen, China</div><h3 data-i="j.p2.r">Logistics Assistant</h3><div class="journey-org" data-i="j.p2.o">Dell Technologies</div><ul><li data-i="j.p2.b0">Contributed to an ASN monitoring dashboard by gathering business requirements and preparing shipment-status and exception-monitoring datasets.</li><li data-i="j.p2.b1">Cleaned and standardized logistics data in Excel using lookup formulas, record matching, delivery-status classification, and duplicate removal.</li><li data-i="j.p2.b2">Monitored daily logistics operations and prepared 50+ Excel and Power BI reports for operational tracking.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-3" aria-labelledby="tab-3" hidden><div class="journey-kicker mono" data-i="j.p3.k">Xiamen, China</div><h3 data-i="j.p3.r">Media Promotion Staff</h3><div class="journey-org" data-i="j.p3.o">Pioneer Futures Co., Ltd</div><ul><li data-i="j.p3.b0">Analyzed market trends across 20+ futures commodities and translated financial news into daily content topics.</li><li data-i="j.p3.b1">Independently planned, produced, and published 300+ short videos across Douyin, WeChat Channels, and Toutiao, generating 30,000+ cumulative views.</li></ul></article>
+            <article class="journey-panel" role="tabpanel" id="journey-4" aria-labelledby="tab-4" hidden><div class="journey-kicker mono" data-i="j.p4.k">Xiamen, China</div><h3 data-i="j.p4.r">Operations Assistant</h3><div class="journey-org" data-i="j.p4.o">Xiamen MC Group Corp., Ltd.</div><ul><li data-i="j.p4.b0">Supported trade documentation, logistics coordination, and export tax rebate processes through a cross-functional rotation.</li><li data-i="j.p4.b1">Prepared and reviewed 100+ import and export documents monthly, identifying errors and supporting accurate order processing.</li><li data-i="j.p4.b2">Tracked shipments and coordinated with logistics carriers for 20+ monthly orders, following up on delays and shipment issues.</li></ul></article>
           </div>
         </div>
       </div>
@@ -683,19 +690,29 @@
     <section id="recognition" data-section="recognition">
       <div class="container">
         <div class="section-head reveal"><div><div class="eyebrow mono" data-i="recognition.eyebrow">05 · Research &amp; Recognition</div><h2 data-i="recognition.h2">APCG 2026: research, presentation, and recognition.</h2></div><p class="section-intro" data-i="recognition.intro">I presented a spatial model of tropical fruit cultivation suitability on Hawaiʻi Island and received the 2026 APCG Women’s Network Small Travel Grant.</p></div>
-        <div class="recognition-visuals">
-          <figure class="recognition-photo wide reveal">
-            <button type="button" data-lightbox-src="assets/apcg-award-ceremony.jpg" data-lightbox-title="2026 APCG Women’s Network Small Travel Grant · Award ceremony" aria-label="Open APCG award ceremony photo">
-              <img src="assets/apcg-award-ceremony.jpg" alt="Ran Ma receiving the 2026 APCG Women's Network Small Travel Grant" loading="lazy" width="1800" height="2400">
-            </button>
-            <figcaption class="recognition-caption"><span data-i="recognition.caption1">Receiving the Women’s Network Small Travel Grant at APCG 2026</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
-          </figure>
-          <figure class="recognition-photo tall reveal">
-            <button type="button" data-lightbox-src="assets/apcg-award-announcement-clean.jpg" data-lightbox-title="APCG · 2026 Women’s Network Small Travel Grant recipient announcement" aria-label="Open APCG award recipient announcement">
-              <img src="assets/apcg-award-announcement-clean.jpg" alt="APCG announcement naming Ran Ma as a 2026 Women's Network Small Travel Grant recipient" loading="lazy" width="1000" height="2069">
-            </button>
-            <figcaption class="recognition-caption"><span data-i="recognition.caption2">APCG recipient announcement</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
-          </figure>
+        <div class="recognition-carousel reveal" id="recognitionCarousel" aria-roledescription="carousel" aria-label="APCG 2026 photos">
+          <div class="recognition-viewport">
+            <div class="recognition-track">
+              <figure class="recognition-photo is-photo" aria-label="1 of 2">
+                <button type="button" data-lightbox-src="assets/apcg-award-ceremony.jpg" data-lightbox-title="2026 APCG Women’s Network Small Travel Grant · Award ceremony" aria-label="Open APCG award ceremony photo">
+                  <img src="assets/apcg-award-ceremony.jpg" alt="Ran Ma receiving the 2026 APCG Women's Network Small Travel Grant" loading="lazy" width="1400" height="1867">
+                </button>
+                <figcaption class="recognition-caption"><span data-i="recognition.caption1">Receiving the Women’s Network Small Travel Grant at APCG 2026</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
+              </figure>
+              <figure class="recognition-photo is-poster" aria-label="2 of 2" aria-hidden="true">
+                <button type="button" data-lightbox-src="assets/apcg-award-announcement-clean.jpg" data-lightbox-title="APCG · 2026 Women’s Network Small Travel Grant recipient announcement" aria-label="Open APCG award recipient announcement" tabindex="-1">
+                  <img src="assets/apcg-award-announcement-clean.jpg" alt="APCG announcement naming Ran Ma as a 2026 Women's Network Small Travel Grant recipient" loading="lazy" width="1000" height="1500">
+                </button>
+                <figcaption class="recognition-caption"><span data-i="recognition.caption2">APCG recipient announcement</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <button class="carousel-button prev" type="button" aria-label="Previous photo">‹</button>
+          <button class="carousel-button next" type="button" aria-label="Next photo">›</button>
+          <div class="carousel-dots" role="group" aria-label="Choose a photo">
+            <button class="carousel-dot active" type="button" aria-label="Show photo 1" aria-current="true"></button>
+            <button class="carousel-dot" type="button" aria-label="Show photo 2" aria-current="false"></button>
+          </div>
         </div>
         <div class="recognition-content">
           <article class="research-story reveal">
@@ -836,23 +853,23 @@
       "work.c1.no": "01 · Data operations",
       "work.c1.h3": "Turning daily logistics data into decisions.",
       "work.c1.meta": "Dell Technologies · Power BI + Excel",
-      "work.c1.sum": "Built an Excel database and Power BI visualization panels to surface operational insight from daily logistics data.",
+      "work.c1.sum": "Prepared clean shipment-status and exception data for an ASN monitoring dashboard, then turned daily logistics data into reliable operational reporting.",
       "work.c1.vc1": "Weekly reports delivered", "work.c1.vc2": "50+ total",
-      "work.c1.det": "Tracked daily logistics data, compiled it in an Excel database, published timely updates to the internal site, summarized daily backlogs, and reported weekly IT issues — more than 50 reports delivered.",
-      "work.c1.m1": "50+ reports", "work.c1.m2": "Power BI panels", "work.c1.m3": "Operational insight",
+      "work.c1.det": "Gathered business requirements for an ASN monitoring dashboard, prepared shipment-status and exception-monitoring datasets, and cleaned logistics data in Excel using lookup formulas, record matching, delivery-status classification, and duplicate removal. Monitored daily operations and delivered 50+ Excel and Power BI reports.",
+      "work.c1.m1": "50+ reports", "work.c1.m2": "ASN monitoring", "work.c1.m3": "Clean logistics data",
       "work.c2.no": "02 · Media intelligence",
       "work.c2.h3": "Making market movement easier to follow.",
       "work.c2.meta": "Pioneer Futures · Analysis + Content",
-      "work.c2.sum": "Tracked prices across four commodity classes, then translated daily market and media signals into clear platform content.",
-      "work.c2.vc1": "Cumulative video reach", "work.c2.vc2": "30,000+ clicks",
-      "work.c2.det": "Analyzed daily price trends across 20+ futures commodities in agriculture, metals, energy, and chemicals, curated daily media coverage across WeChat, TikTok, and Toutiao, and produced 300+ videos that reached 30,000+ total clicks.",
-      "work.c2.m1": "20+ commodities", "work.c2.m2": "300+ videos", "work.c2.m3": "30,000+ clicks",
+      "work.c2.sum": "Translated market trends and financial news into daily content, then used performance signals to refine topics and titles.",
+      "work.c2.vc1": "Cumulative video reach", "work.c2.vc2": "30,000+ views",
+      "work.c2.det": "Analyzed market trends across 20+ futures commodities and translated financial news into daily content topics. Independently planned, produced, and published 300+ short videos across Douyin, WeChat Channels, and Toutiao, generating 30,000+ cumulative views.",
+      "work.c2.m1": "20+ commodities", "work.c2.m2": "300+ videos", "work.c2.m3": "30,000+ views",
       "work.c3.no": "03 · AI-enabled business operations",
       "work.c3.h3": "Connecting fragmented operations through internal tools and automation.",
       "work.c3.meta": "Cayi Drink Tech · Internal platform + E-commerce automation",
-      "work.c3.sum": "Built an Internal Operations Management Platform, digitized the end-to-end order lifecycle, and automated recurring e-commerce research with Claude and Codex.",
+      "work.c3.sum": "Translated cross-functional SOPs into an AI-assisted operations platform and automated recurring competitive research with Claude and Codex.",
       "work.c3.vc1": "Recurring research time", "work.c3.vc2": "80% less",
-      "work.c3.det": "Designed and built an Internal Operations Management Platform using AI-assisted development, centralizing fragmented business records and enabling cross-functional teams to retrieve linked operational information by order number. Digitized the end-to-end order lifecycle from sample requests and quotations through sales orders, production and procurement, inventory allocation, quality inspection, shipment, and receivables, incorporating linked records, approval workflows, status tracking, and employee task notifications. Automated Amazon and TikTok market research and data collection across 10+ brands and 300+ products using Claude and Codex, reducing recurring research time by 80%—from 20 to 4 hours.",
+      "work.c3.det": "Analyzed SOPs across sales, procurement, production, inventory, and fulfillment, then translated order processes into linked digital workflows. Designed an AI-assisted internal operations platform with order tracking, approvals, and automated task notifications; coordinated employee testing and feedback before deployment. Automated Amazon and TikTok competitive research across 10+ brands and 300+ products, reducing recurring research time by 80%, from 20 to 4 hours.",
       "work.c3.m1": "1 CAYI platform", "work.c3.m2": "300+ products", "work.c3.m3": "80% less research time",
       "journey.eyebrow": "03 · Journey",
       "journey.h2": 'One route, <span class="soft">five perspectives.</span>',
@@ -864,8 +881,7 @@
       "map.cn": "CHINA", "map.us": "USA",
       "map.lbl.xiamen": "Xiamen", "map.lbl.zhangzhou": "Zhangzhou", "map.lbl.la": "Los Angeles", "map.lbl.usc": "USC",
       "map.tip.xiamen": "Xiamen — Mingcheng, Dell, Pioneer Futures",
-      "map.tip.oxnard": "Oxnard — Cayi Drink Tech (internal operations platform & e-commerce automation)",
-      "map.tip.la": "Los Angeles — CAFF / CATF (film & TV festival)",
+      "map.tip.la": "Los Angeles — Cayi Drink Tech and CAFF / CATF",
       "map.tip.jgu": "XMU Tan Kah Kee College — B.Econ, International Business & Trade",
       "map.tip.usc": "University of Southern California — M.S., Spatial Economics & Data Analysis",
       "j.t0.d": "Jun 2026 — Present", "j.t0.n": "Cayi Drink Tech",
@@ -873,27 +889,25 @@
       "j.t2.d": "Jul — Sep 2023", "j.t2.n": "Dell Technologies",
       "j.t3.d": "Feb 2021 — Jun 2022", "j.t3.n": "Pioneer Futures",
       "j.t4.d": "Jul 2020 — Feb 2022", "j.t4.n": "Xiamen Mingcheng",
-      "j.p0.k": "Los Angeles · Current", "j.p0.r": "AI Tool Creator Intern", "j.p0.o": "Cayi Drink Tech",
-      "j.p0.b0": "Designed and built two internal company systems after auditing colleagues’ workflows for efficiency gains.",
-      "j.p0.b1": "Set up AI-assisted automation, including AppSheet, to reduce repetitive manual work.",
-      "j.p0.b2": "Trained the U.S. business development team to use AI tools for pipeline building and lead generation.",
-      "j.p0.b3": "Led SEO/GEO strategy and used Claude to automate Amazon and TikTok data collection for sales analysis across 10+ hydration brands.",
-      "j.p1.k": "Los Angeles", "j.p1.r": "Assistant", "j.p1.o": "Chinese American Film Festival & TV Festival (CAFF / CATF)",
-      "j.p1.b0": "Supported large-scale event operations — pre-event prep, on-site coordination, and live execution alongside production teams.",
-      "j.p1.b1": "Coordinated talent and guests across red carpet, seating, and award segments.",
-      "j.p1.b2": "Assisted the Industry Forum and Film Promotion Conference with content sessions and project showcases.",
-      "j.p2.k": "Xiamen, China", "j.p2.r": "Global Supply Chain Assistant", "j.p2.o": "Dell Technologies",
-      "j.p2.b0": "Tracked daily logistics data, built an Excel database, and visualized it in Power BI — 50+ reports delivered.",
-      "j.p2.b1": "Built data visualization panels to surface operational insights from Excel.",
-      "j.p2.b2": "Summarized daily backlogs and reported weekly IT issues.",
+      "j.p0.k": "Los Angeles · Current", "j.p0.r": "Business Operations & AI Automation Assistant", "j.p0.o": "Cayi Drink Tech",
+      "j.p0.b0": "Analyzed SOPs across sales, procurement, production, inventory, and fulfillment, translating order processes into linked digital workflows with status tracking.",
+      "j.p0.b1": "Designed an AI-assisted internal operations platform with order tracking, approvals, and automated task notifications; coordinated employee testing and feedback before deployment.",
+      "j.p0.b2": "Automated Amazon and TikTok competitive research across 10+ brands and 300+ products with Claude and Codex, cutting recurring research time by 80%, from 20 to 4 hours.",
+      "j.p1.k": "Los Angeles", "j.p1.r": "Part-time Event Operations Assistant", "j.p1.o": "Chinese American Film Festival & TV Festival (CAFF / CATF)",
+      "j.p1.b0": "Supported large-scale film and television event operations from pre-event preparation through on-site coordination and live execution.",
+      "j.p1.b1": "Coordinated talent and guests across red carpet, seating, and award segments within live production workflows.",
+      "j.p1.b2": "Supported the Industry Forum and Film Promotion Conference, including content sessions, project showcases, and industry talks.",
+      "j.p2.k": "Xiamen, China", "j.p2.r": "Logistics Assistant", "j.p2.o": "Dell Technologies",
+      "j.p2.b0": "Contributed to an ASN monitoring dashboard by gathering business requirements and preparing shipment-status and exception-monitoring datasets.",
+      "j.p2.b1": "Cleaned and standardized logistics data in Excel using lookup formulas, record matching, delivery-status classification, and duplicate removal.",
+      "j.p2.b2": "Monitored daily logistics operations and prepared 50+ Excel and Power BI reports for operational tracking.",
       "j.p3.k": "Xiamen, China", "j.p3.r": "Media Promotion Staff", "j.p3.o": "Pioneer Futures Co., Ltd",
-      "j.p3.b0": "Tracked and analyzed daily price trends across 20+ futures commodities — agriculture, metals, energy, chemicals.",
-      "j.p3.b1": "Curated and summarized daily media coverage across WeChat, TikTok, and Toutiao.",
-      "j.p3.b2": "Produced 300+ videos across platforms, reaching 30,000+ total clicks.",
-      "j.p4.k": "Xiamen, China", "j.p4.r": "Documentation & Logistics Assistant", "j.p4.o": "Xiamen Mingcheng Environmental Technology Co., Ltd",
-      "j.p4.b0": "Produced and reviewed 100+ import/export documents monthly with 100% regulatory compliance.",
-      "j.p4.b1": "Negotiated shipment terms with carriers for 20+ orders monthly, ensuring 100% on-time delivery.",
-      "j.p4.b2": "Verified tax refund details and completed documentation for 20+ export orders.",
+      "j.p3.b0": "Analyzed market trends across 20+ futures commodities and translated financial news into daily content topics.",
+      "j.p3.b1": "Independently planned, produced, and published 300+ short videos across Douyin, WeChat Channels, and Toutiao, generating 30,000+ cumulative views.",
+      "j.p4.k": "Xiamen, China", "j.p4.r": "Operations Assistant", "j.p4.o": "Xiamen MC Group Corp., Ltd.",
+      "j.p4.b0": "Supported trade documentation, logistics coordination, and export tax rebate processes through a cross-functional rotation.",
+      "j.p4.b1": "Prepared and reviewed 100+ import and export documents monthly, identifying errors and supporting accurate order processing.",
+      "j.p4.b2": "Tracked shipments and coordinated with logistics carriers for 20+ monthly orders, following up on delays and shipment issues.",
       "edu.eyebrow": "04 · Education",
       "edu.h2": "Trained to think in maps, models, and markets.",
       "edu.intro": "A foundation that connects spatial analysis with economics, trade, and practical development.",
@@ -1002,23 +1016,23 @@
       "work.c1.no": "01 · 数据运营",
       "work.c1.h3": "将日常物流数据转化为决策依据。",
       "work.c1.meta": "戴尔科技 · Power BI + Excel",
-      "work.c1.sum": "建立 Excel 数据库与 Power BI 看板，从日常物流数据中识别运营问题。",
+      "work.c1.sum": "为 ASN 监控看板整理运输状态与异常数据，并将每日物流数据转化为可靠的运营报告。",
       "work.c1.vc1": "每周产出的报告", "work.c1.vc2": "累计 50 多份",
-      "work.c1.det": "每日跟踪物流数据并录入 Excel 数据库，及时更新内部系统，汇总积压事项，按周报告 IT 问题，累计交付 50 余份报告。",
-      "work.c1.m1": "50+ 份报告", "work.c1.m2": "Power BI 看板", "work.c1.m3": "运营问题识别",
+      "work.c1.det": "参与 ASN 监控看板建设，收集业务需求并整理运输状态与异常监控数据；使用查找公式、记录匹配、配送状态分类和去重等方法清洗并标准化 Excel 数据。持续跟踪日常物流运营，累计完成 50 余份 Excel 与 Power BI 报告。",
+      "work.c1.m1": "50+ 份报告", "work.c1.m2": "ASN 监控", "work.c1.m3": "物流数据清洗",
       "work.c2.no": "02 · 市场与媒体分析",
       "work.c2.h3": "将市场变化转化为清晰的信息。",
       "work.c2.meta": "先锋期货 · 分析 + 内容",
-      "work.c2.sum": "跟踪四类商品价格，将每日行情与媒体动态整理为清晰的平台内容。",
+      "work.c2.sum": "将市场走势与财经新闻转化为每日内容，并根据传播表现持续优化选题和标题。",
       "work.c2.vc1": "视频累计播放", "work.c2.vc2": "3 万+ 次",
-      "work.c2.det": "跟踪农产品、金属、能源及化工领域 20 余个期货品种的每日走势，整理微信、抖音与今日头条的相关报道，并制作 300 余条视频，累计获得 3 万余次播放。",
+      "work.c2.det": "分析 20 余个期货品种的市场走势，将财经新闻转化为每日内容选题；独立策划、制作并发布 300 余条短视频，覆盖抖音、微信视频号和今日头条，累计获得 3 万余次播放。",
       "work.c2.m1": "20+ 个品种", "work.c2.m2": "300+ 条视频", "work.c2.m3": "3 万+ 次播放",
       "work.c3.no": "03 · AI 赋能业务运营",
       "work.c3.h3": "以内部工具与自动化连接分散的业务信息。",
       "work.c3.meta": "Cayi Drink Tech · 内部运营平台 + 电商自动化",
-      "work.c3.sum": "设计并搭建内部运营管理平台，实现订单全生命周期数字化，并使用 Claude 与 Codex 自动化电商市场研究和数据采集。",
+      "work.c3.sum": "梳理跨部门 SOP 并转化为 AI 辅助运营平台，同时使用 Claude 与 Codex 自动化竞品调研。",
       "work.c3.vc1": "重复性调研耗时", "work.c3.vc2": "减少 80%",
-      "work.c3.det": "利用 AI 辅助开发，设计并搭建内部运营管理平台，集中整合分散的业务记录，使跨职能团队能够通过订单号检索关联的运营信息。将端到端订单生命周期数字化，覆盖样品申请、报价、销售订单、生产与采购、库存分配、质量检验、出货及应收款，并纳入关联记录、审批流程、状态跟踪和员工任务通知。使用 Claude 与 Codex 自动化 Amazon 和 TikTok 市场研究及数据采集，覆盖 10 余个品牌和 300 余个产品，将重复性调研时间减少 80%，由 20 小时缩短至 4 小时。",
+      "work.c3.det": "梳理销售、采购、生产、库存与履约等环节的 SOP，将订单流程转化为相互关联的数字化工作流。设计 AI 辅助内部运营平台，整合订单跟踪、审批流程和自动任务通知，并组织员工测试、收集反馈以支持正式上线。使用 Claude 与 Codex 自动化 Amazon 和 TikTok 竞品调研，覆盖 10 余个品牌和 300 余个产品，将重复性调研时间减少 80%，由 20 小时缩短至 4 小时。",
       "work.c3.m1": "1 套 CAYI 平台", "work.c3.m2": "300+ 个产品", "work.c3.m3": "调研耗时减少 80%",
       "journey.eyebrow": "03 · 职业经历",
       "journey.h2": '一条职业路径，<span class="soft">五种观察视角。</span>',
@@ -1030,8 +1044,7 @@
       "map.cn": "中国", "map.us": "美国",
       "map.lbl.xiamen": "厦门", "map.lbl.zhangzhou": "漳州", "map.lbl.la": "洛杉矶", "map.lbl.usc": "USC",
       "map.tip.xiamen": "厦门 — 明承环保、戴尔、先锋期货",
-      "map.tip.oxnard": "奥克斯纳德 — Cayi Drink Tech（内部运营平台与电商自动化）",
-      "map.tip.la": "洛杉矶 — 中美电影节 / 电视节（CAFF / CATF）",
+      "map.tip.la": "洛杉矶 — Cayi Drink Tech 与中美电影节 / 电视节",
       "map.tip.jgu": "厦门大学嘉庚学院 — 经济学学士（国际经济与贸易）",
       "map.tip.usc": "南加州大学 — 理学硕士（空间经济学与数据分析）",
       "j.t0.d": "2026年6月 — 至今", "j.t0.n": "Cayi Drink Tech",
@@ -1039,27 +1052,25 @@
       "j.t2.d": "2023年7 — 9月", "j.t2.n": "Dell Technologies",
       "j.t3.d": "2021年2月 — 2022年6月", "j.t3.n": "Pioneer Futures",
       "j.t4.d": "2020年7月 — 2022年2月", "j.t4.n": "厦门明承环保",
-      "j.p0.k": "洛杉矶 · 当前职位", "j.p0.r": "AI 工具开发实习生", "j.p0.o": "Cayi Drink Tech",
-      "j.p0.b0": "梳理同事的实际工作流程，据此设计并搭建两套公司内部系统，提高工作效率。",
-      "j.p0.b1": "搭建 AI 辅助自动化流程，包括 AppSheet，减少重复的手工操作。",
-      "j.p0.b2": "培训美国业务拓展团队使用 AI 工具，用于搭建销售管线和获取潜在客户。",
-      "j.p0.b3": "负责 SEO/GEO 策略，并利用 Claude 自动采集 Amazon 与 TikTok 数据，支持 10 多个水饮品牌的销售表现分析。",
-      "j.p1.k": "洛杉矶", "j.p1.r": "现场助理", "j.p1.o": "中美电影节 & 中美电视节（CAFF / CATF）",
-      "j.p1.b0": "参与大型影视活动运营，涵盖活动前期筹备、现场调度与实时执行。",
-      "j.p1.b1": "负责红毯、席位及颁奖环节中的嘉宾与艺人协调工作。",
-      "j.p1.b2": "协助产业论坛和电影推介会的内容环节与项目展示。",
-      "j.p2.k": "中国厦门", "j.p2.r": "全球供应链助理", "j.p2.o": "Dell Technologies",
-      "j.p2.b0": "每日跟踪物流数据，建立 Excel 数据库并使用 Power BI 进行可视化，累计交付 50 余份报告。",
-      "j.p2.b1": "建立数据看板，从 Excel 数据中识别运营层面的问题。",
-      "j.p2.b2": "汇总每日积压事项，并按周报告 IT 问题。",
+      "j.p0.k": "洛杉矶 · 当前职位", "j.p0.r": "业务运营与 AI 自动化助理", "j.p0.o": "Cayi Drink Tech",
+      "j.p0.b0": "梳理销售、采购、生产、库存与履约等环节的 SOP，将订单流程转化为包含关联记录与状态跟踪的数字化工作流。",
+      "j.p0.b1": "设计 AI 辅助内部运营平台，整合订单跟踪、审批流程和自动任务通知；组织员工测试并收集反馈，为正式上线持续优化。",
+      "j.p0.b2": "使用 Claude 与 Codex 自动化 Amazon 和 TikTok 竞品调研，覆盖 10 余个品牌和 300 余个产品，将重复性调研时间减少 80%，由 20 小时缩短至 4 小时。",
+      "j.p1.k": "洛杉矶", "j.p1.r": "兼职活动运营助理", "j.p1.o": "中美电影节 & 中美电视节（CAFF / CATF）",
+      "j.p1.b0": "参与大型影视活动运营，从前期筹备到现场协调及实时执行，为活动顺利落地提供支持。",
+      "j.p1.b1": "在红毯、席位安排和颁奖环节中协调嘉宾与艺人，参与现场制作流程。",
+      "j.p1.b2": "协助产业论坛和电影推介会，包括内容展示、项目推介及行业分享环节。",
+      "j.p2.k": "中国厦门", "j.p2.r": "物流助理", "j.p2.o": "Dell Technologies",
+      "j.p2.b0": "参与 ASN 监控看板建设，收集业务需求并整理运输状态及异常监控数据。",
+      "j.p2.b1": "使用查找公式、记录匹配、配送状态分类和去重等方法，在 Excel 中清洗并标准化物流数据。",
+      "j.p2.b2": "持续跟踪日常物流运营，累计完成 50 余份 Excel 与 Power BI 报告，为运营监控提供支持。",
       "j.p3.k": "中国厦门", "j.p3.r": "媒体推广", "j.p3.o": "Pioneer Futures Co., Ltd",
-      "j.p3.b0": "跟踪并分析 20 多个期货品种的每日走势——农产品、金属、能源、化工。",
-      "j.p3.b1": "梳理并汇总微信、抖音、今日头条的当天报道。",
-      "j.p3.b2": "跨平台制作 300 余条视频，累计获得 3 万余次播放。",
-      "j.p4.k": "中国厦门", "j.p4.r": "单证与物流助理", "j.p4.o": "厦门明承环保科技有限公司",
-      "j.p4.b0": "每月制作并审核 100 余份进出口单证，合规率达 100%。",
-      "j.p4.b1": "每月就 20 余笔订单与承运商协商运输条款，确保 100% 按时交付。",
-      "j.p4.b2": "核对出口退税明细，并完成 20 余笔出口订单的相关单证。",
+      "j.p3.b0": "分析 20 余个期货品种的市场走势，将财经新闻转化为每日内容选题。",
+      "j.p3.b1": "独立策划、制作并发布 300 余条短视频，覆盖抖音、微信视频号和今日头条，累计获得 3 万余次播放。",
+      "j.p4.k": "中国厦门", "j.p4.r": "运营助理", "j.p4.o": "厦门明承环保科技有限公司",
+      "j.p4.b0": "通过跨部门轮岗参与贸易单证、物流协调与出口退税等流程，了解国际贸易业务的多个环节。",
+      "j.p4.b1": "每月制作并审核 100 余份进出口单证，识别单证错误并支持订单准确处理。",
+      "j.p4.b2": "跟踪货运进度，并就每月 20 余笔订单与物流承运商协调，持续跟进延误及运输异常。",
       "edu.eyebrow": "04 · 教育背景",
       "edu.h2": "以空间、模型与市场为基础的分析训练。",
       "edu.intro": "将空间分析、经济学、国际贸易与实际开发能力相结合，形成跨领域的问题分析框架。",
@@ -1245,37 +1256,37 @@
         en: {
           kicker: 'Data operations flow', total: '50+ reports',
           steps: [
-            ['01', 'Daily data', 'Live inputs', 'Tracked logistics movement, backlogs, and recurring operational issues.'],
-            ['02', 'Excel base', 'Structured', 'Turned scattered updates into a reusable database with consistent fields.'],
-            ['03', 'Power BI', 'Visible', 'Built visual panels so patterns and exceptions could be seen quickly.'],
-            ['04', 'Decisions', 'Actionable', 'Published updates and delivered more than 50 reports for day-to-day decisions.']
+            ['01', 'Requirements', 'ASN scope', 'Gathered business needs for shipment-status and exception monitoring.'],
+            ['02', 'Clean data', 'Standardized', 'Matched records, classified delivery status, and removed duplicates in Excel.'],
+            ['03', 'Monitor', 'Daily view', 'Prepared reliable inputs for ASN monitoring and logistics tracking.'],
+            ['04', 'Report', '50+ delivered', 'Produced Excel and Power BI reports to support day-to-day operations.']
           ]
         },
         zh: {
           kicker: '数据运营流程', total: '50+ 份报告',
           steps: [
-            ['01', '每日数据', '实时输入', '持续跟踪物流进度、积压情况和重复出现的运营问题。'],
-            ['02', 'Excel 数据库', '结构化', '把分散更新整理成字段统一、可复用的数据库。'],
-            ['03', 'Power BI', '可视化', '搭建可视化面板，让趋势和异常更容易被发现。'],
-            ['04', '运营决策', '可行动', '发布更新并完成 50 多份报告，支持日常运营判断。']
+            ['01', '需求梳理', 'ASN 范围', '收集运输状态与异常监控相关的业务需求。'],
+            ['02', '数据清洗', '标准化', '在 Excel 中匹配记录、分类配送状态并删除重复数据。'],
+            ['03', '运营监控', '每日跟踪', '为 ASN 监控和物流跟踪准备可靠的数据输入。'],
+            ['04', '报告输出', '50+ 份', '完成 Excel 与 Power BI 报告，支持日常运营。']
           ]
         }
       },
       media: {
         en: {
-          kicker: 'Signal-to-audience model', total: '30K+ clicks',
+          kicker: 'Signal-to-audience model', total: '30K+ views',
           steps: [
             ['01', 'Markets', '20+ tracked', 'Monitored agriculture, metals, energy, and chemical futures every day.'],
             ['02', 'Content', '300+ videos', 'Translated market and media signals into short, platform-ready stories.'],
-            ['03', 'Reach', '30K+ clicks', 'Distributed across WeChat, TikTok, and Toutiao to build cumulative reach.']
+            ['03', 'Reach', '30K+ views', 'Published across Douyin, WeChat Channels, and Toutiao to build cumulative reach.']
           ]
         },
         zh: {
-          kicker: '从信号到受众', total: '30,000+ 点击',
+          kicker: '从信号到受众', total: '30,000+ 播放',
           steps: [
             ['01', '市场监测', '20+ 品种', '每日跟踪农业、金属、能源和化工四类期货行情。'],
             ['02', '内容生产', '300+ 视频', '把市场与媒体信号转化成适合平台传播的短内容。'],
-            ['03', '传播触达', '30,000+ 点击', '通过微信、抖音和今日头条形成累计传播效果。']
+            ['03', '传播触达', '30,000+ 播放', '通过抖音、微信视频号和今日头条形成累计传播效果。']
           ]
         }
       },
@@ -1283,18 +1294,18 @@
         en: {
           kicker: 'AI-enabled operations', total: '80% less research time',
           steps: [
-            ['01', 'Build', 'AI-assisted', 'Built an Internal Operations Management Platform that centralizes fragmented business records.'],
-            ['02', 'Digitize', 'End to end', 'Connected the order lifecycle from samples and quotations through production, shipment, and receivables.'],
-            ['03', 'Coordinate', 'Linked workflow', 'Added linked records, approvals, status tracking, order-number retrieval, and employee task notifications.'],
+            ['01', 'Analyze', 'Cross-functional SOPs', 'Mapped sales, procurement, production, inventory, and fulfillment processes.'],
+            ['02', 'Build', 'AI-assisted', 'Translated order processes into linked digital workflows with status tracking.'],
+            ['03', 'Test', 'Deployment ready', 'Added approvals and task notifications, then coordinated employee testing and feedback.'],
             ['04', 'Automate', '20 → 4 hours', 'Used Claude and Codex across 10+ brands and 300+ products, reducing recurring research time by 80%.']
           ]
         },
         zh: {
           kicker: 'AI 赋能业务运营', total: '调研耗时减少 80%',
           steps: [
-            ['01', '搭建平台', 'AI 辅助开发', '搭建内部运营管理平台，集中整合分散的业务记录。'],
-            ['02', '订单数字化', '全生命周期', '连接样品与报价、生产采购、出货直至应收款的完整订单流程。'],
-            ['03', '协同管理', '关联工作流', '实现关联记录、审批、状态跟踪、订单号检索与员工任务通知。'],
+            ['01', '梳理流程', '跨部门 SOP', '梳理销售、采购、生产、库存和履约流程。'],
+            ['02', '搭建平台', 'AI 辅助开发', '将订单流程转化为包含关联记录与状态跟踪的数字化工作流。'],
+            ['03', '测试优化', '上线准备', '加入审批与任务通知，并组织员工测试、收集反馈。'],
             ['04', '自动调研', '20 → 4 小时', '使用 Claude 与 Codex 覆盖 10 余个品牌和 300 余个产品，将重复性调研时间减少 80%。']
           ]
         }
@@ -1353,6 +1364,48 @@
     }));
     document.getElementById('mediaDialogClose').addEventListener('click', () => mediaDialog.close());
     mediaDialog.addEventListener('click', e => { if (e.target === mediaDialog) mediaDialog.close(); });
+
+    /* ---------- APCG photo carousel ---------- */
+    const recognitionCarousel = document.getElementById('recognitionCarousel');
+    const carouselTrack = recognitionCarousel.querySelector('.recognition-track');
+    const carouselSlides = [...recognitionCarousel.querySelectorAll('.recognition-photo')];
+    const carouselDots = [...recognitionCarousel.querySelectorAll('.carousel-dot')];
+    const carouselViewport = recognitionCarousel.querySelector('.recognition-viewport');
+    let carouselIndex = 0, carouselTimer = null, carouselStartX = null;
+    const showCarouselSlide = index => {
+      carouselIndex = (index + carouselSlides.length) % carouselSlides.length;
+      carouselTrack.style.transform = `translateX(-${carouselIndex * 100}%)`;
+      carouselSlides.forEach((slide, i) => {
+        const active = i === carouselIndex;
+        slide.setAttribute('aria-hidden', String(!active));
+        slide.querySelector('button').tabIndex = active ? 0 : -1;
+      });
+      carouselDots.forEach((dot, i) => {
+        const active = i === carouselIndex;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-current', String(active));
+      });
+    };
+    const stopCarousel = () => { if (carouselTimer) clearInterval(carouselTimer); carouselTimer = null; };
+    const startCarousel = () => {
+      stopCarousel();
+      if (!reduced && !document.hidden) carouselTimer = setInterval(() => showCarouselSlide(carouselIndex + 1), 5500);
+    };
+    recognitionCarousel.querySelector('.prev').addEventListener('click', () => { showCarouselSlide(carouselIndex - 1); startCarousel(); });
+    recognitionCarousel.querySelector('.next').addEventListener('click', () => { showCarouselSlide(carouselIndex + 1); startCarousel(); });
+    carouselDots.forEach((dot, i) => dot.addEventListener('click', () => { showCarouselSlide(i); startCarousel(); }));
+    carouselViewport.addEventListener('pointerdown', e => { carouselStartX = e.clientX; stopCarousel(); });
+    carouselViewport.addEventListener('pointerup', e => {
+      if (carouselStartX !== null && Math.abs(e.clientX - carouselStartX) > 45) showCarouselSlide(carouselIndex + (e.clientX < carouselStartX ? 1 : -1));
+      carouselStartX = null; startCarousel();
+    });
+    carouselViewport.addEventListener('pointercancel', () => { carouselStartX = null; startCarousel(); });
+    recognitionCarousel.addEventListener('pointerenter', stopCarousel);
+    recognitionCarousel.addEventListener('pointerleave', startCarousel);
+    recognitionCarousel.addEventListener('focusin', stopCarousel);
+    recognitionCarousel.addEventListener('focusout', e => { if (!recognitionCarousel.contains(e.relatedTarget)) startCarousel(); });
+    document.addEventListener('visibilitychange', () => document.hidden ? stopCarousel() : startCarousel());
+    showCarouselSlide(0); startCarousel();
 
     /* ---------- journey tabs + hash + map filter ---------- */
     const tabs = [...document.querySelectorAll('.journey-tab')];
