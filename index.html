@@ -348,6 +348,8 @@
     .recognition-photo button{width:100%;height:auto;aspect-ratio:3/4;padding:0;border:0;background:transparent;cursor:zoom-in;display:block;overflow:hidden;flex:0 0 auto}
     .recognition-photo img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.22,1,.36,1),filter .3s}
     .recognition-photo.is-photo img{object-position:center}
+    .recognition-photo.is-landscape button{background:linear-gradient(145deg,#e9e7fa,#fff4f7 62%,#e9fff7)}
+    .recognition-photo.is-landscape img{position:relative;z-index:1;object-fit:contain;padding:12px;filter:drop-shadow(0 10px 22px rgba(26,24,48,.22))}
     .recognition-photo.is-poster{background:linear-gradient(135deg,#e9e7fa,#fff)}
     .recognition-photo.is-poster img{object-fit:contain;padding:18px}
     .recognition-photo:hover img,.recognition-photo button:focus-visible img{transform:scale(1.035);filter:saturate(1.05)}
@@ -723,17 +725,29 @@
         <div class="recognition-carousel reveal" id="recognitionCarousel" aria-roledescription="carousel" aria-label="APCG 2026 photos">
           <div class="recognition-viewport">
             <div class="recognition-track">
-              <figure class="recognition-photo is-photo" aria-label="1 of 2">
+              <figure class="recognition-photo is-photo" aria-label="1 of 4">
                 <button type="button" data-lightbox-src="assets/apcg-award-ceremony.jpg" data-lightbox-title="2026 APCG Women’s Network Small Travel Grant · Award ceremony" aria-label="Open APCG award ceremony photo">
                   <img src="assets/apcg-award-ceremony.jpg" alt="Ran Ma receiving the 2026 APCG Women's Network Small Travel Grant" loading="lazy" width="1400" height="1867">
                 </button>
                 <figcaption class="recognition-caption"><span data-i="recognition.caption1">Receiving the Women’s Network Small Travel Grant at APCG 2026</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
               </figure>
-              <figure class="recognition-photo is-poster" aria-label="2 of 2" aria-hidden="true">
+              <figure class="recognition-photo is-poster" aria-label="2 of 4" aria-hidden="true">
                 <button type="button" data-lightbox-src="assets/apcg-award-announcement-clean.jpg" data-lightbox-title="APCG · 2026 Women’s Network Small Travel Grant recipient announcement" aria-label="Open APCG award recipient announcement" tabindex="-1">
                   <img src="assets/apcg-award-announcement-clean.jpg" alt="APCG announcement naming Ran Ma as a 2026 Women's Network Small Travel Grant recipient" loading="lazy" width="1000" height="1500">
                 </button>
                 <figcaption class="recognition-caption"><span data-i="recognition.caption2">APCG recipient announcement</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
+              </figure>
+              <figure class="recognition-photo is-landscape" aria-label="3 of 4" aria-hidden="true">
+                <button type="button" data-lightbox-src="assets/apcg-field-visit.jpg" data-lightbox-title="APCG 2026 · Field visit in Hilo" aria-label="Open APCG field visit group photo" tabindex="-1">
+                  <img src="assets/apcg-field-visit.jpg" alt="Ran Ma with fellow APCG 2026 participants during a field visit in Hilo" loading="lazy" width="1600" height="1222">
+                </button>
+                <figcaption class="recognition-caption"><span data-i="recognition.caption3">Field visit with fellow APCG participants in Hilo</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
+              </figure>
+              <figure class="recognition-photo is-landscape" aria-label="4 of 4" aria-hidden="true">
+                <button type="button" data-lightbox-src="assets/apcg-conference-group.jpg" data-lightbox-title="APCG 2026 · Conference gathering in Hilo" aria-label="Open APCG conference group photo" tabindex="-1">
+                  <img src="assets/apcg-conference-group.jpg" alt="Ran Ma with fellow participants at APCG 2026 in Hilo" loading="lazy" width="1600" height="1182">
+                </button>
+                <figcaption class="recognition-caption"><span data-i="recognition.caption4">With fellow participants at APCG 2026 in Hilo</span><span class="zoom" data-i="recognition.zoom">View photo ↗</span></figcaption>
               </figure>
             </div>
           </div>
@@ -742,6 +756,8 @@
           <div class="carousel-dots" role="group" aria-label="Choose a photo">
             <button class="carousel-dot active" type="button" aria-label="Show photo 1" aria-current="true"></button>
             <button class="carousel-dot" type="button" aria-label="Show photo 2" aria-current="false"></button>
+            <button class="carousel-dot" type="button" aria-label="Show photo 3" aria-current="false"></button>
+            <button class="carousel-dot" type="button" aria-label="Show photo 4" aria-current="false"></button>
           </div>
         </div>
         <div class="recognition-content">
@@ -760,7 +776,6 @@
             <div class="award-mark" aria-hidden="true">✦</div>
             <div class="label mono" data-i="recognition.award.label">Recognition</div>
             <h3 data-i="recognition.award.title">2026 APCG Women’s Network Small Travel Grant</h3>
-            <p data-i="recognition.award.copy">The Association of Pacific Coast Geographers supported my travel to Hilo to present this research at APCG 2026.</p>
           </aside>
         </div>
       </div>
@@ -958,14 +973,15 @@
       "recognition.h2": "APCG 2026 Research Presentation and Award",
       "recognition.intro": "Presented a spatial suitability model for tropical fruit cultivation on Hawaiʻi Island and received the 2026 APCG Women’s Network Small Travel Grant.",
       "recognition.caption1": "Receiving the Women’s Network Small Travel Grant at APCG 2026",
-      "recognition.caption2": "APCG recipient announcement", "recognition.zoom": "View photo ↗",
+      "recognition.caption2": "APCG recipient announcement",
+      "recognition.caption3": "Field visit with fellow APCG participants in Hilo",
+      "recognition.caption4": "With fellow participants at APCG 2026 in Hilo", "recognition.zoom": "View photo ↗",
       "recognition.kicker": "APCG 2026 · Hilo, Hawaiʻi · October 24, 2026",
       "recognition.title": "From Environmental Suitability to Agricultural Planning",
       "recognition.subtitle": "A Maxent-Based Analysis of Tropical Fruit Cultivation on Hawaiʻi Island",
       "recognition.summary": "The project combines Maxent suitability modeling with future climate scenarios and planning constraints to identify where tropical fruit cultivation could remain viable on Hawaiʻi Island.",
       "recognition.metric1": "test AUC", "recognition.metric2": "projected suitable area by 2041–2070", "recognition.metric3": "climate-robust candidate land",
       "recognition.award.label": "Recognition", "recognition.award.title": "2026 APCG Women’s Network Small Travel Grant",
-      "recognition.award.copy": "The Association of Pacific Coast Geographers supported my travel to Hilo to present this research at APCG 2026.",
       "skills.eyebrow": "06 · Skills",
       "skills.h2": 'Technical and <span class="soft">Business Capabilities</span>',
       "skills.intro": "Skills are grouped by analysis, development, content production, and operations, with examples drawn from completed work.",
@@ -1122,14 +1138,15 @@
       "recognition.h2": "APCG 2026 研究展示与获奖",
       "recognition.intro": "在 APCG 2026 展示夏威夷大岛热带水果种植空间适宜性模型，并获得 2026 APCG Women’s Network Small Travel Grant。",
       "recognition.caption1": "在 APCG 2026 领取 Women’s Network Small Travel Grant",
-      "recognition.caption2": "APCG 官方获奖人公告", "recognition.zoom": "查看大图 ↗",
+      "recognition.caption2": "APCG 官方获奖人公告",
+      "recognition.caption3": "与 APCG 参会者在希洛开展实地交流",
+      "recognition.caption4": "与 APCG 2026 参会者在希洛合影", "recognition.zoom": "查看大图 ↗",
       "recognition.kicker": "APCG 2026 · 美国夏威夷州希洛 · 2026年10月24日",
       "recognition.title": "从环境适宜性到农业规划",
       "recognition.subtitle": "基于 Maxent 的夏威夷大岛热带水果种植适宜性分析",
       "recognition.summary": "研究结合 Maxent 适宜性模型、2041–2070 年气候情景与土地规划限制，识别夏威夷大岛未来仍具热带水果种植潜力的区域。",
       "recognition.metric1": "测试集 AUC", "recognition.metric2": "2041–2070 年适宜面积预计增幅", "recognition.metric3": "气候稳健型候选土地",
       "recognition.award.label": "获奖荣誉", "recognition.award.title": "2026 APCG Women’s Network Small Travel Grant",
-      "recognition.award.copy": "美国太平洋沿岸地理学家协会通过该奖项支持我前往希洛，在 APCG 2026 展示这项研究。",
       "skills.eyebrow": "06 · 技能",
       "skills.h2": '技术与<span class="soft">业务能力</span>',
       "skills.intro": "能力按分析、开发、内容制作与业务运营分类，并结合实际项目说明具体应用。",
