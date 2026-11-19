@@ -377,6 +377,12 @@
     .award-card .label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#5a3fc0;margin:24px 0 10px}
     .award-card h3{font-size:clamp(1.45rem,2.4vw,2.15rem);line-height:1.14;margin:0;color:#1a1830}
     .award-card p{color:rgba(26,24,48,.7);line-height:1.65;margin:18px 0 0}
+    .presentation-entry{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;margin-top:auto;padding-top:30px;color:#1a1830}
+    .presentation-entry-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.68);box-shadow:inset 0 0 0 1px rgba(26,24,48,.08);font-size:1rem}
+    .presentation-entry-copy b{display:block;font:750 .88rem "Manrope",sans-serif;line-height:1.3}
+    .presentation-entry-copy small{display:block;margin-top:4px;color:rgba(26,24,48,.62);font-size:.68rem;line-height:1.35}
+    .presentation-entry-arrow{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:#1a1830;color:#fff;transition:transform .25s,background .25s}
+    .presentation-entry:hover .presentation-entry-arrow,.presentation-entry:focus-visible .presentation-entry-arrow{transform:translate(3px,-3px);background:var(--purple)}
 
     .skill-layout{display:grid;grid-template-columns:minmax(270px,.7fr) 1.3fr;gap:50px;align-items:start}
     .skill-display{position:sticky;top:115px;min-height:300px;border-radius:32px;padding:34px;background:linear-gradient(145deg,var(--lilac),var(--pink));display:flex;flex-direction:column;color:#1a1830}
@@ -776,6 +782,11 @@
             <div class="award-mark" aria-hidden="true">✦</div>
             <div class="label mono" data-i="recognition.award.label">Recognition</div>
             <h3 data-i="recognition.award.title">2026 APCG Women’s Network Small Travel Grant</h3>
+            <a class="presentation-entry" href="apcg-presentation.html">
+              <span class="presentation-entry-icon" aria-hidden="true">▤</span>
+              <span class="presentation-entry-copy"><b data-i="recognition.presentation.title">View research presentation</b><small data-i="recognition.presentation.meta">17-slide deck · opens separately</small></span>
+              <span class="presentation-entry-arrow" aria-hidden="true">↗</span>
+            </a>
           </aside>
         </div>
       </div>
@@ -982,6 +993,7 @@
       "recognition.summary": "The project combines Maxent suitability modeling with future climate scenarios and planning constraints to identify where tropical fruit cultivation could remain viable on Hawaiʻi Island.",
       "recognition.metric1": "test AUC", "recognition.metric2": "projected suitable area by 2041–2070", "recognition.metric3": "climate-robust candidate land",
       "recognition.award.label": "Recognition", "recognition.award.title": "2026 APCG Women’s Network Small Travel Grant",
+      "recognition.presentation.title": "View research presentation", "recognition.presentation.meta": "17-slide deck · opens separately",
       "skills.eyebrow": "06 · Skills",
       "skills.h2": 'Technical and <span class="soft">Business Capabilities</span>',
       "skills.intro": "Skills are grouped by analysis, development, content production, and operations, with examples drawn from completed work.",
@@ -1147,6 +1159,7 @@
       "recognition.summary": "研究结合 Maxent 适宜性模型、2041–2070 年气候情景与土地规划限制，识别夏威夷大岛未来仍具热带水果种植潜力的区域。",
       "recognition.metric1": "测试集 AUC", "recognition.metric2": "2041–2070 年适宜面积预计增幅", "recognition.metric3": "气候稳健型候选土地",
       "recognition.award.label": "获奖荣誉", "recognition.award.title": "2026 APCG Women’s Network Small Travel Grant",
+      "recognition.presentation.title": "查看研究演示文稿", "recognition.presentation.meta": "共 17 页 · 点击进入独立预览",
       "skills.eyebrow": "06 · 技能",
       "skills.h2": '技术与<span class="soft">业务能力</span>',
       "skills.intro": "能力按分析、开发、内容制作与业务运营分类，并结合实际项目说明具体应用。",

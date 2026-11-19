@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta name="description" content="Ran Ma's APCG 2026 research presentation on tropical fruit cultivation suitability on Hawaiʻi Island.">
+  <title>APCG 2026 Research Presentation · Ran Ma</title>
+  <link rel="icon" type="image/png" href="assets/nav-avatar.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#fbfaf7;--ink:#1a1830;--muted:#777389;--purple:#7257d5;--lime:#d9ff78;--line:rgba(26,24,48,.13);--usc:#990000;--shadow:0 22px 65px rgba(32,24,66,.14)}
+    *{box-sizing:border-box}
+    html{background:var(--paper);color:var(--ink);font-family:"DM Sans","PingFang SC","Microsoft YaHei",sans-serif}
+    body{min-height:100vh;margin:0;background:radial-gradient(circle at 12% 8%,rgba(216,201,255,.38),transparent 28%),radial-gradient(circle at 88% 16%,rgba(255,210,225,.34),transparent 30%),var(--paper)}
+    a{color:inherit;text-decoration:none}button,input{font:inherit}button{color:inherit}
+    :focus-visible{outline:3px solid var(--purple);outline-offset:4px}
+    .shell{width:min(1180px,calc(100vw - 38px));margin:auto;padding:22px 0 40px}
+    header{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(251,250,247,.86);backdrop-filter:blur(18px);box-shadow:0 10px 34px rgba(34,27,62,.08)}
+    .back{display:flex;align-items:center;gap:10px;font:700 .82rem "Manrope",sans-serif}
+    .back-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:#fff;font-size:1.1rem}
+    .header-actions{display:flex;align-items:center;gap:8px}
+    .header-btn{min-width:42px;height:38px;padding:0 13px;border:1px solid var(--line);border-radius:999px;background:transparent;cursor:pointer;font-weight:700;font-size:.73rem}
+    .header-btn:hover{background:var(--ink);color:#fff}
+    .intro{display:grid;grid-template-columns:1fr minmax(250px,.52fr);gap:34px;align-items:end;padding:58px 6px 34px}
+    .kicker{font:500 .68rem "Roboto Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:15px}
+    h1{max-width:850px;margin:0;font:800 clamp(2.4rem,6.4vw,5.8rem)/.98 "Manrope",sans-serif;letter-spacing:-.055em}
+    .intro p{margin:0;color:var(--muted);font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.7}
+    .viewer{overflow:hidden;border:1px solid var(--line);border-radius:30px;background:#171522;box-shadow:var(--shadow)}
+    .stage{position:relative;display:grid;place-items:center;min-height:0;aspect-ratio:16/9;background:linear-gradient(145deg,#1a1725,#2a2439)}
+    .stage img{width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+    .nav-button{position:absolute;z-index:2;top:50%;width:50px;height:50px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(20,17,36,.72);color:#fff;cursor:pointer;font-size:1.45rem;backdrop-filter:blur(8px);transform:translateY(-50%);transition:.2s}
+    .nav-button:hover{background:var(--purple);transform:translateY(-50%) scale(1.05)}
+    .nav-button.prev{left:18px}.nav-button.next{right:18px}
+    .controls{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:16px 18px;background:#1a1830;color:#fff}
+    .counter{font:600 .72rem "Roboto Mono",monospace;letter-spacing:.08em;white-space:nowrap}
+    .scrubber{width:100%;accent-color:var(--lime);cursor:pointer}
+    .fullscreen{display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:transparent;color:#fff;padding:8px 12px;cursor:pointer;font-size:.72rem}
+    .fullscreen:hover{background:#fff;color:var(--ink)}
+    .slide-index{display:flex;gap:7px;overflow-x:auto;padding:16px 2px 4px;scrollbar-width:thin;scrollbar-color:var(--purple) transparent}
+    .slide-index button{flex:0 0 34px;height:34px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.64);cursor:pointer;font:600 .68rem "Roboto Mono",monospace;transition:.2s}
+    .slide-index button:hover,.slide-index button.active{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px)}
+    .deck-note{display:flex;justify-content:space-between;gap:20px;padding:16px 4px 0;color:var(--muted);font-size:.7rem;line-height:1.5}
+    .deck-note strong{color:var(--ink)}
+    @media(max-width:700px){
+      .shell{width:min(100% - 20px,1180px);padding-top:10px}.back-label{display:none}.intro{grid-template-columns:1fr;gap:18px;padding:40px 4px 24px}.intro p{max-width:34ch}.viewer{border-radius:22px}.nav-button{width:42px;height:42px}.nav-button.prev{left:9px}.nav-button.next{right:9px}.controls{grid-template-columns:auto 1fr;padding:13px 14px}.fullscreen{display:none}.deck-note{flex-direction:column;gap:5px}.stage{aspect-ratio:16/9}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="back" href="./#recognition"><span class="back-icon" aria-hidden="true">←</span><span class="back-label" data-en="Back to Ran Ma's profile" data-zh="返回马然的个人网站">Back to Ran Ma's profile</span></a>
+      <div class="header-actions"><button class="header-btn" id="langBtn" type="button" aria-label="切换到中文">中</button></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <div class="kicker" data-en="APCG 2026 · Hilo, Hawaiʻi · October 24, 2026" data-zh="APCG 2026 · 美国夏威夷州希洛 · 2026年10月24日">APCG 2026 · Hilo, Hawaiʻi · October 24, 2026</div>
+          <h1 data-en="Research presentation" data-zh="研究演示文稿">Research presentation</h1>
+        </div>
+        <p data-en="A Maxent-based analysis of tropical fruit cultivation suitability on Hawaiʻi Island." data-zh="基于 Maxent 的夏威夷大岛热带水果种植适宜性分析。">A Maxent-based analysis of tropical fruit cultivation suitability on Hawaiʻi Island.</p>
+      </section>
+
+      <section class="viewer" id="viewer" aria-label="APCG 2026 presentation viewer">
+        <div class="stage" id="stage">
+          <img id="slideImage" src="assets/apcg-presentation/slide-01.png" alt="Slide 1 of 17" width="1280" height="720">
+          <button class="nav-button prev" id="prevBtn" type="button" aria-label="Previous slide">‹</button>
+          <button class="nav-button next" id="nextBtn" type="button" aria-label="Next slide">›</button>
+        </div>
+        <div class="controls">
+          <output class="counter" id="counter" aria-live="polite">01 / 17</output>
+          <input class="scrubber" id="scrubber" type="range" min="1" max="17" value="1" aria-label="Choose slide">
+          <button class="fullscreen" id="fullscreenBtn" type="button"><span aria-hidden="true">⛶</span><span data-en="Full screen" data-zh="全屏查看">Full screen</span></button>
+        </div>
+      </section>
+
+      <nav class="slide-index" id="slideIndex" aria-label="Choose a slide"></nav>
+      <div class="deck-note"><span><strong>Ran Ma</strong> · USC Spatial Sciences Institute</span><span data-en="Use the arrow keys or swipe to move between slides." data-zh="可使用键盘方向键或在手机上滑动切换页面。">Use the arrow keys or swipe to move between slides.</span></div>
+    </main>
+  </div>
+
+  <script>
+    const total = 17;
+    const image = document.getElementById('slideImage');
+    const counter = document.getElementById('counter');
+    const scrubber = document.getElementById('scrubber');
+    const index = document.getElementById('slideIndex');
+    const viewer = document.getElementById('viewer');
+    const stage = document.getElementById('stage');
+    const langBtn = document.getElementById('langBtn');
+    let current = 1;
+    let startX = null;
+    let lang = (() => { try { return localStorage.getItem('rm-lang') || 'en'; } catch (e) { return 'en'; } })();
+
+    const pathFor = number => `assets/apcg-presentation/slide-${String(number).padStart(2,'0')}.png`;
+    const buttons = Array.from({length: total}, (_, i) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = String(i + 1).padStart(2, '0');
+      button.setAttribute('aria-label', `Show slide ${i + 1}`);
+      button.addEventListener('click', () => showSlide(i + 1));
+      index.appendChild(button);
+      return button;
+    });
+
+    function showSlide(number) {
+      current = Math.min(total, Math.max(1, number));
+      image.src = pathFor(current);
+      image.alt = `${lang === 'zh' ? '第' : 'Slide'} ${current} ${lang === 'zh' ? `页，共 ${total} 页` : `of ${total}`}`;
+      counter.textContent = `${String(current).padStart(2,'0')} / ${total}`;
+      scrubber.value = current;
+      buttons.forEach((button, i) => button.classList.toggle('active', i + 1 === current));
+      buttons[current - 1].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+      if (current < total) { const preload = new Image(); preload.src = pathFor(current + 1); }
+    }
+
+    function applyLang(next) {
+      lang = next;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-en]').forEach(el => { el.textContent = el.dataset[lang]; });
+      langBtn.textContent = lang === 'en' ? '中' : 'EN';
+      langBtn.setAttribute('aria-label', lang === 'en' ? '切换到中文' : 'Switch to English');
+      document.title = lang === 'zh' ? 'APCG 2026 研究演示文稿 · 马然' : 'APCG 2026 Research Presentation · Ran Ma';
+      try { localStorage.setItem('rm-lang', lang); } catch (e) {}
+      showSlide(current);
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => showSlide(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => showSlide(current + 1));
+    scrubber.addEventListener('input', () => showSlide(Number(scrubber.value)));
+    langBtn.addEventListener('click', () => applyLang(lang === 'en' ? 'zh' : 'en'));
+    document.getElementById('fullscreenBtn').addEventListener('click', () => {
+      if (!document.fullscreenElement) viewer.requestFullscreen?.(); else document.exitFullscreen?.();
+    });
+    addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') showSlide(current - 1);
+      if (event.key === 'ArrowRight') showSlide(current + 1);
+      if (event.key === 'Home') showSlide(1);
+      if (event.key === 'End') showSlide(total);
+    });
+    stage.addEventListener('pointerdown', event => { startX = event.clientX; });
+    stage.addEventListener('pointerup', event => {
+      if (startX !== null && Math.abs(event.clientX - startX) > 45) showSlide(current + (event.clientX < startX ? 1 : -1));
+      startX = null;
+    });
+    stage.addEventListener('pointercancel', () => { startX = null; });
+    applyLang(lang);
+  </script>
+</body>
+</html>
