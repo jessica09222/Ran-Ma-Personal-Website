@@ -114,8 +114,13 @@
       image.alt = `${lang === 'zh' ? '第' : 'Slide'} ${current} ${lang === 'zh' ? `页，共 ${total} 页` : `of ${total}`}`;
       counter.textContent = `${String(current).padStart(2,'0')} / ${total}`;
       scrubber.value = current;
-      buttons.forEach((button, i) => button.classList.toggle('active', i + 1 === current));
-      buttons[current - 1].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+      buttons.forEach((button, i) => {
+        const active = i + 1 === current;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+      const activeButton = buttons[current - 1];
+      index.scrollTo({left: Math.max(0, activeButton.offsetLeft - index.clientWidth / 2 + activeButton.clientWidth / 2), behavior:'smooth'});
       if (current < total) { const preload = new Image(); preload.src = pathFor(current + 1); }
     }
 
