@@ -15,10 +15,13 @@
   <link rel="icon" type="image/png" href="assets/nav-avatar.png?v=2">
   <link rel="apple-touch-icon" href="assets/nav-avatar.png?v=2">
   <link rel="preload" as="image" href="assets/princess-walk.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Ran Ma","alternateName":"马然","url":"https://jessica09222.github.io/Ran-Ma-Personal-Website/","image":"https://jessica09222.github.io/Ran-Ma-Personal-Website/assets/portrait.jpg","jobTitle":"AI Automation and Business Operations Assistant","worksFor":{"@type":"Organization","name":"Cayi Drink Tech"},"affiliation":{"@type":"CollegeOrUniversity","name":"University of Southern California"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Xiamen University Tan Kah Kee College"},"knowsAbout":["AI automation","Business operations","Data analytics","Spatial economics","Power BI","International trade"],"sameAs":["https://www.linkedin.com/in/ran-ma-6b51b6384"]}
+  </script>
   <style>
+    @font-face{font-family:"DM Sans";font-style:normal;font-weight:400 600;font-display:swap;src:url("assets/fonts/dm-sans-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:"Manrope";font-style:normal;font-weight:500 800;font-display:swap;src:url("assets/fonts/manrope-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:"Roboto Mono";font-style:normal;font-weight:400 500;font-display:swap;src:url("assets/fonts/roboto-mono-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
     :root {
       --ink:#1a1830; --muted:#6e6a80; --paper:#fbfaf7; --white:#fff;
       --lilac:#d8c9ff; --pink:#ffd2e1; --mint:#c9f5e8; --lime:#d9ff78;
@@ -213,7 +216,7 @@
       .bento .tile,.bento .tile.now{grid-column:span 2}
       .bento .tile.now{grid-column:span 4}
     }
-    @media(max-width:560px){.bento{grid-template-columns:1fr 1fr}.bento .tile,.bento .tile.now{grid-column:span 2}}
+    @media(max-width:560px){.bento{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bento .tile{grid-column:span 1;padding:18px 14px}.bento .tile.now{grid-column:span 2}.tile b{font-size:clamp(1.55rem,8vw,2.1rem)}.tile>span{font-size:.72rem}}
 
     #work{background:linear-gradient(180deg,transparent,rgba(216,201,255,.18),transparent)}
     .work-showcase{display:block;position:relative;isolation:isolate}
@@ -276,7 +279,7 @@
     .journey-tab.active b{color:var(--purple)}
     .journey-tab.dim{opacity:.32}
     .journey-tab .date{font-size:.65rem;display:block;margin-bottom:5px}
-    .journey-tab b{font-family:"Manrope";font-size:.95rem}
+    .journey-tab b{font-family:"Manrope",sans-serif;font-size:.95rem}
     /* illustrated career map with clickable hotspots */
     .mini-map{border:1px solid var(--line);border-radius:24px;padding:14px;background:var(--card-bg);position:relative;overflow:visible;max-width:780px;margin:0 auto 46px;box-shadow:0 14px 44px rgba(45,35,92,.07)}
     .map-hint{font-size:.66rem;color:var(--muted);margin:9px 0 2px;line-height:1.4;text-align:center}
@@ -469,8 +472,7 @@
       .orbit{inset:-10px}.orbit::before,.orbit::after{width:11px;height:11px}
       .float-card,.scroll-cue,.cursor-ring{display:none}
       .about-panel{border-radius:30px;padding:30px 22px}.about-feature{grid-template-columns:minmax(0,1fr) 112px;gap:10px;align-items:end}.about-copy p{font-size:.86rem}.about-copy p:first-child{font-size:.94rem}.about-worker{align-self:end}
-      .work-guide-stage{height:210px;margin-top:-4px;margin-bottom:-62px}.work-guide-pose,.work-guide-hand{height:220px;bottom:-28px}
-      .work-grid{gap:7px}.work-card,.work-card:nth-child(3){min-height:220px;padding:48px 10px 14px;border-radius:17px}.work-card h3{font-size:.82rem;line-height:1.35;margin:26px 0 9px}.work-card .meta{font-size:.62rem;line-height:1.35}.work-summary,.work-detail,.impact-model,.expand-icon{display:none!important}.work-no{font-size:.55rem}.work-top{gap:4px}
+      .work-guide-stage{display:none}.work-grid{grid-template-columns:1fr;gap:14px}.work-card,.work-card:nth-child(3){min-height:0;padding:28px 22px 22px;border-radius:22px}.work-card h3{font-size:1.25rem;line-height:1.28;margin:20px 0 10px}.work-card .meta{font-size:.78rem;line-height:1.4}.work-summary{display:block!important;font-size:.9rem;margin-top:16px}.work-detail{display:grid!important}.impact-model{display:none!important}.expand-icon{display:grid!important;width:34px;height:34px;font-size:1.05rem}.work-no{font-size:.62rem}.work-top{gap:10px}
       .journey-stage{min-height:570px;border-radius:26px;padding:28px 20px}.journey-panel li{padding-left:40px}
       .edu-grid,.beyond-grid{grid-template-columns:1fr}.edu-body{padding:22px}
       .recognition-viewport{border-radius:24px}.recognition-photo{height:auto;aspect-ratio:auto}.recognition-photo.is-poster img{padding:12px}.recognition-caption{min-height:64px;padding:12px 14px}.carousel-button{width:40px;height:40px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}.research-metrics{grid-template-columns:1fr}.research-story,.award-card{border-radius:24px;padding:24px}

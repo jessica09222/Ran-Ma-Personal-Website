@@ -1,0 +1,29 @@
+# Ran Ma / 马然
+
+> Bilingual portfolio for Ran Ma, a USC graduate student working across AI automation, business operations, data analytics, spatial economics, and international trade.
+
+## Profile
+
+- Name: Ran Ma (马然)
+- Current role: AI Automation and Business Operations Assistant at Cayi Drink Tech
+- Education: M.S. in Spatial Economics and Data Analysis, University of Southern California
+- Undergraduate education: B.Econ. in International Business and Trade, Xiamen University Tan Kah Kee College
+- Focus areas: AI workflow automation, operations systems, market research, logistics analytics, spatial analysis, Power BI, and international trade
+- Languages: Chinese and English
+
+## Selected work
+
+- Cayi operations platform: designed and built an internal AI-assisted operations system connecting order records, approvals, status tracking, task notifications, and cross-functional workflows.
+- AI market research automation: used Claude and Codex to automate Amazon and TikTok research across more than 10 brands and 300 products, reducing repetitive research time from about 20 hours to 4 hours.
+- Dell Technologies logistics analytics: contributed to demand consolidation, ASN data cleaning, and Power BI dashboard support.
+- APCG 2026 research: presented a tropical-fruit cultivation suitability study for Hawaiʻi Island and received the 2026 APCG Women’s Network Small Travel Grant.
+
+## Pages
+
+- Main portfolio: https://jessica09222.github.io/Ran-Ma-Personal-Website/
+- APCG presentation viewer: https://jessica09222.github.io/Ran-Ma-Personal-Website/apcg-presentation.html
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/ran-ma-6b51b6384
+
