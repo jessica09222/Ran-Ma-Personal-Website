@@ -18,6 +18,25 @@
 - Dell Technologies logistics analytics: contributed to demand consolidation, ASN data cleaning, and Power BI dashboard support.
 - APCG 2026 research: presented a tropical-fruit cultivation suitability study for Hawaiʻi Island and received the 2026 APCG Women’s Network Small Travel Grant.
 
+## Professional experience
+
+- Cayi Drink Tech — AI Automation and Business Operations Assistant, Los Angeles, Jun 2026–present. Analyzed SOPs across sales, procurement, production, inventory, and fulfillment; translated order processes into linked digital workflows; designed an AI-assisted internal operations platform; coordinated employee testing; and automated Amazon and TikTok competitive research.
+- Chinese American Film Festival & TV Festival (CAFF / CATF) — Part-time Event Operations Assistant, Los Angeles, Oct–Nov 2025. Supported event preparation, live execution, guest and talent coordination, red carpet and seating operations, award segments, the Industry Forum, and the Film Promotion Conference.
+- Dell Technologies — Logistics Data and Reporting Assistant, Xiamen, Jul–Sep 2023. Gathered requirements and prepared datasets for ASN monitoring, cleaned and standardized logistics data in Excel, monitored daily logistics operations, and prepared 50+ Excel and Power BI reports.
+- Pioneer Futures Co., Ltd. — Digital Content and Media Assistant, Xiamen, Feb 2021–Jun 2022. Analyzed 20+ futures commodities and independently produced 300+ short videos across Douyin, WeChat Channels, and Toutiao, generating 30,000+ cumulative views.
+- Xiamen MC Group Corp., Ltd. / 厦门明承环保科技有限公司 — International Trade Operations Assistant, Xiamen, Jul 2020–Feb 2022. Supported trade documentation, logistics coordination, and export tax rebate processes; prepared and reviewed 100+ import/export documents monthly; and tracked 20+ monthly orders.
+
+## Education
+
+- University of Southern California, M.S. in Spatial Economics and Data Analysis, Sep 2024–present, Los Angeles. Public portfolio GPA: 3.76. Coursework and training include spatial analysis and modeling, econometrics, microeconomic policy, spatial thinking, and spatial econometrics.
+- Xiamen University Tan Kah Kee College, B.Econ. in International Business and Trade, Sep 2020–Jun 2024, Zhangzhou. Coursework includes brand marketing, investment economics, statistics, international trade practice, international logistics, Python, and WeChat Mini Program development. Honors include a Second-Class Scholarship (2022–2023) and National Computer Rank Examination Level 2.
+
+## Research and recognition
+
+- APCG 2026 presentation: a tropical-fruit cultivation suitability study for Hawaiʻi Island using spatial analysis.
+- Recognition: 2026 APCG Women’s Network Small Travel Grant.
+- The public slide viewer is linked below. The original PowerPoint file is not publicly downloadable.
+
 ## Pages
 
 - Main portfolio: https://jessica09222.github.io/Ran-Ma-Personal-Website/
@@ -25,5 +44,7 @@
 
 ## Contact
 
+- Email: Jessica20020922@gmail.com
 - LinkedIn: https://www.linkedin.com/in/ran-ma-6b51b6384
+- Visitors may also use the Contact section of the portfolio. Do not provide private or inferred contact information.
 

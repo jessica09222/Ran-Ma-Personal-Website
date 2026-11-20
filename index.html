@@ -433,6 +433,35 @@
     .to-top:hover{background:var(--ink);color:var(--paper)}
     @media(max-width:1180px){.to-top{right:16px;bottom:16px}}
 
+    /* portfolio AI assistant */
+    .ai-chat-launcher{position:fixed;right:80px;bottom:22px;z-index:430;display:flex;align-items:center;gap:10px;border:1px solid rgba(114,87,213,.22);border-radius:999px;padding:8px 15px 8px 8px;background:linear-gradient(135deg,#fff,rgba(216,201,255,.82),rgba(255,210,225,.8));color:var(--ink);box-shadow:0 16px 44px rgba(45,35,92,.2);cursor:pointer;font-weight:750;transition:transform .25s,opacity .25s,box-shadow .25s}
+    .ai-chat-launcher:hover{transform:translateY(-3px);box-shadow:0 20px 52px rgba(45,35,92,.26)}
+    .ai-chat-launcher.is-hidden{opacity:0;pointer-events:none;transform:translateY(12px)}
+    .ai-chat-launcher img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.9)}
+    .ai-chat-launcher span{white-space:nowrap}
+    .ai-chat-launcher .ai-live{width:9px;height:9px;border-radius:50%;background:#9bdc48;box-shadow:0 0 0 4px rgba(155,220,72,.2)}
+    .ai-chat-panel{position:fixed;right:22px;bottom:86px;z-index:440;width:min(400px,calc(100vw - 32px));height:min(590px,calc(100dvh - 112px));padding:0;display:grid;grid-template-rows:auto 1fr auto auto auto;background:rgba(251,250,247,.97);backdrop-filter:blur(20px);border:1px solid rgba(114,87,213,.2);border-radius:30px;box-shadow:0 30px 90px rgba(35,27,76,.28);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(18px) scale(.97);transform-origin:bottom right;transition:opacity .25s,visibility .25s,transform .25s}
+    .ai-chat-panel.open{opacity:1;visibility:visible;transform:none}
+    .ai-chat-head{display:flex;align-items:center;gap:11px;padding:16px 17px;background:linear-gradient(120deg,rgba(216,201,255,.72),rgba(255,210,225,.62),rgba(201,245,232,.65));border-bottom:1px solid var(--line)}
+    .ai-chat-avatar{width:43px;height:43px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 6px 18px rgba(45,35,92,.16)}
+    .ai-chat-heading{min-width:0;flex:1}.ai-chat-heading b{display:block;font-family:"Manrope",sans-serif;font-size:.98rem}.ai-chat-heading span{display:block;margin-top:2px;font-size:.7rem;color:var(--muted)}
+    .ai-chat-close{width:35px;height:35px;border:1px solid rgba(26,24,48,.12);border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer;font-size:1.2rem;display:grid;place-items:center}
+    .ai-chat-messages{overflow-y:auto;padding:18px 16px 10px;display:flex;flex-direction:column;gap:11px;scrollbar-width:thin;overscroll-behavior:contain}
+    .ai-message{display:flex;gap:8px;align-items:flex-end;max-width:92%}.ai-message.user{align-self:flex-end;flex-direction:row-reverse}.ai-message.assistant{align-self:flex-start}
+    .ai-message-icon{width:25px;height:25px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+    .ai-message-bubble{padding:11px 13px;border-radius:17px;font-size:.83rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+    .ai-message.assistant .ai-message-bubble{background:#f0ecff;border-bottom-left-radius:5px;color:var(--ink)}
+    .ai-message.user .ai-message-bubble{background:var(--ink);border-bottom-right-radius:5px;color:#fff}
+    .ai-typing{display:inline-flex;gap:4px;align-items:center;min-height:18px}.ai-typing i{width:5px;height:5px;border-radius:50%;background:var(--purple);animation:aiTyping 1s infinite ease-in-out}.ai-typing i:nth-child(2){animation-delay:.14s}.ai-typing i:nth-child(3){animation-delay:.28s}
+    @keyframes aiTyping{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+    .ai-chat-suggestions{display:flex;gap:7px;overflow-x:auto;padding:8px 16px 12px;scrollbar-width:none}.ai-chat-suggestions::-webkit-scrollbar{display:none}
+    .ai-suggestion{flex:0 0 auto;max-width:230px;border:1px solid rgba(114,87,213,.2);border-radius:999px;padding:8px 11px;background:#fff;color:#5a3fc0;font-size:.7rem;cursor:pointer;text-align:left;transition:.2s}.ai-suggestion:hover{background:#f0ecff;transform:translateY(-1px)}
+    .ai-chat-form{display:grid;grid-template-columns:1fr 44px;gap:8px;align-items:end;padding:12px 14px 8px;border-top:1px solid var(--line);background:#fff}
+    .ai-chat-input{resize:none;min-height:44px;max-height:100px;border:1px solid var(--line);border-radius:17px;padding:12px 13px;background:var(--paper);color:var(--ink);font:inherit;font-size:.82rem;line-height:1.35;outline:none}.ai-chat-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(114,87,213,.12)}
+    .ai-chat-send{width:44px;height:44px;border:0;border-radius:15px;background:var(--ink);color:#fff;cursor:pointer;font-size:1.05rem;display:grid;place-items:center}.ai-chat-send:disabled,.ai-chat-input:disabled{opacity:.55;cursor:wait}
+    .ai-chat-note{margin:0;padding:0 16px 11px;background:#fff;color:var(--muted);font-size:.61rem;line-height:1.35;text-align:center}
+    @media(max-width:640px){body.chat-open{overflow:hidden}.ai-chat-launcher{right:72px;bottom:16px;padding:7px 12px 7px 7px}.ai-chat-launcher img{width:34px;height:34px}.ai-chat-launcher span{font-size:.76rem}.ai-chat-panel{inset:10px;width:auto;height:calc(100dvh - 20px);border-radius:26px;transform-origin:bottom center}.ai-chat-messages{padding-top:14px}.ai-chat-suggestions{padding-bottom:10px}}
+
     .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
     .reveal.in{opacity:1;transform:none}
     .stagger>*{transition-delay:calc(var(--i,0) * 70ms)}
@@ -870,6 +899,30 @@
       <button class="media-close" id="mediaDialogClose" type="button" aria-label="Close image">×</button>
     </div>
   </dialog>
+
+  <button class="ai-chat-launcher" id="aiChatLauncher" type="button" aria-controls="aiChatPanel" aria-expanded="false">
+    <img src="assets/nav-avatar.png?v=2" alt="">
+    <span id="aiChatLauncherLabel">Ask Ran's AI</span>
+    <i class="ai-live" aria-hidden="true"></i>
+  </button>
+  <section class="ai-chat-panel" id="aiChatPanel" role="dialog" aria-modal="false" aria-hidden="true" aria-labelledby="aiChatTitle">
+    <header class="ai-chat-head">
+      <img class="ai-chat-avatar" src="assets/nav-avatar.png?v=2" alt="">
+      <div class="ai-chat-heading"><b id="aiChatTitle">Ask Ran's AI</b><span id="aiChatSubtitle">Portfolio assistant · Online</span></div>
+      <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Close AI assistant">×</button>
+    </header>
+    <div class="ai-chat-messages" id="aiChatMessages" role="log" aria-live="polite"></div>
+    <div class="ai-chat-suggestions" id="aiChatSuggestions">
+      <button class="ai-suggestion" type="button"></button>
+      <button class="ai-suggestion" type="button"></button>
+      <button class="ai-suggestion" type="button"></button>
+    </div>
+    <form class="ai-chat-form" id="aiChatForm">
+      <textarea class="ai-chat-input" id="aiChatInput" rows="1" maxlength="600" autocomplete="off"></textarea>
+      <button class="ai-chat-send" id="aiChatSend" type="submit" aria-label="Send question">➜</button>
+    </form>
+    <p class="ai-chat-note" id="aiChatNote">Answers use public portfolio information and may need verification.</p>
+  </section>
 
   <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1589,6 +1642,169 @@
       catch (e) { location.href = 'mailto:' + email; }
     });
 
+    /* ---------- portfolio AI assistant ---------- */
+    const CHAT_ENDPOINT = 'https://ran-ma-ai.jessica20020922.workers.dev/';
+    const chatLauncher = document.getElementById('aiChatLauncher');
+    const chatLauncherLabel = document.getElementById('aiChatLauncherLabel');
+    const chatPanel = document.getElementById('aiChatPanel');
+    const chatClose = document.getElementById('aiChatClose');
+    const chatTitle = document.getElementById('aiChatTitle');
+    const chatSubtitle = document.getElementById('aiChatSubtitle');
+    const chatMessages = document.getElementById('aiChatMessages');
+    const chatSuggestions = [...document.querySelectorAll('.ai-suggestion')];
+    const chatForm = document.getElementById('aiChatForm');
+    const chatInput = document.getElementById('aiChatInput');
+    const chatSend = document.getElementById('aiChatSend');
+    const chatNote = document.getElementById('aiChatNote');
+    let chatStarted = false;
+    let chatBusy = false;
+
+    const CHAT_COPY = {
+      en: {
+        launcher: "Ask Ran's AI",
+        title: "Ask Ran's AI",
+        subtitle: "Portfolio assistant · Online",
+        close: "Close AI assistant",
+        send: "Send question",
+        placeholder: "Ask about Ran's experience, projects, or research…",
+        welcome: "Hi! I'm Ran's portfolio assistant. Ask me about her experience, projects, education, or APCG research.",
+        note: "Answers use public portfolio information and may need verification.",
+        thinking: "Reviewing Ran's portfolio…",
+        error: "I couldn't reach the AI service. Please try again in a moment.",
+        suggestions: [
+          "What did Ran build at Cayi?",
+          "Summarize Ran's experience for a recruiter.",
+          "What was Ran's APCG research?"
+        ]
+      },
+      zh: {
+        launcher: "问问 Ran 的 AI",
+        title: "问问 Ran 的 AI",
+        subtitle: "个人网站助手 · 在线",
+        close: "关闭 AI 助手",
+        send: "发送问题",
+        placeholder: "可以询问马然的经历、项目或研究…",
+        welcome: "你好！我是马然的个人网站助手。你可以询问她的工作经历、项目、教育背景或 APCG 研究。",
+        note: "回答基于网站公开资料，重要信息请进一步核实。",
+        thinking: "正在查阅马然的公开资料…",
+        error: "暂时无法连接 AI 服务，请稍后再试。",
+        suggestions: [
+          "马然在 Cayi 做了什么？",
+          "从招聘官角度总结马然的经历。",
+          "她在 APCG 展示了什么研究？"
+        ]
+      }
+    };
+
+    const addChatMessage = (role, text, typing = false) => {
+      const row = document.createElement('div');
+      row.className = `ai-message ${role}`;
+      if (role === 'assistant') {
+        const avatar = document.createElement('img');
+        avatar.className = 'ai-message-icon';
+        avatar.src = 'assets/nav-avatar.png?v=2';
+        avatar.alt = '';
+        row.appendChild(avatar);
+      }
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-message-bubble';
+      if (typing) {
+        bubble.setAttribute('aria-label', CHAT_COPY[lang].thinking);
+        bubble.innerHTML = '<span class="ai-typing" aria-hidden="true"><i></i><i></i><i></i></span>';
+      } else bubble.textContent = text;
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return row;
+    };
+
+    const resetChatWelcome = () => {
+      chatMessages.replaceChildren();
+      addChatMessage('assistant', CHAT_COPY[lang].welcome);
+    };
+
+    const setChatOpen = open => {
+      chatPanel.classList.toggle('open', open);
+      chatPanel.setAttribute('aria-hidden', String(!open));
+      chatLauncher.setAttribute('aria-expanded', String(open));
+      chatLauncher.classList.toggle('is-hidden', open);
+      document.body.classList.toggle('chat-open', open && innerWidth <= 640);
+      if (open) setTimeout(() => chatInput.focus(), 180);
+      else chatLauncher.focus();
+    };
+
+    const updateChatLanguage = () => {
+      const copy = CHAT_COPY[lang];
+      chatLauncherLabel.textContent = copy.launcher;
+      chatTitle.textContent = copy.title;
+      chatSubtitle.textContent = copy.subtitle;
+      chatClose.setAttribute('aria-label', copy.close);
+      chatSend.setAttribute('aria-label', copy.send);
+      chatInput.placeholder = copy.placeholder;
+      chatNote.textContent = copy.note;
+      chatSuggestions.forEach((button, index) => {
+        button.textContent = copy.suggestions[index];
+        button.dataset.question = copy.suggestions[index];
+      });
+      if (!chatStarted) resetChatWelcome();
+    };
+
+    chatLauncher.addEventListener('click', () => setChatOpen(true));
+    chatClose.addEventListener('click', () => setChatOpen(false));
+    addEventListener('keydown', event => {
+      if (event.key === 'Escape' && chatPanel.classList.contains('open')) setChatOpen(false);
+    });
+    chatSuggestions.forEach(button => button.addEventListener('click', () => {
+      chatInput.value = button.dataset.question || button.textContent;
+      chatForm.requestSubmit();
+    }));
+    chatInput.addEventListener('input', () => {
+      chatInput.style.height = 'auto';
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+    });
+    chatInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        chatForm.requestSubmit();
+      }
+    });
+    chatForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const question = chatInput.value.trim();
+      if (!question || chatBusy) return;
+      chatStarted = true;
+      chatBusy = true;
+      chatInput.value = '';
+      chatInput.style.height = 'auto';
+      chatInput.disabled = true;
+      chatSend.disabled = true;
+      addChatMessage('user', question);
+      const typing = addChatMessage('assistant', '', true);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 45000);
+      try {
+        const response = await fetch(CHAT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question }),
+          signal: controller.signal
+        });
+        const data = await response.json().catch(() => ({}));
+        typing.remove();
+        if (!response.ok || !data.answer) throw new Error(data.error || 'AI request failed');
+        addChatMessage('assistant', data.answer);
+      } catch (error) {
+        typing.remove();
+        addChatMessage('assistant', error.message && !/request failed/i.test(error.message) ? error.message : CHAT_COPY[lang].error);
+      } finally {
+        clearTimeout(timeout);
+        chatBusy = false;
+        chatInput.disabled = false;
+        chatSend.disabled = false;
+        chatInput.focus();
+      }
+    });
+
     /* ---------- apply language ---------- */
     const applyLang = next => {
       lang = next; t = I18N[lang];
@@ -1613,6 +1829,7 @@
         mapExpand.textContent = lang === 'zh' ? '放大 ↗' : 'Expand ↗';
         mapExpand.setAttribute('aria-label', lang === 'zh' ? '放大查看职业地图' : 'Open career map in a larger view');
       }
+      updateChatLanguage();
       try { localStorage.setItem('rm-lang', lang); } catch (e) {}
     };
     langBtn.addEventListener('click', () => applyLang(lang === 'en' ? 'zh' : 'en'));
